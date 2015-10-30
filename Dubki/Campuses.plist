@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>id</key>
+		<integer>1</integer>
+		<key>title</key>
+		<string>Dubki</string>
+		<key>description</key>
+		<string>Student house</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>2</integer>
+		<key>title</key>
+		<string>Campus 1</string>
+		<key>description</key>
+		<string>Subway Strogino</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>3</integer>
+		<key>title</key>
+		<string>Campus 2</string>
+		<key>description</key>
+		<string>Subway Lubyanka</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+</array>
+</plist>

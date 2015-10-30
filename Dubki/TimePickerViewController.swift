@@ -9,14 +9,17 @@
 import UIKit
 
 class TimePickerViewController: UIViewController {
+    
+//    let lessonTitles = ["I (9:00)", "II (10:30)", "III (12:10)", "IV (13:40)", "V (15:10)", "VI (16:40)", "VII (18:10)", "VIII (19:40)"]
+    let lessonTimes = ["I":" 09:00", "II":" 10:30", "III":" 12:10", "IV":" 13:40", "V":" 15:10", "VI":" 16:40", "VII":" 18:10", "VIII":" 19:40"]
 
-    var selectedDate: String?
-    var selectedTime: String?
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        datePicker.minimumDate = NSDate()
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,6 +27,18 @@ class TimePickerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func lessonButtonPress(sender: UIButton) {
+        // change time for lesson
+        let lessonTime = lessonTimes[(sender.titleLabel?.text)!]
+
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.stringFromDate(datePicker.date) + lessonTime!
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        datePicker.date = dateFormatter.dateFromString(dateString)!
+        
+    }
 
     // MARK: - Navigation
 
