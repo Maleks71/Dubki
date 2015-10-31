@@ -13,6 +13,14 @@ class TimePickerViewController: UIViewController {
 //    let lessonTitles = ["I (9:00)", "II (10:30)", "III (12:10)", "IV (13:40)", "V (15:10)", "VI (16:40)", "VII (18:10)", "VIII (19:40)"]
     let lessonTimes = ["I":" 09:00", "II":" 10:30", "III":" 12:10", "IV":" 13:40", "V":" 15:10", "VI":" 16:40", "VII":" 18:10", "VIII":" 19:40"]
 
+    var selectedDate: NSDate? {
+        didSet {
+            if selectedDate != nil && datePicker != nil && selectedDate != datePicker.date {
+                datePicker.date = selectedDate!
+            }
+        }
+    }
+    
     @IBOutlet weak var datePicker: UIDatePicker!
     
     override func viewDidLoad() {
@@ -20,6 +28,9 @@ class TimePickerViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         datePicker.minimumDate = NSDate()
+        if selectedDate != nil {
+            datePicker.date = selectedDate!
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,18 +47,21 @@ class TimePickerViewController: UIViewController {
         let dateString = dateFormatter.stringFromDate(datePicker.date) + lessonTime!
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        datePicker.date = dateFormatter.dateFromString(dateString)!
         
+        selectedDate = dateFormatter.dateFromString(dateString)!
     }
 
+    @IBAction func datePickerChangeValue(sender: UIDatePicker) {
+        selectedDate = datePicker.date
+    }
+    
+    /*
     // MARK: - Navigation
 
-    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
     */
-
 }

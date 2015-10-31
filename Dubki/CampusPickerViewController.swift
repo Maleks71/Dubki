@@ -13,11 +13,12 @@ class CampusPickerViewController: UIViewController {
 
     let campuses = RouteDataModel.sharedInstance.campuses
     
-    var label: UILabel?
+    var setCampus: Int?
+    
     var selectedCampus: Dictionary<String, AnyObject>? {
         didSet {
             if let campus = selectedCampus {
-                selectedCampusIndex = campus["id"] as? Int
+                selectedCampusIndex = (campus["id"] as? Int)! - 1
             }
         }
     }
@@ -36,9 +37,9 @@ class CampusPickerViewController: UIViewController {
     
 
 
+    /*
     // MARK: - Navigation
 
-    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.

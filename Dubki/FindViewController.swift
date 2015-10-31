@@ -14,6 +14,30 @@ class FindViewController: UIViewController {
     @IBOutlet weak var toLabel: UILabel!
     @IBOutlet weak var whenLabel: UILabel!
     
+    var fromCampus: Dictionary<String, AnyObject>? {
+        didSet {
+            if fromCampus != nil && fromLabel != nil {
+                fromLabel.text = fromCampus!["title"] as? String
+            }
+        }
+    }
+    var toCampus: Dictionary<String, AnyObject>? {
+        didSet {
+            if toCampus != nil && toLabel != nil {
+                toLabel.text = toCampus!["title"] as? String
+            }
+        }
+    }
+    var when: NSDate? {
+        didSet {
+            if when != nil && whenLabel != nil {
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+                whenLabel.text = dateFormatter.stringFromDate(when!)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -52,15 +76,24 @@ class FindViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "FromCampusPick" {
             if let campusPickerViewController = segue.destinationViewController as? CampusPickerViewController {
-                campusPickerViewController.label = fromLabel
+//                campusPickerViewController.selectedCampus = fromCampus
+                campusPickerViewController.setCampus = 1
             }
         }
         if segue.identifier == "ToCampusPick" {
             if let campusPickerViewController = segue.destinationViewController as? CampusPickerViewController {
-                campusPickerViewController.label = toLabel
+//                campusPickerViewController.selectedCampus = toCampus
+                campusPickerViewController.setCampus = 2
             }
         }
-   }
+//        if segue.identifier == "WhenPick" {
+//            if let timePickerViewController = segue.destinationViewController as? TimePickerViewController {
+//                if when != nil {
+//                    timePickerViewController.selectedDate = when!
+//                }
+//            }
+//        }
+    }
 
     @IBAction func cancelSelect(segue:UIStoryboardSegue) {
         // not action for cancel
@@ -69,9 +102,11 @@ class FindViewController: UIViewController {
     @IBAction func doneCampuseSelect(segue:UIStoryboardSegue) {
         if let campusPickerViewController = segue.sourceViewController as? CampusPickerViewController {
             //print(campusPickerViewController.selectedPlace)
-            if let label = campusPickerViewController.label {
-                if let campus = campusPickerViewController.selectedCampus {
-                    label.text = campus["title"] as? String
+            if let setCampus = campusPickerViewController.setCampus {
+                if setCampus == 1 {
+                    fromCampus = campusPickerViewController.selectedCampus
+                } else {
+                    toCampus = campusPickerViewController.selectedCampus
                 }
             }
         }
@@ -79,10 +114,8 @@ class FindViewController: UIViewController {
 
     @IBAction func doneTimeSelect(segue:UIStoryboardSegue) {
         if let timePickerViewController = segue.sourceViewController as? TimePickerViewController {
-            //print(timePickerViewController.datePicker.date)
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-            whenLabel.text = dateFormatter.stringFromDate(timePickerViewController.datePicker.date)
+            //print(timePickerViewController.selectedDate)
+            when = timePickerViewController.selectedDate
         }
     }
 
