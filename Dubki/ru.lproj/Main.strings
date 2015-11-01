@@ -1,0 +1,93 @@
+
+/* Class = "UIButton"; normalTitle = "III"; ObjectID = "2Bm-Tr-Dgt"; */
+"2Bm-Tr-Dgt.normalTitle" = "III";
+
+/* Class = "UIButton"; normalTitle = "To"; ObjectID = "3OM-4T-2vg"; */
+"3OM-4T-2vg.normalTitle" = "Куда";
+
+/* Class = "UIButton"; normalTitle = "I"; ObjectID = "5FB-nR-TtN"; */
+"5FB-nR-TtN.normalTitle" = "I";
+
+/* Class = "UINavigationItem"; title = "Choose Time"; ObjectID = "8ze-LV-MGB"; */
+"8ze-LV-MGB.title" = "Выберите время";
+
+/* Class = "UIButton"; normalTitle = "II"; ObjectID = "9p5-Pm-zMf"; */
+"9p5-Pm-zMf.normalTitle" = "II";
+
+/* Class = "UIButton"; normalTitle = "V"; ObjectID = "AUB-jT-hgh"; */
+"AUB-jT-hgh.normalTitle" = "V";
+
+/* Class = "UILabel"; text = "Lesson"; ObjectID = "BSu-J8-A3b"; */
+"BSu-J8-A3b.text" = "Пара";
+
+/* Class = "UIViewController"; title = "Find"; ObjectID = "BYZ-38-t0r"; */
+"BYZ-38-t0r.title" = "Найти";
+
+/* Class = "UIButton"; normalTitle = "VII"; ObjectID = "CGI-Rn-IS8"; */
+"CGI-Rn-IS8.normalTitle" = "VII";
+
+/* Class = "UITabBarItem"; title = "Find"; ObjectID = "CoY-rx-Fe3"; */
+"CoY-rx-Fe3.title" = "Найти";
+
+/* Class = "UILabel"; text = "When"; ObjectID = "D9j-Dc-rbC"; */
+"D9j-Dc-rbC.text" = "Когда";
+
+/* Class = "UIButton"; normalTitle = "VIII"; ObjectID = "DCh-8P-7Rf"; */
+"DCh-8P-7Rf.normalTitle" = "VIII";
+
+/* Class = "UIButton"; normalTitle = "When"; ObjectID = "K49-mX-XyZ"; */
+"K49-mX-XyZ.normalTitle" = "Когда";
+
+/* Class = "UINavigationItem"; title = "Route"; ObjectID = "LKM-Be-Rgf"; */
+"LKM-Be-Rgf.title" = "Маршрут";
+
+/* Class = "UIButton"; normalTitle = "Go"; ObjectID = "Mee-Si-3AV"; */
+"Mee-Si-3AV.normalTitle" = "Поехали";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "ONO-xS-GHL"; */
+"ONO-xS-GHL.text" = "Subtitle";
+
+/* Class = "UITabBarItem"; title = "Route"; ObjectID = "R77-82-2XV"; */
+"R77-82-2XV.title" = "Маршрут";
+
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "SHD-rd-unc"; */
+"SHD-rd-unc.normalTitle" = "Очистить";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "UXZ-27-CBY"; */
+"UXZ-27-CBY.text" = "Title";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "Wcg-x4-krS"; */
+"Wcg-x4-krS.text" = "Subtitle";
+
+/* Class = "UIButton"; normalTitle = "From"; ObjectID = "aSL-QW-UeZ"; */
+"aSL-QW-UeZ.normalTitle" = "Откуда";
+
+/* Class = "UILabel"; text = "Campuse1"; ObjectID = "dLC-cn-1Vr"; */
+"dLC-cn-1Vr.text" = "Кампус1";
+
+/* Class = "UINavigationItem"; title = "Choose Campus"; ObjectID = "dos-yU-Qac"; */
+"dos-yU-Qac.title" = "Выберите Кампус";
+
+/* Class = "UIButton"; normalTitle = "VI"; ObjectID = "fYb-3Y-Vjt"; */
+"fYb-3Y-Vjt.normalTitle" = "VI";
+
+/* Class = "UIButton"; normalTitle = "Swap"; ObjectID = "gnJ-yH-pLz"; */
+"gnJ-yH-pLz.normalTitle" = "Поменять";
+
+/* Class = "UIViewController"; title = "CampusePicker"; ObjectID = "hOe-zy-ryI"; */
+"hOe-zy-ryI.title" = "CampusePicker";
+
+/* Class = "UILabel"; text = "Campuse2"; ObjectID = "iGd-9i-5gF"; */
+"iGd-9i-5gF.text" = "Кампус 2";
+
+/* Class = "UIButton"; normalTitle = "IV"; ObjectID = "jG9-ht-yf5"; */
+"jG9-ht-yf5.normalTitle" = "IV";
+
+/* Class = "UIViewController"; title = "TimePicker"; ObjectID = "lwQ-yw-eOv"; */
+"lwQ-yw-eOv.title" = "TimePicker";
+
+/* Class = "UITableViewController"; title = "Route"; ObjectID = "rbE-Yh-aoA"; */
+"rbE-Yh-aoA.title" = "Маршрут";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "zK0-nM-zBl"; */
+"zK0-nM-zBl.text" = "Title";

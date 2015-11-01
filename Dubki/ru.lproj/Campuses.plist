@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>id</key>
+		<integer>1</integer>
+		<key>title</key>
+		<string>Дубки</string>
+		<key>description</key>
+		<string>Общежитие (Одинцово)</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>2</integer>
+		<key>title</key>
+		<string>Мясницкая</string>
+		<key>description</key>
+		<string>м. Лубянка</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>3</integer>
+		<key>title</key>
+		<string>Кривоколенный переулок</string>
+		<key>description</key>
+		<string>м. Лубянка</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>4</integer>
+		<key>title</key>
+		<string>Словянская площадь</string>
+		<key>description</key>
+		<string>м. Китай-Город</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>5</integer>
+		<key>title</key>
+		<string>Малый Гнездниковский переулок</string>
+		<key>description</key>
+		<string>м. Тверская</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>6</integer>
+		<key>title</key>
+		<string>Большой Трёхсвятительский переулок</string>
+		<key>description</key>
+		<string>м. Китай-Город</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>7</integer>
+		<key>title</key>
+		<string>Большой Харитоньевский переулок</string>
+		<key>description</key>
+		<string>м. Красные ворота</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>8</integer>
+		<key>title</key>
+		<string>Кочновский проезд</string>
+		<key>description</key>
+		<string>м. Аэропорт</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>9</integer>
+		<key>title</key>
+		<string>Петровка</string>
+		<key>description</key>
+		<string>м. Кузнецкий мост</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>10</integer>
+		<key>title</key>
+		<string>Малая Ордынка</string>
+		<key>description</key>
+		<string>м. Третьяковская</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>11</integer>
+		<key>title</key>
+		<string>Вашавское шоссе</string>
+		<key>description</key>
+		<string>м. Нагатинская</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>12</integer>
+		<key>title</key>
+		<string>Малая Пионерская</string>
+		<key>description</key>
+		<string>м. Павелецкая</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>13</integer>
+		<key>title</key>
+		<string>Волгоградский проспект</string>
+		<key>description</key>
+		<string>м. Кузьминки</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>14</integer>
+		<key>title</key>
+		<string>Космонавта Волкова</string>
+		<key>description</key>
+		<string>м. Войковская</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>15</integer>
+		<key>title</key>
+		<string>Кирпичная</string>
+		<key>description</key>
+		<string>м. Семёновская</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>16</integer>
+		<key>title</key>
+		<string>Измайловское шоссе</string>
+		<key>description</key>
+		<string>м. Партизанское</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>17</integer>
+		<key>title</key>
+		<string>Трифоновская</string>
+		<key>description</key>
+		<string>м. Рижское</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>18</integer>
+		<key>title</key>
+		<string>Шаболовка</string>
+		<key>description</key>
+		<string>м. Шаболовская</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>19</integer>
+		<key>title</key>
+		<string>Малый Трехсвятский переулок</string>
+		<key>description</key>
+		<string>м. Китай-Город</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>20</integer>
+		<key>title</key>
+		<string>Покровский бульвар</string>
+		<key>description</key>
+		<string>м. Курская</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>21</integer>
+		<key>title</key>
+		<string>Хитровский переулок</string>
+		<key>description</key>
+		<string>м. Китай-Город</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>22</integer>
+		<key>title</key>
+		<string>Вавилова</string>
+		<key>description</key>
+		<string>м. Ленинский проспект</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>23</integer>
+		<key>title</key>
+		<string>Ильинка</string>
+		<key>description</key>
+		<string>м. Китай-Город</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>24</integer>
+		<key>title</key>
+		<string>Кибальчича</string>
+		<key>description</key>
+		<string>м. ВДНХ</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>25</integer>
+		<key>title</key>
+		<string>Потаповский переулок</string>
+		<key>description</key>
+		<string>м. Китай-Город</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>26</integer>
+		<key>title</key>
+		<string>Старая Басманная</string>
+		<key>description</key>
+		<string>м. Китай-Город</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>27</integer>
+		<key>title</key>
+		<string>Строгино</string>
+		<key>description</key>
+		<string>м. Строгино</string>
+		<key>lon</key>
+		<integer>0</integer>
+		<key>lat</key>
+		<integer>0</integer>
+	</dict>
+</array>
+</plist>
