@@ -13,7 +13,8 @@ class RouteDataModel: NSObject {
     
     static let sharedInstance = RouteDataModel()
 
-    var campuses: NSArray?
+    //var campuses: NSArray?
+    let campuses = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Campuses", ofType: "plist")!)
     
     var fromCampus: Dictionary<String, AnyObject>?
     var toCampus: Dictionary<String, AnyObject>?
@@ -30,8 +31,8 @@ class RouteDataModel: NSObject {
         super.init()
         
         // load array of campuses from resource
-        let campusesPath = NSBundle.mainBundle().pathForResource("Campuses", ofType: "plist")
-        campuses = NSArray(contentsOfFile: campusesPath!)
+        //let campusesPath = NSBundle.mainBundle().pathForResource("Campuses", ofType: "plist")
+        //campuses = NSArray(contentsOfFile: campusesPath!)
         //print(campuses?.count)
         
     }

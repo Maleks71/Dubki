@@ -13,6 +13,7 @@ class FindViewController: UIViewController {
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var toLabel: UILabel!
     @IBOutlet weak var whenLabel: UILabel!
+    @IBOutlet weak var fortuneQuoteLabel: UILabel!
     
     var fromCampus: Dictionary<String, AnyObject>? {
         didSet {
@@ -38,6 +39,8 @@ class FindViewController: UIViewController {
         }
     }
     
+    let fortuneQuotes = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("FortuneQuotes", ofType: "plist")!)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -47,6 +50,15 @@ class FindViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func randomInt(min: Int, max:Int) -> Int {
+        return min + Int(arc4random_uniform(UInt32(max - min + 1)))
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        let fq = randomInt(0, max: (fortuneQuotes?.count)!)
+        fortuneQuoteLabel.text = fortuneQuotes![fq] as? String
     }
 
     @IBAction func clearAll(sender: AnyObject) {

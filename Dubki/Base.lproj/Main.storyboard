@@ -17,38 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aSL-QW-UeZ">
-                                <rect key="frame" x="20" y="53" width="335" height="30"/>
-                                <animations/>
-                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="From"/>
-                                <connections>
-                                    <segue destination="hOe-zy-ryI" kind="presentation" identifier="FromCampusPick" id="3aY-AZ-1WQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3OM-4T-2vg">
-                                <rect key="frame" x="20" y="216" width="335" height="30"/>
-                                <animations/>
-                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="To"/>
-                                <connections>
-                                    <segue destination="hOe-zy-ryI" kind="presentation" identifier="ToCampusPick" id="sMS-vc-Tcz"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Campuse1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLC-cn-1Vr">
-                                <rect key="frame" x="20" y="91" width="335" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Campuse2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGd-9i-5gF">
-                                <rect key="frame" x="25" y="254" width="335" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="When" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9j-Dc-rbC">
                                 <rect key="frame" x="25" y="404" width="335" height="21"/>
                                 <animations/>
@@ -56,14 +24,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SHD-rd-unc">
-                                <rect key="frame" x="25" y="20" width="99" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Clear"/>
-                                <connections>
-                                    <action selector="clearAll:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h9c-VA-UMz"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mee-Si-3AV">
                                 <rect key="frame" x="25" y="514" width="335" height="30"/>
                                 <animations/>
@@ -84,14 +44,61 @@
                                     <segue destination="lwQ-yw-eOv" kind="presentation" identifier="WhenPick" id="THC-xv-XPw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aSL-QW-UeZ">
+                                <rect key="frame" x="22" y="106" width="335" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="From"/>
+                                <connections>
+                                    <segue destination="hOe-zy-ryI" kind="presentation" identifier="FromCampusPick" id="3aY-AZ-1WQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3OM-4T-2vg">
+                                <rect key="frame" x="22" y="239" width="335" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="To"/>
+                                <connections>
+                                    <segue destination="hOe-zy-ryI" kind="presentation" identifier="ToCampusPick" id="sMS-vc-Tcz"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Campuse1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLC-cn-1Vr">
+                                <rect key="frame" x="22" y="144" width="335" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Campuse2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGd-9i-5gF">
+                                <rect key="frame" x="27" y="277" width="335" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SHD-rd-unc">
+                                <rect key="frame" x="27" y="73" width="99" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Clear"/>
+                                <connections>
+                                    <action selector="clearAll:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h9c-VA-UMz"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnJ-yH-pLz">
-                                <rect key="frame" x="122" y="158" width="130" height="30"/>
+                                <rect key="frame" x="124" y="187" width="130" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Swap"/>
                                 <connections>
                                     <action selector="swapPlaces:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LWB-3Q-jDs"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FortuneQuote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ox-2S-R4o">
+                                <rect key="frame" x="20" y="20" width="335" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -99,6 +106,7 @@
                     <tabBarItem key="tabBarItem" title="Find" id="CoY-rx-Fe3"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="fortuneQuoteLabel" destination="7ox-2S-R4o" id="cWb-y5-HCh"/>
                         <outlet property="fromLabel" destination="dLC-cn-1Vr" id="HPe-oT-0mF"/>
                         <outlet property="toLabel" destination="iGd-9i-5gF" id="2dY-M8-CO1"/>
                         <outlet property="whenLabel" destination="D9j-Dc-rbC" id="GP4-F8-eCi"/>
@@ -108,10 +116,10 @@
             </objects>
             <point key="canvasLocation" x="1151.5" y="387.5"/>
         </scene>
-        <!--CampusePicker-->
+        <!--CampusPicker-->
         <scene sceneID="tOp-zl-3td">
             <objects>
-                <viewController title="CampusePicker" id="hOe-zy-ryI" customClass="CampusPickerViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="CampusPicker" id="hOe-zy-ryI" customClass="CampusPickerViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7bN-8E-790"/>
                         <viewControllerLayoutGuide type="bottom" id="ilQ-1B-WMD"/>
