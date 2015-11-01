@@ -132,7 +132,7 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="IlQ-as-QHw">
                                             <connections>
-                                                <segue destination="71w-I3-VY9" kind="unwind" unwindAction="doneCampuseSelect:" id="ZHN-ll-Pn0"/>
+                                                <segue destination="71w-I3-VY9" kind="unwind" identifier="DoneCampusSelect" unwindAction="doneCampusSelect:" id="ZHN-ll-Pn0"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -201,7 +201,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="8af-D3-JEE"/>
-                        <segue destination="rbE-Yh-aoA" kind="relationship" relationship="viewControllers" id="d2x-LA-QEo"/>
+                        <segue destination="1Kg-yc-9Ma" kind="relationship" relationship="viewControllers" id="d2x-LA-QEo"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jE9-t8-nUo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -212,29 +212,29 @@
         <scene sceneID="ri2-qg-svm">
             <objects>
                 <tableViewController title="Route" id="rbE-Yh-aoA" customClass="RouteTableViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="8IH-4q-hcA">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="8IH-4q-hcA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RouteCell" textLabel="UXZ-27-CBY" detailTextLabel="ONO-xS-GHL" style="IBUITableViewCellStyleSubtitle" id="fqC-53-ycR">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fqC-53-ycR" id="QxI-Vb-hS9">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UXZ-27-CBY">
-                                            <rect key="frame" x="15" y="5" width="32" height="20"/>
+                                            <rect key="frame" x="15" y="23" width="32" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ONO-xS-GHL">
-                                            <rect key="frame" x="15" y="25" width="41" height="14"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ONO-xS-GHL">
+                                            <rect key="frame" x="15" y="43" width="41" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -252,12 +252,12 @@
                             <outlet property="delegate" destination="rbE-Yh-aoA" id="Qjk-99-63z"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Route" id="R77-82-2XV"/>
+                    <navigationItem key="navigationItem" title="Route" id="LKM-Be-Rgf"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eb7-r7-Dlb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1151.5" y="1144.5"/>
+            <point key="canvasLocation" x="1738.5" y="1144.5"/>
         </scene>
         <!--TimePicker-->
         <scene sceneID="ncC-a8-zol">
@@ -283,7 +283,7 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="67H-7N-4Ej">
                                             <connections>
-                                                <segue destination="fMy-L5-T2r" kind="unwind" unwindAction="doneTimeSelect:" id="cyp-t3-mfS"/>
+                                                <segue destination="fMy-L5-T2r" kind="unwind" identifier="DoneTimeSelect" unwindAction="doneTimeSelect:" id="cyp-t3-mfS"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -382,7 +382,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EKc-cL-nAc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="fMy-L5-T2r" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1820.5" y="861.5"/>
+            <point key="canvasLocation" x="2407.5" y="861.5"/>
+        </scene>
+        <!--Route-->
+        <scene sceneID="tZe-6t-2m2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1Kg-yc-9Ma" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Route" id="R77-82-2XV"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sdG-d2-V93">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rbE-Yh-aoA" kind="relationship" relationship="rootViewController" id="sgW-Cw-JQ4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qR8-bq-7xJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1151.5" y="1144.5"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

@@ -55,13 +55,14 @@ class TimePickerViewController: UIViewController {
         selectedDate = datePicker.date
     }
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "DoneTimeSelect" {
+            selectedDate = datePicker.date
+        }
     }
-    */
 }

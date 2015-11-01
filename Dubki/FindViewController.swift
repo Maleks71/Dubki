@@ -56,15 +56,22 @@ class FindViewController: UIViewController {
     }
 
     @IBAction func swapPlaces(sender: AnyObject) {
-        let place = fromLabel.text
-        fromLabel.text = toLabel.text
-        toLabel.text = place
+        let campus = fromCampus
+        fromCampus = toCampus
+        toCampus = campus
     }
     
     @IBAction func goButtonPress(sender: AnyObject) {
         if let tabBarController = self.tabBarController {
-            //print(tabBarController.selectedIndex)
-            tabBarController.selectedIndex = 1 // Route Tab
+            if fromCampus != nil && toCampus != nil && when != nil {
+                let fromId = fromCampus!["id"] as! Int
+                let toId = toCampus!["id"] as! Int
+                RouteDataModel.sharedInstance.routeSetParameter(fromId, to: toId, when: when!)
+                tabBarController.selectedIndex = 1 // Route Tab
+            } else {
+                print("error route parameter!")
+                print("from: \(fromCampus), to: \(toCampus), when: \(when)")
+            }
         }
     }
     
@@ -99,7 +106,7 @@ class FindViewController: UIViewController {
         // not action for cancel
     }
     
-    @IBAction func doneCampuseSelect(segue:UIStoryboardSegue) {
+    @IBAction func doneCampusSelect(segue:UIStoryboardSegue) {
         if let campusPickerViewController = segue.sourceViewController as? CampusPickerViewController {
             //print(campusPickerViewController.selectedPlace)
             if let setCampus = campusPickerViewController.setCampus {

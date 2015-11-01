@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21C89BBC1BE62EAF00816449 /* SwiftyJSON in Resources */ = {isa = PBXBuildFile; fileRef = 21C89BBB1BE62EAF00816449 /* SwiftyJSON */; };
 		A6BC8BD81BE2B21F006A91F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC8BD71BE2B21F006A91F7 /* AppDelegate.swift */; };
 		A6BC8BDA1BE2B21F006A91F7 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC8BD91BE2B21F006A91F7 /* FindViewController.swift */; };
 		A6BC8BDD1BE2B21F006A91F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6BC8BDB1BE2B21F006A91F7 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21C89BBB1BE62EAF00816449 /* SwiftyJSON */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SwiftyJSON; sourceTree = "<group>"; };
 		A6BC8BD41BE2B21F006A91F7 /* Dubki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dubki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BC8BD71BE2B21F006A91F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6BC8BD91BE2B21F006A91F7 /* FindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 		A6BC8BD61BE2B21F006A91F7 /* Dubki */ = {
 			isa = PBXGroup;
 			children = (
+				21C89BBB1BE62EAF00816449 /* SwiftyJSON */,
 				A6BC8BF31BE3C2EC006A91F7 /* Resources */,
 				A6BC8BD71BE2B21F006A91F7 /* AppDelegate.swift */,
 				A6BC8BD91BE2B21F006A91F7 /* FindViewController.swift */,
@@ -151,6 +154,7 @@
 				A6BC8BE21BE2B21F006A91F7 /* LaunchScreen.storyboard in Resources */,
 				A6BC8BF51BE3C3DF006A91F7 /* Campuses.plist in Resources */,
 				A6BC8BDF1BE2B21F006A91F7 /* Assets.xcassets in Resources */,
+				21C89BBC1BE62EAF00816449 /* SwiftyJSON in Resources */,
 				A6BC8BDD1BE2B21F006A91F7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,6 +320,7 @@
 				A6BC8BE81BE2B21F006A91F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

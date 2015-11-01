@@ -9,6 +9,8 @@
 import UIKit
 
 class RouteTableViewController: UITableViewController {
+    
+    let routeDataModel = RouteDataModel.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +20,10 @@ class RouteTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,23 +35,35 @@ class RouteTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return routeDataModel.route.count
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("RouteCell", forIndexPath: indexPath)
 
         // Configure the cell...
+        cell.textLabel?.text = routeDataModel.route[indexPath.row]["title"]
+        cell.detailTextLabel?.text = routeDataModel.route[indexPath.row]["detail"]
+//        switch indexPath.row {
+//        case 0:
+//            let from = routeDataModel.fromCampus!["title"] as! String
+//            let to = routeDataModel.toCampus!["title"] as! String
+//            let dateFormatter = NSDateFormatter()
+//            dateFormatter.dateFormat = "HH:mm EEE, dd MMMM yyyy"
+//            let when = dateFormatter.stringFromDate(routeDataModel.when!)
+//            cell.textLabel?.text = "\(from) -> \(to)"
+//            cell.detailTextLabel?.text = when
+//        default:
+//            break
+//        }
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
