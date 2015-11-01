@@ -118,15 +118,15 @@ class RouteDataModel: NSObject {
         return 0
     }
     
-    func getNearestSubway(from: String, to: String, when: NSDate) -> Dictionary<String, AnyObject> {
+    func getNearestSubway(from: String, to: String, timestamp: NSDate) -> Dictionary<String, AnyObject> {
         var result: Dictionary<String, AnyObject> = ["from": from, "to": to]
         
-//        if subwayCloses <= when && when <= subwayOpens {
+//        if subwayCloses <= timestamp && timestamp <= subwayOpens {
 //            // subway is still closed
-//            when = subwayOpens
+//            timestamp = subwayOpens
 //        }
-        result["departure"] = when
-        result["arrival"] = /*when +*/ getSubwayData(from, to: to)
+        result["departure"] = timestamp
+        result["arrival"] = /*timestamp +*/ getSubwayData(from, to: to)
         
         return result
     }
@@ -177,9 +177,9 @@ class RouteDataModel: NSObject {
         return nil
     }
     
-    func getNearestOnFoot(edu: String, when: NSDate) -> Dictionary<String, AnyObject> {
-        var result: Dictionary<String, AnyObject> = ["departure": when]
-        result["arrival"] = when /*+ onFootEduDeltas[edu]*/
+    func getNearestOnFoot(edu: String, timestamp: NSDate) -> Dictionary<String, AnyObject> {
+        var result: Dictionary<String, AnyObject> = ["departure": timestamp]
+        result["arrival"] = timestamp /*+ onFootEduDeltas[edu]*/
         result["time"] = onFootEduDeltas[edu]
         result["mapsrc"] = formMapUrl(edu)
         
