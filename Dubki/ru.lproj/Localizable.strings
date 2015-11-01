@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Dubki
+
+  Created by Игорь Моренко on 01.11.15.
+  Copyright © 2015 Alexander Morenko. All rights reserved.
+*/
+
+"Bus" = "🚌 Автобус";
+"Rail" = "🚊 Электричка";
+"Subway" = "🚇 Метро";
+"OnFoot" = "🚶 On Foot";
