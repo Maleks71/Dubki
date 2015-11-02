@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		219C1DFC1BE76F3C0084CC5C /* Stations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 219C1DFA1BE76F3C0084CC5C /* Stations.plist */; };
+		219C1E001BE786BC0084CC5C /* Subways.plist in Resources */ = {isa = PBXBuildFile; fileRef = 219C1DFE1BE786BC0084CC5C /* Subways.plist */; };
 		21C89BBF1BE6501500816449 /* Campuses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C89BC11BE6501500816449 /* Campuses.plist */; };
 		21C89BC51BE69E2700816449 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C89BC31BE69E2700816449 /* Localizable.strings */; };
 		21DBB37B1BE6AD3600879415 /* FortuneQuotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21DBB3791BE6AD3600879415 /* FortuneQuotes.plist */; };
@@ -24,6 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		219C1DFB1BE76F3C0084CC5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Stations.plist; sourceTree = "<group>"; };
+		219C1DFD1BE770850084CC5C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/Stations.plist; sourceTree = "<group>"; };
+		219C1DFF1BE786BC0084CC5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Subways.plist; sourceTree = "<group>"; };
+		219C1E011BE788AB0084CC5C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/Subways.plist; sourceTree = "<group>"; };
 		21C89BBD1BE64FE800816449 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		21C89BBE1BE64FE800816449 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		21C89BC01BE6501500816449 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Campuses.plist; sourceTree = "<group>"; };
@@ -101,6 +107,8 @@
 				21C89BC11BE6501500816449 /* Campuses.plist */,
 				21C89BC31BE69E2700816449 /* Localizable.strings */,
 				21DBB3791BE6AD3600879415 /* FortuneQuotes.plist */,
+				219C1DFA1BE76F3C0084CC5C /* Stations.plist */,
+				219C1DFE1BE786BC0084CC5C /* Subways.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -178,6 +186,8 @@
 				21C89BBF1BE6501500816449 /* Campuses.plist in Resources */,
 				A6BC8BDF1BE2B21F006A91F7 /* Assets.xcassets in Resources */,
 				A6BC8BDD1BE2B21F006A91F7 /* Main.storyboard in Resources */,
+				219C1E001BE786BC0084CC5C /* Subways.plist in Resources */,
+				219C1DFC1BE76F3C0084CC5C /* Stations.plist in Resources */,
 				21DBB37B1BE6AD3600879415 /* FortuneQuotes.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,6 +213,24 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		219C1DFA1BE76F3C0084CC5C /* Stations.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				219C1DFB1BE76F3C0084CC5C /* Base */,
+				219C1DFD1BE770850084CC5C /* ru */,
+			);
+			name = Stations.plist;
+			sourceTree = "<group>";
+		};
+		219C1DFE1BE786BC0084CC5C /* Subways.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				219C1DFF1BE786BC0084CC5C /* Base */,
+				219C1E011BE788AB0084CC5C /* ru */,
+			);
+			name = Subways.plist;
+			sourceTree = "<group>";
+		};
 		21C89BC11BE6501500816449 /* Campuses.plist */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -5,326 +5,290 @@
 	<dict>
 		<key>id</key>
 		<integer>1</integer>
+		<key>name</key>
+		<string>dubki</string>
 		<key>title</key>
 		<string>Dubki</string>
 		<key>description</key>
-		<string>Student house</string>
-		<key>lon</key>
+		<string>Domitory (Odincovo)</string>
+		<key>station</key>
+		<string>odincovo</string>
+		<key>subway</key>
+		<string>--</string>
+		<key>onfoot</key>
 		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
+		<key>mapsrc</key>
+		<string></string>
 	</dict>
 	<dict>
 		<key>id</key>
 		<integer>2</integer>
+		<key>name</key>
+		<string>aeroport</string>
 		<key>title</key>
-		<string>Myasnitskaya</string>
+		<string>Кочновский проезд</string>
 		<key>description</key>
-		<string>Subway Lubyanka</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
+		<string>Subway Aeroport</string>
+		<key>station</key>
+		<string>belorusskaya</string>
+		<key>subway</key>
+		<string>aeroport</string>
+		<key>onfoot</key>
+		<integer>14</integer>
+		<key>mapsrc</key>
+		<string>9kfYmO7lbg2o_YuSTvZqiY9rCevo23cs</string>
 	</dict>
 	<dict>
 		<key>id</key>
 		<integer>3</integer>
-		<key>title</key>
-		<string>Krivokolenny Pereulok</string>
-		<key>description</key>
-		<string>Subway Lubyanka</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>4</integer>
-		<key>title</key>
-		<string>Slavyanskaya Ploshchad</string>
-		<key>description</key>
-		<string>Subway China-Town</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>5</integer>
-		<key>title</key>
-		<string>Maly Gnezdnikovsky Pereulok</string>
-		<key>description</key>
-		<string>Subway Tverskaya</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>6</integer>
-		<key>title</key>
-		<string>Bolshoy Tryokhsvyatitelsky Pereulok</string>
-		<key>description</key>
-		<string>Subway China-Town</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>7</integer>
-		<key>title</key>
-		<string>Bolshoy Kharitonjevsky Pereulok </string>
-		<key>description</key>
-		<string>Subway Red Gates</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>8</integer>
-		<key>title</key>
-		<string>Kochnovsky Proezd</string>
-		<key>description</key>
-		<string>Subway Aeroport</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>9</integer>
-		<key>title</key>
-		<string>Petrovka</string>
-		<key>description</key>
-		<string>Subway Kuznecky Most</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>10</integer>
-		<key>title</key>
-		<string>Malaya Ordynka</string>
-		<key>description</key>
-		<string>Subway Tretjyakovskaya</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>11</integer>
-		<key>title</key>
-		<string>Varshavskoe Shosse</string>
-		<key>description</key>
-		<string>Subway Nagatinskaya </string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>12</integer>
-		<key>title</key>
-		<string>Malaya Pionerskaya</string>
-		<key>description</key>
-		<string>Subway Paveleckaya</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>13</integer>
-		<key>title</key>
-		<string>Volgogradsky Prospekt</string>
-		<key>description</key>
-		<string>Subway Kuzminki</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>14</integer>
-		<key>title</key>
-		<string>Kosmonavta Volkova</string>
-		<key>description</key>
-		<string>Subway Vojkovskaya</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>15</integer>
-		<key>title</key>
-		<string>Kirpichnaya</string>
-		<key>description</key>
-		<string>Subway Semenovskaya</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>16</integer>
-		<key>title</key>
-		<string>Izmaylovskoye Shosse</string>
-		<key>description</key>
-		<string>Subway Partizanskoye</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>17</integer>
-		<key>title</key>
-		<string>Trifonovskaya</string>
-		<key>description</key>
-		<string>Subway Rizhskoye</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>18</integer>
-		<key>title</key>
-		<string>Shabolovka</string>
-		<key>description</key>
-		<string>Subway Shabolovskaya</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>19</integer>
-		<key>title</key>
-		<string>Maly Tryokhsvyatitelsky Pereulok</string>
-		<key>description</key>
-		<string>Subway China-Town</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>20</integer>
-		<key>title</key>
-		<string>Pokrovsky Bulvar</string>
-		<key>description</key>
-		<string>Subway Kurskaya</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>21</integer>
-		<key>title</key>
-		<string>Khitrovsky Pereulok</string>
-		<key>description</key>
-		<string>Subway China-Town</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>22</integer>
-		<key>title</key>
-		<string>Vavilova</string>
-		<key>description</key>
-		<string>Subway Leninskiy Prospekt</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>23</integer>
-		<key>title</key>
-		<string>Iliynka</string>
-		<key>description</key>
-		<string>Subway China-Town</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>24</integer>
-		<key>title</key>
-		<string>Kibalchicha</string>
-		<key>description</key>
-		<string>Subway VDNH</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>25</integer>
-		<key>title</key>
-		<string>Potapovsky Pereulok</string>
-		<key>description</key>
-		<string>Subway China-Town</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>26</integer>
-		<key>title</key>
-		<string>Staraya Basmannaya</string>
-		<key>description</key>
-		<string>Subway China-Town</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>id</key>
-		<integer>27</integer>
+		<key>name</key>
+		<string>strogino</string>
 		<key>title</key>
 		<string>Strogino</string>
 		<key>description</key>
 		<string>Subway Strogino</string>
-		<key>lon</key>
-		<integer>0</integer>
-		<key>lat</key>
-		<integer>0</integer>
+		<key>station</key>
+		<string>kuncevo</string>
+		<key>subway</key>
+		<string>strogino</string>
+		<key>onfoot</key>
+		<integer>6</integer>
+		<key>mapsrc</key>
+		<string>pMeBRyKZjz3PnQn4HCZKIlagbMIv2Bxp</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>4</integer>
+		<key>name</key>
+		<string>myasnitskaya</string>
+		<key>title</key>
+		<string>Myasnitskaya</string>
+		<key>description</key>
+		<string>Subway Lubyanka</string>
+		<key>station</key>
+		<string>begovaya</string>
+		<key>subway</key>
+		<string>lubyanka</string>
+		<key>onfoot</key>
+		<integer>6</integer>
+		<key>mapsrc</key>
+		<string>GGWd7qLfRklaR5KSQQpKFOiJT8RPFGO-</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>5</integer>
+		<key>name</key>
+		<string>vavilova</string>
+		<key>title</key>
+		<string>Vavilovo</string>
+		<key>description</key>
+		<string>Subway Leninskiy prospect</string>
+		<key>station</key>
+		<string>kuncevo</string>
+		<key>subway</key>
+		<string>leninskiy_prospekt</string>
+		<key>onfoot</key>
+		<integer>5</integer>
+		<key>mapsrc</key>
+		<string>_Cz-NprpRRfD15AECXvyxGQb5N7RY3xC</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>6</integer>
+		<key>name</key>
+		<string>izmailovo</string>
+		<key>title</key>
+		<string>Kirpichnaya ulitsa</string>
+		<key>description</key>
+		<string>Subway Semenovskaya</string>
+		<key>station</key>
+		<string>kuncevo</string>
+		<key>subway</key>
+		<string>semenovskaya</string>
+		<key>onfoot</key>
+		<integer>16</integer>
+		<key>mapsrc</key>
+		<string>tTSwzei04UwodpOe5ThQSKwo47ZiR8aO</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>7</integer>
+		<key>name</key>
+		<string>tekstilshiki</string>
+		<key>title</key>
+		<string>Tekstilshiki</string>
+		<key>description</key>
+		<string>Subway Tekstilshiki</string>
+		<key>station</key>
+		<string>begovaya</string>
+		<key>subway</key>
+		<string>tekstilshiki</string>
+		<key>onfoot</key>
+		<integer>10</integer>
+		<key>mapsrc</key>
+		<string>IcVLk9vNC1afHy5ge05Ae07wahHXZZ7H</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>8</integer>
+		<key>name</key>
+		<string>st_basmannaya</string>
+		<key>title</key>
+		<string>Staraya Basmannaya</string>
+		<key>description</key>
+		<string>Subway Kurskaya</string>
+		<key>station</key>
+		<string>kuncevo</string>
+		<key>subway</key>
+		<string>kurskaya</string>
+		<key>onfoot</key>
+		<integer>16</integer>
+		<key>mapsrc</key>
+		<string>LwunOFh66TXk8NyRAgKpsssV0Gdy34pG</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>9</integer>
+		<key>name</key>
+		<string>shabolovskaya</string>
+		<key>title</key>
+		<string>Shabolovskaya</string>
+		<key>description</key>
+		<string>Subway Shabolovskaya</string>
+		<key>station</key>
+		<string>begovaya</string>
+		<key>subway</key>
+		<string>shabolovskaya</string>
+		<key>onfoot</key>
+		<integer>4</integer>
+		<key>mapsrc</key>
+		<string>0enMIqcJ_dLy8ShEHN34Lu-4XBAHsrno</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>10</integer>
+		<key>name</key>
+		<string>petrovka</string>
+		<key>title</key>
+		<string>Petrovka</string>
+		<key>description</key>
+		<string>Subway Kuznetskiy most</string>
+		<key>station</key>
+		<string>begovaya</string>
+		<key>subway</key>
+		<string>kuznetskiy_most</string>
+		<key>onfoot</key>
+		<integer>6</integer>
+		<key>mapsrc</key>
+		<string>pSiE6gI2ftRfAGBDauSW0G0H2o9R726u</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>11</integer>
+		<key>name</key>
+		<string>paveletskaya</string>
+		<key>title</key>
+		<string>Malaya Pionerskaya</string>
+		<key>description</key>
+		<string>Subway Paveletskaya</string>
+		<key>station</key>
+		<string>begovaya</string>
+		<key>subway</key>
+		<string>paveletskaya</string>
+		<key>onfoot</key>
+		<integer>5</integer>
+		<key>mapsrc</key>
+		<string>1SimW8pYfuzER0tbTEYFs1RFaNUFnhh-</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>12</integer>
+		<key>name</key>
+		<string>ilyinka</string>
+		<key>title</key>
+		<string>Ilyinka</string>
+		<key>description</key>
+		<string>Subway China-town</string>
+		<key>station</key>
+		<string>begovaya</string>
+		<key>subway</key>
+		<string>china-town</string>
+		<key>onfoot</key>
+		<integer>7</integer>
+		<key>mapsrc</key>
+		<string>7UEkPE7kT0Bhb4rOzDbk2O57LdWBE8Lq</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>13</integer>
+		<key>name</key>
+		<string>trehsvyat_b</string>
+		<key>title</key>
+		<string>Bolshoy Tryokhsvyatitelsky Pereulok</string>
+		<key>description</key>
+		<string>Subway China-town</string>
+		<key>station</key>
+		<string>begovaya</string>
+		<key>subway</key>
+		<string>china-town</string>
+		<key>onfoot</key>
+		<integer>13</integer>
+		<key>mapsrc</key>
+		<string>_WWkurGGUbabsiPE9xgdLP_iJ61vbJrZ</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>14</integer>
+		<key>name</key>
+		<string>trehsvyat_m</string>
+		<key>title</key>
+		<string>Maly Tryokhsvyatitelsky Pereulok</string>
+		<key>description</key>
+		<string>Subway China-town</string>
+		<key>station</key>
+		<string>begovaya</string>
+		<key>subway</key>
+		<string>china-town</string>
+		<key>onfoot</key>
+		<integer>15</integer>
+		<key>mapsrc</key>
+		<string>jBGwqmV8V-JjFzbG2M_13sGlAUVqug-9</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>15</integer>
+		<key>name</key>
+		<string>hitra</string>
+		<key>title</key>
+		<string>Khitrovsky Pereulok</string>
+		<key>description</key>
+		<string>Subway China-town</string>
+		<key>station</key>
+		<string>begovaya</string>
+		<key>subway</key>
+		<string>china-town</string>
+		<key>onfoot</key>
+		<integer>13</integer>
+		<key>mapsrc</key>
+		<string>j1cHqL5k2jw_MK31dlBLEwPPPmj72NNg</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<integer>16</integer>
+		<key>name</key>
+		<string>gnezdo</string>
+		<key>title</key>
+		<string>Maly Gnezdnikovsky Pereulok</string>
+		<key>description</key>
+		<string>Subway Tverskaya</string>
+		<key>station</key>
+		<string>belorusskaya</string>
+		<key>subway</key>
+		<string>tverskaya</string>
+		<key>onfoot</key>
+		<integer>5</integer>
+		<key>mapsrc</key>
+		<string>_a_UjKz_rMbmf2l_mWtsRUjlaqlRySIS</string>
 	</dict>
 </array>
 </plist>

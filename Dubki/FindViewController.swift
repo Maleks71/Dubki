@@ -17,24 +17,36 @@ class FindViewController: UIViewController {
     
     var fromCampus: Dictionary<String, AnyObject>? {
         didSet {
-            if fromCampus != nil && fromLabel != nil {
-                fromLabel.text = fromCampus!["title"] as? String
+            if fromLabel != nil {
+                if fromCampus != nil {
+                    fromLabel.text = fromCampus!["title"] as? String
+                } else {
+                    fromLabel.text = ""
+                }
             }
         }
     }
     var toCampus: Dictionary<String, AnyObject>? {
         didSet {
-            if toCampus != nil && toLabel != nil {
-                toLabel.text = toCampus!["title"] as? String
+            if toLabel != nil {
+                if toCampus != nil {
+                    toLabel.text = toCampus!["title"] as? String
+                } else {
+                    toLabel.text = ""
+                }
             }
         }
     }
     var when: NSDate? {
         didSet {
-            if when != nil && whenLabel != nil {
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-                whenLabel.text = dateFormatter.stringFromDate(when!)
+            if whenLabel != nil {
+                if when != nil {
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+                    whenLabel.text = dateFormatter.stringFromDate(when!)
+                } else {
+                    whenLabel.text = ""
+                }
             }
         }
     }
@@ -57,14 +69,14 @@ class FindViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        let fq = randomInt(0, max: (fortuneQuotes?.count)!)
+        let fq = randomInt(0, max: ((fortuneQuotes?.count)! - 1))
         fortuneQuoteLabel.text = fortuneQuotes![fq] as? String
     }
 
     @IBAction func clearAll(sender: AnyObject) {
-        fromLabel.text = ""
-        toLabel.text = ""
-        whenLabel.text = ""
+        fromCampus = nil
+        toCampus = nil
+        when = nil
     }
 
     @IBAction func swapPlaces(sender: AnyObject) {

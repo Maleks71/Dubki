@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>odincovo</key>
+	<dict>
+		<key>title</key>
+		<string>Одинцово</string>
+		<key>subway</key>
+		<string>--</string>
+		<key>onfoot</key>
+		<integer>0</integer>
+	</dict>
+	<key>kuncevo</key>
+	<dict>
+		<key>title</key>
+		<string>Кунцево</string>
+		<key>subway</key>
+		<string>Кунцевская</string>
+		<key>onfoot</key>
+		<integer>10</integer>
+	</dict>
+	<key>fili</key>
+	<dict>
+		<key>title</key>
+		<string>Фили</string>
+		<key>subway</key>
+		<string>Фили</string>
+		<key>onfoot</key>
+		<integer>7</integer>
+	</dict>
+	<key>begovaya</key>
+	<dict>
+		<key>title</key>
+		<string>Беговая</string>
+		<key>subway</key>
+		<string>Беговая</string>
+		<key>onfoot</key>
+		<integer>5</integer>
+	</dict>
+	<key>belorusskaya</key>
+	<dict>
+		<key>title</key>
+		<string>Белорусская</string>
+		<key>subway</key>
+		<string>Белорусская</string>
+		<key>onfoot</key>
+		<integer>5</integer>
+	</dict>
+</dict>
+</plist>

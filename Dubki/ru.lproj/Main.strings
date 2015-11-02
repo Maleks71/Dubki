@@ -29,8 +29,8 @@
 /* Class = "UILabel"; text = "When"; ObjectID = "D9j-Dc-rbC"; */
 "D9j-Dc-rbC.text" = "Когда";
 
-/* Class = "UIButton"; normalTitle = "Go"; ObjectID = "Mee-Si-3AV"; */
-"Mee-Si-3AV.normalTitle" = "Поехали";
+/* Class = "UIButton"; normalTitle = "Go!"; ObjectID = "Mee-Si-3AV"; */
+"Mee-Si-3AV.normalTitle" = "Поехали!";
 
 /* Class = "UIViewController"; title = "TimePicker"; ObjectID = "lwQ-yw-eOv"; */
 "lwQ-yw-eOv.title" = "TimePicker";

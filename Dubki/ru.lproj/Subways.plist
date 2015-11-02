@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aeroport</key>
+	<string>Аэропорт</string>
+	<key>lubyanka</key>
+	<string>Лубянка</string>
+	<key>strogino</key>
+	<string>Строгино</string>
+	<key>kurskaya</key>
+	<string>Курская</string>
+	<key>tekstilshiki</key>
+	<string>Текстильщики</string>
+	<key>leninskiy_prospekt</key>
+	<string>Ленинский проспект</string>
+	<key>semenovskaya</key>
+	<string>Семёновская</string>
+	<key>shabolovskaya</key>
+	<string>Шаболовская</string>
+	<key>kuzneckiy_most</key>
+	<string>Кузнецкий мост</string>
+	<key>paveletskaya</key>
+	<string>Павелецкая</string>
+	<key>china-town</key>
+	<string>Китай-город</string>
+	<key>tverskaya</key>
+	<string>Тверская</string>
+	<key>kuntsevskaya</key>
+	<string>Кунцевская</string>
+	<key>belorusskaya</key>
+	<string>Белорусская</string>
+	<key>begovaya</key>
+	<string>Беговая</string>
+	<key>slavyanskiy_bulvar</key>
+	<string>Славянский бульвар</string>
+</dict>
+</plist>

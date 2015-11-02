@@ -15,7 +15,10 @@ class RouteDataModel: NSObject {
 
     //var campuses: NSArray?
     let campuses = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Campuses", ofType: "plist")!)
+    let subways = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Subways", ofType: "plist")!)
+    let stations = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Stations", ofType: "plist")!)
     
+    // for route
     var fromCampus: Dictionary<String, AnyObject>?
     var toCampus: Dictionary<String, AnyObject>?
     var when: NSDate?
@@ -37,6 +40,7 @@ class RouteDataModel: NSObject {
         
     }
     
+    // TODO: change Int on Dictionary<String, AnyObject>
     func routeSetParameter(from: Int, to: Int, when: NSDate) {
         
         self.fromCampus = campuses![from - 1] as? Dictionary<String, AnyObject>
@@ -67,38 +71,105 @@ class RouteDataModel: NSObject {
         }
         
     }
-    
+
+    // MARK: - Route On Bus
+
+    // MARK: - Route On Train
+
+/*
+    // maps edus to preferred stations
+    // TODO: move to Campuses.plist
+    let prefStations = [
+        "aeroport":      "Белорусская",
+        "strogino":      "Кунцево",
+        "myasnitskaya":  "Беговая",
+        "vavilova":      "Кунцево",
+        "izmailovo":     "Кунцево",
+        "tekstilshiki":  "Беговая",
+        "st_basmannaya": "Кунцево",
+        "shabolovskaya": "Беговая",
+        "petrovka":      "Беговая",
+        "paveletskaya":  "Беговая",
+        "ilyinka":       "Беговая",
+        "trehsvyat_b":   "Беговая",
+        "trehsvyat_m":   "Беговая",
+        "hitra":         "Беговая",
+        "gnezdo":        "Белорусская"
+    ]
+
+    // delta to pass from railway station to subway station
+    // TODO: move to Stations.plist
+    let ttsDeltas = [
+        "Кунцево":    10,
+        "Фили":        7,
+        "Беговая":     5,
+        "Белорусская": 5
+    ]
+
+    // relation between railway station and subway station
+    // TODO: move to Stations.plist
+    let ttsNames = [
+        "Кунцево":     "Кунцевская",
+        "Фили":        "Фили",
+        "Беговая":     "Беговая",
+        "Белорусская": "Белорусская"
+    ]
+*/
+
+    // MARK: - Route On Subway
+
+/*
+    // TODO: move to Campuses.plist
+    let subways = [
+        "aeroport":      "Аэропорт",
+        "myasnitskaya":  "Лубянка",
+        "strogino":      "Строгино",
+        "st_basmannaya": "Курская",
+        "tekstilshiki":  "Текстильщики",
+        "vavilova":      "Ленинский проспект",
+        "izmailovo":     "Семёновская",
+        "shabolovskaya": "Шаболовская",
+        "petrovka":      "Кузнецкий мост",
+        "paveletskaya":  "Павелецкая",
+        "ilyinka":       "Китай-город",
+        "trehsvyat_b":   "Китай-город",
+        "trehsvyat_m":   "Китай-город",
+        "hitra":         "Китай-город",
+        "gnezdo":        "Тверская"
+    ]
+*/
+
     // Subway Route Data (timedelta in minutes)
     let subwayData = [
-        "Кунцевская": [
-            "Строгино":  15,
-            "Семёновская": 28,
-            "Курская": 21,
-            "Ленинский проспект" : 28
+        "kuntsevskaya": [
+            "strogino":            15,
+            "semenovskaya":        28,
+            "kurskaya":            21,
+            "leninskiy_prospekt" : 28
         ],
-        "Белорусская": [
-            "Аэропорт": 6,
-            "Тверская": 4
+        "belorusskaya": [
+            "aeroport":  6,
+            "tverskaya": 4
         ],
-        "Беговая": [
-            "Текстильщики": 22,
-            "Лубянка": 12,
-            "Шаболовская": 20,
-            "Кузнецкий мост": 9,
-            "Павелецкая": 17,
-            "Китай-город": 11
+        "begovaya": [
+            "tekstilshiki":   22,
+            "lubyanka":       12,
+            "shabolovskaya":  20,
+            "kuzneckiy_most":  9,
+            "paveletskaya":   17,
+            "china-town":     11
         ],
-        "Славянский бульвар": [
-            "Строгино":  18,
-            "Семёновская": 25,
-            "Курская": 18,
-            "Ленинский проспект": 25,
-            "Аэропорт": 26,
-            "Текстильщики": 35,
-            "Лубянка": 21,
-            "Шаболовская": 22,
-            "Кузнецкий мост": 22,
-            "Тверская": 22
+        "slavyanskiy_bulvar": [
+            "strogino":       18,
+            "semenovskaya":   25,
+            "kurskaya":       18,
+            "leninskiy_prospekt": 25,
+            "aeroport":       26,
+            "tekstilshiki":   35,
+            "lubyanka":       21,
+            "shabolovskaya":  22,
+            "kuzneckiy_most": 22,
+            "tverskaya":      22
         ]
     ]
     let subwayClosesTime = "01:00"
@@ -136,61 +207,69 @@ class RouteDataModel: NSObject {
         return result
     }
 
-    // On Foot Data (timedelta in minutes)
+    // MARK: - Route On Foot
+/*
+    // On Foot Data (timedelta in minutes) 
+    // TODO: move to Campuses.plist
     let onFootEduDeltas = [
-        "aeroport": 14,
-        "strogino": 6,
-        "tekstilshiki": 10,
+        "aeroport":      14,
+        "strogino":       6,
+        "myasnitskaya":   6,
+        "vavilova":       5,
+        "izmailovo":     16,
+        "tekstilshiki":  10,
         "st_basmannaya": 16,
-        "vavilova": 5,
-        "myasnitskaya": 6,
-        "izmailovo": 16,
-        "shabolovskaya": 4,
-        "petrovka": 6,
-        "paveletskaya": 5,
-        "ilyinka": 7,
-        "trehsvyat_b": 13,
-        "trehsvyat_m": 15,
-        "hitra": 13,
-        "gnezdo": 5
+        "shabolovskaya":  4,
+        "petrovka":       6,
+        "paveletskaya":   5,
+        "ilyinka":        7,
+        "trehsvyat_b":   13,
+        "trehsvyat_m":   15,
+        "hitra":         13,
+        "gnezdo":         5
     ]
     
+    // TODO: move to Campuses.plist
     let mapSources = [
-        "aeroport": "9kfYmO7lbg2o_YuSTvZqiY9rCevo23cs",
-        "strogino": "pMeBRyKZjz3PnQn4HCZKIlagbMIv2Bxp",
-        "tekstilshiki": "IcVLk9vNC1afHy5ge05Ae07wahHXZZ7H",
+        "aeroport":      "9kfYmO7lbg2o_YuSTvZqiY9rCevo23cs",
+        "strogino":      "pMeBRyKZjz3PnQn4HCZKIlagbMIv2Bxp",
+        "myasnitskaya":  "GGWd7qLfRklaR5KSQQpKFOiJT8RPFGO-",
+        "vavilova":      "_Cz-NprpRRfD15AECXvyxGQb5N7RY3xC",
+        "izmailovo":     "tTSwzei04UwodpOe5ThQSKwo47ZiR8aO",
+        "tekstilshiki":  "IcVLk9vNC1afHy5ge05Ae07wahHXZZ7H",
         "st_basmannaya": "LwunOFh66TXk8NyRAgKpsssV0Gdy34pG",
-        "vavilova": "_Cz-NprpRRfD15AECXvyxGQb5N7RY3xC",
-        "myasnitskaya": "GGWd7qLfRklaR5KSQQpKFOiJT8RPFGO-",
-        "izmailovo": "tTSwzei04UwodpOe5ThQSKwo47ZiR8aO",
         "shabolovskaya": "0enMIqcJ_dLy8ShEHN34Lu-4XBAHsrno",
-        "petrovka": "pSiE6gI2ftRfAGBDauSW0G0H2o9R726u",
-        "paveletskaya": "1SimW8pYfuzER0tbTEYFs1RFaNUFnhh-",
-        "ilyinka": "7UEkPE7kT0Bhb4rOzDbk2O57LdWBE8Lq",
-        "trehsvyat_b": "_WWkurGGUbabsiPE9xgdLP_iJ61vbJrZ",
-        "trehsvyat_m": "jBGwqmV8V-JjFzbG2M_13sGlAUVqug-9",
-        "hitra": "j1cHqL5k2jw_MK31dlBLEwPPPmj72NNg",
-        "gnezdo": "_a_UjKz_rMbmf2l_mWtsRUjlaqlRySIS"
+        "petrovka":      "pSiE6gI2ftRfAGBDauSW0G0H2o9R726u",
+        "paveletskaya":  "1SimW8pYfuzER0tbTEYFs1RFaNUFnhh-",
+        "ilyinka":       "7UEkPE7kT0Bhb4rOzDbk2O57LdWBE8Lq",
+        "trehsvyat_b":   "_WWkurGGUbabsiPE9xgdLP_iJ61vbJrZ",
+        "trehsvyat_m":   "jBGwqmV8V-JjFzbG2M_13sGlAUVqug-9",
+        "hitra":         "j1cHqL5k2jw_MK31dlBLEwPPPmj72NNg",
+        "gnezdo":        "_a_UjKz_rMbmf2l_mWtsRUjlaqlRySIS"
     ]
-    
-    func formMapUrl(edu: String, type: String = "img") -> String? {
+*/
+    func formMapUrl(mapSource: String, type: String = "img") -> String? {
         if type == "img" {
-            return "https://api-maps.yandex.ru/services/constructor/1.0/static/?sid=" + mapSources[edu]!
+            return "https://api-maps.yandex.ru/services/constructor/1.0/static/?sid=" + mapSource
         } else if type == "script" {
-            return "https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=" + mapSources[edu]!
+            return "https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=" + mapSource
         }
         return nil
     }
     
-    func getNearestOnFoot(edu: String, timestamp: NSDate) -> Dictionary<String, AnyObject> {
+    func getNearestOnFoot(edu: Dictionary<String, AnyObject>, timestamp: NSDate) -> Dictionary<String, AnyObject> {
+        let onFootEduDeltas: Int = edu["onfoot"] as! Int
+
         var result: Dictionary<String, AnyObject> = ["departure": timestamp]
-        result["arrival"] = timestamp /*+ onFootEduDeltas[edu]*/
-        result["time"] = onFootEduDeltas[edu]
-        result["mapsrc"] = formMapUrl(edu)
+        result["arrival"] = dateByAddingMinute(timestamp, minute: onFootEduDeltas)
+        result["time"] = onFootEduDeltas
+        result["mapsrc"] = formMapUrl(edu["mapsrc"] as! String)
         
         return result
     }
-    
+
+    /*******************************/
+/*
     // dormitory
     let dorms = [
         "dubki": "Дубки",
@@ -198,75 +277,24 @@ class RouteDataModel: NSObject {
     
     // campus
     let edus = [
-        "aeroport": "Кочновский проезд (метро Аэропорт)",
-        "strogino": "Строгино",
-        "myasnitskaya": "Мясницкая (метро Лубянка)",
-        "vavilova": "Вавилова (метро Ленинский проспект)",
-        "izmailovo": "Кирпичная улица (метро Семёновская)",
-        "tekstilshiki": "Текстильщики",
+        "aeroport":      "Кочновский проезд (метро Аэропорт)",
+        "strogino":      "Строгино",
+        "myasnitskaya":  "Мясницкая (метро Лубянка)",
+        "vavilova":      "Вавилова (метро Ленинский проспект)",
+        "izmailovo":     "Кирпичная улица (метро Семёновская)",
+        "tekstilshiki":  "Текстильщики",
         "st_basmannaya": "Старая Басманная",
         "shabolovskaya": "Шаболовская",
-        "petrovka": "Петровка (метро Кузнецкий мост)",
-        "paveletskaya": "Малая Пионерская (метро Павелецкая)",
-        "ilyinka": "Ильинка (метро Китай-город)",
-        "trehsvyat_b": "Большой Трёхсвятительский переулок (метро Китай-город)",
-        "trehsvyat_m": "Малый Трёхсвятительский переулок (метро Китай-город)",
-        "hitra": "Хитровский переулок (метро Китай-город)",
-        "gnezdo": "Малый Гнездниковский переулок (метро Тверская)"
+        "petrovka":      "Петровка (метро Кузнецкий мост)",
+        "paveletskaya":  "Малая Пионерская (метро Павелецкая)",
+        "ilyinka":       "Ильинка (метро Китай-город)",
+        "trehsvyat_b":   "Большой Трёхсвятительский переулок (метро Китай-город)",
+        "trehsvyat_m":   "Малый Трёхсвятительский переулок (метро Китай-город)",
+        "hitra":         "Хитровский переулок (метро Китай-город)",
+        "gnezdo":        "Малый Гнездниковский переулок (метро Тверская)"
     ]
-    
-    // maps edus to preferred stations
-    let prefStations = [
-        "aeroport": "Белорусская",
-        "strogino": "Кунцево",
-        "tekstilshiki": "Беговая",
-        "st_basmannaya": "Кунцево",
-        "vavilova": "Кунцево",
-        "myasnitskaya": "Беговая",
-        "izmailovo": "Кунцево",
-        "shabolovskaya": "Беговая",
-        "petrovka": "Беговая",
-        "paveletskaya":"Беговая",
-        "ilyinka": "Беговая",
-        "trehsvyat_b": "Беговая",
-        "trehsvyat_m": "Беговая",
-        "hitra": "Беговая",
-        "gnezdo": "Белорусская"
-    ]
-    
-    // delta to pass from railway station to subway station
-    let ttsDeltas = [
-        "Кунцево": 10,
-        "Фили": 7,
-        "Беговая": 5,
-        "Белорусская": 5
-    ]
-    
-    let ttsNames = [
-        "Кунцево": "Кунцевская",
-        "Фили": "Фили",
-        "Беговая": "Беговая",
-        "Белорусская": "Белорусская"
-    ]
-    
-    let subways = [
-        "aeroport": "Аэропорт",
-        "myasnitskaya": "Лубянка",
-        "strogino": "Строгино",
-        "st_basmannaya": "Курская",
-        "tekstilshiki": "Текстильщики",
-        "vavilova": "Ленинский проспект",
-        "izmailovo": "Семёновская",
-        "shabolovskaya": "Шаболовская",
-        "petrovka": "Кузнецкий мост",
-        "paveletskaya": "Павелецкая",
-        "ilyinka": "Китай-город",
-        "trehsvyat_b": "Китай-город",
-        "trehsvyat_m": "Китай-город",
-        "hitra": "Китай-город",
-        "gnezdo": "Тверская"
-    ]
-    
+*/
+     
     // MARK: - Function for working with date
     
     func dateChangeTime(date: NSDate, time: String) -> NSDate {
@@ -281,11 +309,19 @@ class RouteDataModel: NSObject {
     }
 
     func dateByAddingMinute(date: NSDate, minute: Int) -> NSDate {
+        //return date.dateByAddingTimeInterval(Double(minute * 60))
         //let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let myCalendar = NSCalendar.currentCalendar()
         return myCalendar.dateByAddingUnit([.Minute], value: minute, toDate: date, options: [])!
     }
     
-    // get interval from two date
+    // get interval from two date (of date on further date and pass the earlier date as parameter, this would give the time difference in seconds)
     //let interval = date1.timeIntervalSinceDate(date2)
+    
+    // get component from date
+//    let date = NSDate()
+//    let calendar = NSCalendar.currentCalendar()
+//    let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date)
+//    let hour = components.hour
+//    let minutes = components.minute
 }
