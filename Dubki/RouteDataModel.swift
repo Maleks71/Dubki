@@ -65,6 +65,7 @@ class RouteDataModel: NSObject {
                 ["title": bus, "detail": "динцово (17:20) → Дубки (17:35)"]
             ]
         }
+        
     }
     
     // Subway Route Data (timedelta in minutes)
@@ -100,8 +101,8 @@ class RouteDataModel: NSObject {
             "Тверская": 22
         ]
     ]
-    let subwayCloses = "01:00"
-    let subwayOpens = "05:50"
+    let subwayClosesTime = "01:00"
+    let subwayOpensTime = "05:50"
 
     func getSubwayData(from: String, to: String) -> Int {
         if let fromStation = subwayData[from] {
@@ -118,15 +119,19 @@ class RouteDataModel: NSObject {
         return 0
     }
     
-    func getNearestSubway(from: String, to: String, timestamp: NSDate) -> Dictionary<String, AnyObject> {
+    func getNearestSubway(from: String, to: String, inout timestamp: NSDate) -> Dictionary<String, AnyObject> {
         var result: Dictionary<String, AnyObject> = ["from": from, "to": to]
-        
-//        if subwayCloses <= timestamp && timestamp <= subwayOpens {
-//            // subway is still closed
-//            timestamp = subwayOpens
-//        }
+
+        let subwayCloses = dateChangeTime(timestamp, time: subwayClosesTime)
+        let subwayOpens = dateChangeTime(timestamp, time: subwayOpensTime)
+        // subwayCloses <= timestamp <= subwayOpens
+        if subwayCloses.compare(timestamp) != NSComparisonResult.OrderedDescending
+            && timestamp.compare(subwayOpens) != NSComparisonResult.OrderedDescending {
+            // subway is still closed
+            timestamp = subwayOpens
+        }
         result["departure"] = timestamp
-        result["arrival"] = /*timestamp +*/ getSubwayData(from, to: to)
+        result["arrival"] = dateByAddingMinute(timestamp, minute: getSubwayData(from, to: to))
         
         return result
     }
@@ -261,5 +266,26 @@ class RouteDataModel: NSObject {
         "hitra": "Китай-город",
         "gnezdo": "Тверская"
     ]
+    
+    // MARK: - Function for working with date
+    
+    func dateChangeTime(date: NSDate, time: String) -> NSDate {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd "
+        
+        let dateString = dateFormatter.stringFromDate(date) + time
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        return dateFormatter.dateFromString(dateString)!
+    }
 
+    func dateByAddingMinute(date: NSDate, minute: Int) -> NSDate {
+        //let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let myCalendar = NSCalendar.currentCalendar()
+        return myCalendar.dateByAddingUnit([.Minute], value: minute, toDate: date, options: [])!
+    }
+    
+    // get interval from two date
+    //let interval = date1.timeIntervalSinceDate(date2)
 }
