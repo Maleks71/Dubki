@@ -6,7 +6,12 @@
   Copyright © 2015 Alexander Morenko. All rights reserved.
 */
 
-"Bus" = "🚌 Автобус";
-"Rail" = "🚊 Электричка";
+"Bus"    = "🚌 Автобус";
+"Rail"   = "🚊 Электричка";
 "Subway" = "🚇 Метро";
-"OnFoot" = "🚶 On Foot";
+"OnFoot" = "🚶 Пешком";
+
+"Now" = "Сейчас";
+
+"ToCampus"   = "в Кампус";
+"FromCampus" = "из Кампуса";

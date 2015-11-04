@@ -16,7 +16,7 @@
 		<key>subway</key>
 		<string>--</string>
 		<key>onfoot</key>
-		<integer>0</integer>
+		<integer>5</integer>
 		<key>mapsrc</key>
 		<string></string>
 	</dict>

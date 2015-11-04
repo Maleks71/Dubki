@@ -8,27 +8,52 @@
 
 import UIKit
 
+// Структура для хранения одного шага маршрута
+struct RouteStep {
+    var from: String?        // откуда (станция метро, ж/д, автобуса)
+    var to: String?          // куда (станция метро, ж/д, автобуса)
+    var departure: NSDate?   // время отправления
+    var arrival: NSDate?     // время прибытия
+    var time: Int?           // время в пути (в минутах)
+    var title: String?       // заголовок шага - вид шага и время в пути (для вывода на экран)
+    var detail: String?      // описание шага - станции откуда/куда и время отправления/прибытия (для вывода на экран)
+    var map: String?         // имя файла карты для показа делелей шага маршрута
+    
+    init(title:String, detail: String) {
+        self.title = title
+        self.detail = detail
+    }
+}
+
 // Singleton Class
 class RouteDataModel: NSObject {
     
     static let sharedInstance = RouteDataModel()
 
-    //var campuses: NSArray?
+    // Описание общежитий
+    let dormitories = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Dormitories", ofType: "plist")!)
+    // Описание кампусов
     let campuses = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Campuses", ofType: "plist")!)
-    let subways = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Subways", ofType: "plist")!)
-    let stations = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Stations", ofType: "plist")!)
+    // Названия станций метро
+    let subways = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Subways", ofType: "plist")!)
+    // Описания станций ж/д
+    let stations = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Stations", ofType: "plist")!)
     
+    // вид шага маршрута
+    let bus = NSLocalizedString("Bus", comment: "") // "🚌 Автобус"
+    let rail = NSLocalizedString("Rail", comment: "") // "🚊 Электричка"
+    let subway = NSLocalizedString("Subway", comment: "") // "🚇 Метро"
+    let onfoot = NSLocalizedString("OnFoot", comment: "") // "🚶 Пешком"
+
     // for route
-    var fromCampus: Dictionary<String, AnyObject>?
-    var toCampus: Dictionary<String, AnyObject>?
+    var direction: Int?
+    var campus: Dictionary<String, AnyObject>?
     var when: NSDate?
     var route = [
-        ["title": "Дубки → Строгино", "detail": "отправление: 09:00 → прибытие: 10:18"],
-        ["title": "🚌 Автобус", "detail": "Дубки (09:10) → Одинцово (09:25)"],
-        ["title": "🚊 Электричка", "detail": "Кубинка 1 - Москва (Белорусский вокзал) (09:31 → 09:47)\nОстановки: везде\nВыходите на станции: Кунцево", "url": "http://rasp.yandex.ru/"],
-        ["title": "🚇 Метро", "detail":"Кунцевская (09:57) → Строгино (10:12)"],
-        ["title": "🚶 Пешком", "detail":"Примерно 6 минут"]
+        ["title": "Не заданы параметры маршрута", "detail": ""],
     ]
+    // Маршрут
+    var route2: [RouteStep]?
     
     override init() {
         super.init()
@@ -40,19 +65,13 @@ class RouteDataModel: NSObject {
         
     }
     
-    // TODO: change Int on Dictionary<String, AnyObject>
-    func routeSetParameter(from: Int, to: Int, when: NSDate) {
+    func calculateRoute(direction: Int, campus: Dictionary<String, AnyObject>, when: NSDate) {
         
-        self.fromCampus = campuses![from - 1] as? Dictionary<String, AnyObject>
-        self.toCampus = campuses![to - 1] as? Dictionary<String, AnyObject>
+        self.direction = direction
+        self.campus = campus
         self.when = when
         
-        let bus = NSLocalizedString("Bus", comment: "") // "🚌 Автобус"
-        let rail = NSLocalizedString("Rail", comment: "") // "🚊 Электричка"
-        let subway = NSLocalizedString("Subway", comment: "") // "🚇 Метро"
-        let onfoot = NSLocalizedString("OnFoot", comment: "") // "🚶 Пешком"
-
-        if from == 1 {
+        if direction == 0 {
             route = [
                 ["title": "Дубки → Строгино", "detail": "отправление: 09:00 | прибытие: 10:18"],
                 ["title": bus, "detail": "Дубки (09:10) → Одинцово (09:25)"],
@@ -66,13 +85,45 @@ class RouteDataModel: NSObject {
                 ["title": onfoot, "detail": "Примерно 6 минут"],
                 ["title": subway, "detail": "Строгино (15:37) → Кунцевская (15:52)"],
                 ["title": rail, "detail": "Москва (Белорусский вокзал) - Можайск (16:27 → 16:39)\nОстановки: Рабочий Посёлок, Сетунь, Одинцово\nВыходите на станции: Одинцово", "url": "http://rasp.yandex.ru/"],
-                ["title": bus, "detail": "динцово (17:20) → Дубки (17:35)"]
+                ["title": bus, "detail": "Одинцово (17:20) → Дубки (17:35)"]
             ]
         }
         
     }
 
     // MARK: - Route On Bus
+
+    let BUS_API_URL = "http://dubkiapi2.appspot.com/sch"
+    
+    // from and to should be in {'Одинцово', 'Дубки'}
+    func getNearestBus(from: String, to: String, inout timestamp: NSDate) -> Dictionary<String, AnyObject> {
+        //assert from in {'Одинцово', 'Дубки'}
+        //assert to in {'Одинцово', 'Дубки'}
+        //assert from != to
+        
+        var _from: String
+        var _to: String
+        
+        let weekday = getDayOfWeek(timestamp)
+        // today is either {'','*Суббота', '*Воскресенье'}
+        if weekday == 7 {
+            if from == "dubki" {
+                _from = "ДубкиСуббота"
+            } else if to == "dubki" {
+                _to = "ДубкиСуббота"
+            }
+        } else if weekday == 0 {
+            if from == "dubki" {
+                _from = "ДубкиВоскресенье"
+            } else if to == "dubki" {
+                _to = "ДубкиВоскресенье"
+            }
+        }
+
+        var result: Dictionary<String, AnyObject> = ["from": from, "to": to]
+        
+        return result
+    }
 
     // MARK: - Route On Train
 
@@ -114,7 +165,24 @@ class RouteDataModel: NSObject {
         "Беговая":     "Беговая",
         "Белорусская": "Белорусская"
     ]
+    
+    let STATIONS = [
+        "Одинцово" :   "c10743",
+        "Кунцево":     "s9601728",
+        "Фили":        "s9600821",
+        "Беговая":     "s9601666",
+        "Белорусская": "s2000006"
+    ]
 */
+    let API_KEY_FILE = ".train_api_key"
+    
+    let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%s&format=json&date=%s&from=%s&to=%s&lang=ru&transport_types=suburban"
+
+    func getNearestTrain(from: String, to: String, inout timestamp: NSDate) -> Dictionary<String, AnyObject> {
+        var result: Dictionary<String, AnyObject> = ["from": from, "to": to]
+        
+        return result
+    }
 
     // MARK: - Route On Subway
 
@@ -141,35 +209,35 @@ class RouteDataModel: NSObject {
 
     // Subway Route Data (timedelta in minutes)
     let subwayData = [
-        "kuntsevskaya": [
-            "strogino":            15,
-            "semenovskaya":        28,
-            "kurskaya":            21,
-            "leninskiy_prospekt" : 28
+        "kuntsevskaya": [ // Кунцевская
+            "strogino":            15, // Строгино
+            "semenovskaya":        28, // Семёновская
+            "kurskaya":            21, // Курская
+            "leninskiy_prospekt" : 28  // Ленинский проспект
         ],
-        "belorusskaya": [
-            "aeroport":  6,
-            "tverskaya": 4
+        "belorusskaya": [ // Белорусская
+            "aeroport":  6, // Аэропорт
+            "tverskaya": 4  // Тверская
         ],
-        "begovaya": [
-            "tekstilshiki":   22,
-            "lubyanka":       12,
-            "shabolovskaya":  20,
-            "kuzneckiy_most":  9,
-            "paveletskaya":   17,
-            "china-town":     11
+        "begovaya": [ // Беговая
+            "tekstilshiki":   22, // Текстильщики
+            "lubyanka":       12, // Лубянка
+            "shabolovskaya":  20, // Шаболовская
+            "kuzneckiy_most":  9, // Кузнецкий мост
+            "paveletskaya":   17, // Павелецкая
+            "china-town":     11  // Китай-город
         ],
-        "slavyanskiy_bulvar": [
-            "strogino":       18,
-            "semenovskaya":   25,
-            "kurskaya":       18,
-            "leninskiy_prospekt": 25,
-            "aeroport":       26,
-            "tekstilshiki":   35,
-            "lubyanka":       21,
-            "shabolovskaya":  22,
-            "kuzneckiy_most": 22,
-            "tverskaya":      22
+        "slavyanskiy_bulvar": [ // Славянский бульвар
+            "strogino":           18, // Строгино
+            "semenovskaya":       25, // Семёновская
+            "kurskaya":           18, // Курская
+            "leninskiy_prospekt": 25, // Ленинский проспект
+            "aeroport":           26, // Аэропорт
+            "tekstilshiki":       35, // Текстильщики
+            "lubyanka":           21, // Лубянка
+            "shabolovskaya":      22, // Шаболовская
+            "kuzneckiy_most":     22, // Кузнецкий мост
+            "tverskaya":          22  // Тверская
         ]
     ]
     let subwayClosesTime = "01:00"
@@ -309,10 +377,21 @@ class RouteDataModel: NSObject {
     }
 
     func dateByAddingMinute(date: NSDate, minute: Int) -> NSDate {
-        //return date.dateByAddingTimeInterval(Double(minute * 60))
+        return date.dateByAddingTimeInterval(Double(minute * 60))
+        //let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        //let myCalendar = NSCalendar.currentCalendar()
+        //return myCalendar.dateByAddingUnit([.Minute], value: minute, toDate: date, options: [])!
+    }
+    
+    func getDayOfWeek(todayDate: NSDate) -> Int {
+        //let weekdayName = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"]
+        
         //let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let myCalendar = NSCalendar.currentCalendar()
-        return myCalendar.dateByAddingUnit([.Minute], value: minute, toDate: date, options: [])!
+        let myComponents = myCalendar.components(NSCalendarUnit.Weekday, fromDate: todayDate)
+        let weekDay = myComponents.weekday - 1
+        return weekDay
+        //return weekdayName[weekDay]
     }
     
     // get interval from two date (of date on further date and pass the earlier date as parameter, this would give the time difference in seconds)

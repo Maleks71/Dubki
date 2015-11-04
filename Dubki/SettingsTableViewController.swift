@@ -1,17 +1,14 @@
 //
-//  RouteTableViewController.swift
+//  SettingsTableViewController.swift
 //  Dubki
 //
-//  Created by Alexander Morenko on 29.10.15.
+//  Created by Игорь Моренко on 04.11.15.
 //  Copyright © 2015 Alexander Morenko. All rights reserved.
 //
 
 import UIKit
 
-class RouteTableViewController: UITableViewController {
- 
-    // route data model
-    let routeDataModel = RouteDataModel.sharedInstance
+class SettingsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +18,6 @@ class RouteTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,35 +29,23 @@ class RouteTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return routeDataModel.route.count
+        return 0
     }
 
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RouteCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = routeDataModel.route[indexPath.row]["title"]
-        cell.detailTextLabel?.text = routeDataModel.route[indexPath.row]["detail"]
-//        switch indexPath.row {
-//        case 0:
-//            let from = routeDataModel.fromCampus!["title"] as! String
-//            let to = routeDataModel.toCampus!["title"] as! String
-//            let dateFormatter = NSDateFormatter()
-//            dateFormatter.dateFormat = "HH:mm EEE, dd MMMM yyyy"
-//            let when = dateFormatter.stringFromDate(routeDataModel.when!)
-//            cell.textLabel?.text = "\(from) -> \(to)"
-//            cell.detailTextLabel?.text = when
-//        default:
-//            break
-//        }
 
         return cell
     }
+    */
 
     /*
     // Override to support conditional editing of the table view.

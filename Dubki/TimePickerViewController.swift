@@ -13,13 +13,7 @@ class TimePickerViewController: UIViewController {
 //    let lessonTitles = ["I (9:00)", "II (10:30)", "III (12:10)", "IV (13:40)", "V (15:10)", "VI (16:40)", "VII (18:10)", "VIII (19:40)"]
     let lessonTimes = ["I":" 09:00", "II":" 10:30", "III":" 12:10", "IV":" 13:40", "V":" 15:10", "VI":" 16:40", "VII":" 18:10", "VIII":" 19:40"]
 
-    var selectedDate: NSDate? {
-        didSet {
-            if selectedDate != nil && datePicker != nil && selectedDate != datePicker.date {
-                datePicker.date = selectedDate!
-            }
-        }
-    }
+    var selectedDate: NSDate?
     
     @IBOutlet weak var datePicker: UIDatePicker!
     
@@ -49,12 +43,14 @@ class TimePickerViewController: UIViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         
         selectedDate = dateFormatter.dateFromString(dateString)!
+        datePicker.date = selectedDate!
     }
 
     @IBAction func datePickerChangeValue(sender: UIDatePicker) {
         selectedDate = datePicker.date
     }
-    
+
+/*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -65,4 +61,5 @@ class TimePickerViewController: UIViewController {
             selectedDate = datePicker.date
         }
     }
+*/
 }

@@ -9,19 +9,10 @@
 import UIKit
 
 
-class CampusPickerViewController: UIViewController {
+class CampusPickerViewController: UITableViewController {
 
     let campuses = RouteDataModel.sharedInstance.campuses
     
-    var setCampus: Int?
-    
-    var selectedCampus: Dictionary<String, AnyObject>? {
-        didSet {
-            if let campus = selectedCampus {
-                selectedCampusIndex = (campus["id"] as? Int)! - 1
-            }
-        }
-    }
     var selectedCampusIndex: Int?
     
     override func viewDidLoad() {
@@ -47,12 +38,9 @@ class CampusPickerViewController: UIViewController {
     }
     */
 
-}
+    // MARK: - Table View Delegate
 
-// MARK: - Table View Delegate
-extension CampusPickerViewController: UITableViewDelegate {
-
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         //Other row is selected - need to deselect it
@@ -61,27 +49,28 @@ extension CampusPickerViewController: UITableViewDelegate {
             cell?.accessoryType = .None
         }
         
-        selectedCampus = campuses![indexPath.row] as? Dictionary<String, AnyObject>
+        //selectedCampus = campuses![indexPath.row] as? Dictionary<String, AnyObject>
+        selectedCampusIndex = indexPath.row
         
         //update the checkmark for the current row
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.accessoryType = .Checkmark
     }
-}
 
-extension CampusPickerViewController: UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    // MARK: - Table View Data Source
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return campuses!.count;
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return campuses!.count - 1;
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlaceCell", forIndexPath: indexPath)
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("CampusCell", forIndexPath: indexPath)
         
-        let campus = campuses![indexPath.row] as! Dictionary<String, AnyObject>
+        let campus = campuses![indexPath.row + 1] as! Dictionary<String, AnyObject>
         
         cell.textLabel?.text = campus["title"] as? String
         cell.detailTextLabel?.text = campus["description"] as? String
