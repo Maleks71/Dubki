@@ -6,10 +6,18 @@
   Copyright © 2015 Alexander Morenko. All rights reserved.
 */
 
+// заголовки вида шага маршрута
+"NoneParameter" = "Route parameters aren't set";
+"TotalTitleFormat" = "%@ → %@ (%d minutes)";
 "Bus"    = "🚌 Bus";
-"Rail"   = "🚊 Rail";
+"Train"  = "🚊 Train";
 "Subway" = "🚇 Subway";
 "OnFoot" = "🚶 On Foot";
+
+// форматы для информации о шаге маршрута
+"TotalDetailFormat" = "departure: %@ | arrival: %@";
+"TrainDetailFormat" = "%@ (%@ → %@)\nStations: %@\nEntry into stations: %@";
+"OnfootDetailFormat" = "About %d minutes";
 
 "IWantToReach" = "I want to reach";
 
@@ -18,4 +26,5 @@
 
 "When" = "When";
 "Now" = "Now";
+
 
