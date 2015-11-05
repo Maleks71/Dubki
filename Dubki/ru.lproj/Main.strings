@@ -24,6 +24,9 @@
 /* Class = "UITableViewController"; title = "Route"; ObjectID = "3zj-aJ-Xbn"; */
 "3zj-aJ-Xbn.title" = "Маршрут";
 
+/* Class = "UINavigationItem"; title = "Route"; ObjectID = "9yu-wx-ZuR"; */
+"9yu-wx-ZuR.title" = "Маршрут";
+
 /* Class = "UIButton"; normalTitle = "V"; ObjectID = "6a6-fM-E1r"; */
 "6a6-fM-E1r.normalTitle" = "V";
 
