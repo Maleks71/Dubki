@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Дубки-->
+        <!--Dubki-->
         <scene sceneID="uv4-fv-hcK">
             <objects>
                 <tableViewController id="x0l-4d-8xE" customClass="FindViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,7 +16,7 @@
                         <animations/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection headerTitle="Я хочу добраться" id="giT-Av-Sy6">
+                            <tableViewSection headerTitle="I want to reach" id="giT-Av-Sy6">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="meN-IE-kdT">
                                         <rect key="frame" x="0.0" y="114" width="320" height="44"/>
@@ -29,8 +29,8 @@
                                                     <rect key="frame" x="8" y="8" width="304" height="29"/>
                                                     <animations/>
                                                     <segments>
-                                                        <segment title="из Дубков"/>
-                                                        <segment title="в Дубки"/>
+                                                        <segment title="from Dubki"/>
+                                                        <segment title="to Dubki"/>
                                                     </segments>
                                                     <connections>
                                                         <action selector="directionValueChanged:" destination="x0l-4d-8xE" eventType="valueChanged" id="Ri4-ah-tTh"/>
@@ -48,7 +48,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="в/из Кампус(а)" id="dkb-U7-uWw">
+                            <tableViewSection headerTitle="to/from Campus" id="dkb-U7-uWw">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Aks-9o-lvh" style="IBUITableViewCellStyleDefault" id="3Ls-Ck-TbB">
                                         <rect key="frame" x="0.0" y="203" width="320" height="44"/>
@@ -57,7 +57,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Кампус" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Aks-9o-lvh">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Campus" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Aks-9o-lvh">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
@@ -77,7 +77,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Когда" id="3HH-ta-GBz">
+                            <tableViewSection headerTitle="When" id="3HH-ta-GBz">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="fxx-Ay-wNT" style="IBUITableViewCellStyleDefault" id="Cme-JB-iue">
                                         <rect key="frame" x="0.0" y="292" width="320" height="44"/>
@@ -86,7 +86,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Сейчас" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fxx-Ay-wNT">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fxx-Ay-wNT">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
@@ -115,7 +115,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Поехали!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tp7-wT-IDT">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Go!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tp7-wT-IDT">
                                                     <rect key="frame" x="15" y="0.0" width="290" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
@@ -145,7 +145,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Цитата" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="grz-pC-jSH">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="FortuneQuote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="grz-pC-jSH">
                                                     <rect key="frame" x="15" y="0.0" width="290" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
@@ -167,8 +167,8 @@
                             <outlet property="delegate" destination="x0l-4d-8xE" id="Mmr-3n-j7a"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Дубки" id="a2Y-KP-vMU">
-                        <barButtonItem key="rightBarButtonItem" title="Настройки" id="eVh-T4-0RY">
+                    <navigationItem key="navigationItem" title="Dubki" id="a2Y-KP-vMU">
+                        <barButtonItem key="rightBarButtonItem" title="Setting" id="eVh-T4-0RY">
                             <connections>
                                 <segue destination="IS7-44-Jdw" kind="show" identifier="SettingsPick" id="hts-qc-AX7">
                                     <nil key="action"/>
@@ -188,7 +188,7 @@
             </objects>
             <point key="canvasLocation" x="1518" y="2634"/>
         </scene>
-        <!--Настройки-->
+        <!--Settings-->
         <scene sceneID="ZH2-Hv-7Kz">
             <objects>
                 <tableViewController id="IS7-44-Jdw" customClass="SettingsTableViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
@@ -198,7 +198,7 @@
                         <animations/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Основной кампус" footerTitle="Кампус будет определяться по геокоординатам автоматически либо основной" id="L3e-pc-eRK">
+                            <tableViewSection headerTitle="Default Campus" footerTitle="The campus will be determined by geocoordinates automatically or the default" id="L3e-pc-eRK">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Fnw-fZ-De6" style="IBUITableViewCellStyleDefault" id="tdX-ra-hSP">
                                         <rect key="frame" x="0.0" y="114" width="320" height="44"/>
@@ -207,7 +207,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Кампус" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fnw-fZ-De6">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Campus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fnw-fZ-De6">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
@@ -230,7 +230,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Автоматически" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jp-WJ-j4T">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Automatically" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jp-WJ-j4T">
                                                     <rect key="frame" x="15" y="11" width="230" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -255,7 +255,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Обновление расписания" footerTitle="Расписания электричек и автобуса на 01.11.2015" id="3Pe-LC-Ju9">
+                            <tableViewSection headerTitle="Updating of the schedule" footerTitle="Schedules of electric trains and bus on 01.11.2015" id="3Pe-LC-Ju9">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MNu-hj-1dT">
                                         <rect key="frame" x="0.0" y="285" width="320" height="44"/>
@@ -264,7 +264,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Автозагрузка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfy-18-06L">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autoload" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfy-18-06L">
                                                     <rect key="frame" x="15" y="11" width="230" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -294,7 +294,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Загрузить расписания" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ab2-fc-OF6">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="To Load Schedules" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ab2-fc-OF6">
                                                     <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
@@ -318,7 +318,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="О программе" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ucV-2w-Ilc">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ucV-2w-Ilc">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
@@ -344,7 +344,7 @@
                             <outlet property="delegate" destination="IS7-44-Jdw" id="9KB-SV-yC3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Настройки" id="jQw-yJ-Tee">
+                    <navigationItem key="navigationItem" title="Settings" id="jQw-yJ-Tee">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="rzv-QT-Ipi"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
@@ -356,7 +356,7 @@
             </objects>
             <point key="canvasLocation" x="1985" y="1979"/>
         </scene>
-        <!--О программе-->
+        <!--About-->
         <scene sceneID="0Sy-X0-GM5">
             <objects>
                 <viewController id="bGy-00-8i1" sceneMemberID="viewController">
@@ -381,20 +381,20 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="138" id="UM9-SG-O2B"/>
                                 </constraints>
-                                <string key="text">Cлужба для студентов ВШЭ, которые живут в общежитии, которое позволяет
-планировать их маршрут от общежития до кампуса и наоборот.</string>
+                                <string key="text">Dubki is a service for HSE students who live in dormitory, which allows 
+to plan their route from dorm to campus and vice versa.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дубки" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRY-3U-3jx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dubki" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRY-3U-3jx">
                                 <rect key="frame" x="20" y="80" width="280" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Автор: Александр Моренко" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3iP-CU-Atl">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author: Alexander Morenko" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3iP-CU-Atl">
                                 <rect key="frame" x="20" y="279" width="280" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -427,17 +427,17 @@
                             <constraint firstItem="3iP-CU-Atl" firstAttribute="leading" secondItem="0JV-3x-H3i" secondAttribute="leading" id="zrT-Aq-lDt"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="О программе" id="xtM-uf-itR"/>
+                    <navigationItem key="navigationItem" title="About" id="xtM-uf-itR"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hO1-Ep-Hpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2368" y="1979"/>
         </scene>
-        <!--Выбор Кампуса-->
+        <!--Choose Campus-->
         <scene sceneID="Bhx-Kx-llQ">
             <objects>
-                <tableViewController title="Выбор Кампуса" id="8ef-0k-w9x" customClass="CampusPickerViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Choose Campus" id="8ef-0k-w9x" customClass="CampusPickerViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ccO-ZX-njF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -481,7 +481,7 @@
                             <outlet property="delegate" destination="8ef-0k-w9x" id="f5K-Lk-vsI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Выбор Кампуса" id="0FI-BX-ts6"/>
+                    <navigationItem key="navigationItem" title="Choose Campus" id="0FI-BX-ts6"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Djn-Mc-0bk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -489,10 +489,10 @@
             </objects>
             <point key="canvasLocation" x="1985" y="2567"/>
         </scene>
-        <!--Выбор Времени-->
+        <!--Choose Time-->
         <scene sceneID="M2K-B0-13P">
             <objects>
-                <viewController title="Выбор Времени" id="Quy-T8-08k" customClass="TimePickerViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Choose Time" id="Quy-T8-08k" customClass="TimePickerViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zuF-s3-gQw"/>
                         <viewControllerLayoutGuide type="bottom" id="c1o-Hp-CII"/>
@@ -572,7 +572,7 @@
                                     <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="Tmh-wq-i5v"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Пара" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cjr-I5-UZS">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lesson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cjr-I5-UZS">
                                 <rect key="frame" x="20" y="132" width="72" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -588,7 +588,7 @@
                             <constraint firstItem="Lvv-De-x6g" firstAttribute="leading" secondItem="ZIf-yw-ZUZ" secondAttribute="leadingMargin" constant="-20" id="yxk-Jy-zdy"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Выбор Времени" id="Rdo-jJ-LFw">
+                    <navigationItem key="navigationItem" title="Choose Time" id="Rdo-jJ-LFw">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="sBg-3i-lEt">
                             <connections>
                                 <segue destination="uVQ-A4-NxS" kind="unwind" identifier="SaveSelectedTime" unwindAction="unwindSelectedTime:" id="MYy-to-igU"/>
@@ -605,10 +605,10 @@
             </objects>
             <point key="canvasLocation" x="1985" y="3113"/>
         </scene>
-        <!--Маршрут-->
+        <!--Route-->
         <scene sceneID="izB-nT-kiG">
             <objects>
-                <tableViewController title="Маршрут" id="3zj-aJ-Xbn" customClass="RouteTableViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Route" id="3zj-aJ-Xbn" customClass="RouteTableViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="X7u-yb-DeZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -652,13 +652,14 @@
                             <outlet property="delegate" destination="3zj-aJ-Xbn" id="oMS-Zr-liP"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Route" id="9yu-wx-ZuR"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vx5-9i-viR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1518" y="3703"/>
         </scene>
-        <!--Подробности-->
+        <!--Detail-->
         <scene sceneID="RRy-D8-DIh">
             <objects>
                 <viewController id="Puq-Lm-8O7" sceneMemberID="viewController">
@@ -672,7 +673,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Подробности" id="QzF-ys-3Nf"/>
+                    <navigationItem key="navigationItem" title="Detail" id="QzF-ys-3Nf"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8k7-aY-40A" userLabel="First Responder" sceneMemberID="firstResponder"/>

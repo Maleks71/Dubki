@@ -1,47 +1,48 @@
 
-/* Class = "UINavigationItem"; title = "Выбор Кампуса"; ObjectID = "0FI-BX-ts6"; */
+/* Class = "UINavigationItem"; title = "Choose Campus"; ObjectID = "0FI-BX-ts6"; */
 "0FI-BX-ts6.title" = "Выбор Кампуса";
 
-/* Class = "UILabel"; text = "Cлужба для студентов ВШЭ, которые живут в общежитии, которое позволяет\nпланировать их маршрут от общежития до кампуса и наоборот."; ObjectID = "0JV-3x-H3i"; */
+/* Class = "UILabel"; text = "Dubki is a service for HSE students who live in dormitory, which allows
+ to plan their route from dorm to campus and vice versa."; ObjectID = "0JV-3x-H3i"; */
 "0JV-3x-H3i.text" = "Cлужба для студентов ВШЭ, которые живут в общежитии, которое позволяет\nпланировать их маршрут от общежития до кампуса и наоборот.";
 
-/* Class = "UILabel"; text = "Автоматически"; ObjectID = "0jp-WJ-j4T"; */
+/* Class = "UILabel"; text = "Automatically"; ObjectID = "0jp-WJ-j4T"; */
 "0jp-WJ-j4T.text" = "Автоматически";
 
-/* Class = "UITableViewSection"; headerTitle = "Когда"; ObjectID = "3HH-ta-GBz"; */
+/* Class = "UITableViewSection"; headerTitle = "When"; ObjectID = "3HH-ta-GBz"; */
 "3HH-ta-GBz.headerTitle" = "Когда";
 
-/* Class = "UITableViewSection"; footerTitle = "Расписания электричек и автобуса на 01.11.2015"; ObjectID = "3Pe-LC-Ju9"; */
+/* Class = "UITableViewSection"; footerTitle = "Schedules of electric trains and bus on 01.11.2015"; ObjectID = "3Pe-LC-Ju9"; */
 "3Pe-LC-Ju9.footerTitle" = "Расписания электричек и автобуса на 01.11.2015";
 
-/* Class = "UITableViewSection"; headerTitle = "Обновление расписания"; ObjectID = "3Pe-LC-Ju9"; */
+/* Class = "UITableViewSection"; headerTitle = "Updating of the schedule"; ObjectID = "3Pe-LC-Ju9"; */
 "3Pe-LC-Ju9.headerTitle" = "Обновление расписания";
 
-/* Class = "UILabel"; text = "Автор: Александр Моренко"; ObjectID = "3iP-CU-Atl"; */
+/* Class = "UILabel"; text = "Author: Alexander Morenko"; ObjectID = "3iP-CU-Atl"; */
 "3iP-CU-Atl.text" = "Автор: Александр Моренко";
 
-/* Class = "UITableViewController"; title = "Маршрут"; ObjectID = "3zj-aJ-Xbn"; */
+/* Class = "UITableViewController"; title = "Route"; ObjectID = "3zj-aJ-Xbn"; */
 "3zj-aJ-Xbn.title" = "Маршрут";
 
 /* Class = "UIButton"; normalTitle = "V"; ObjectID = "6a6-fM-E1r"; */
 "6a6-fM-E1r.normalTitle" = "V";
 
-/* Class = "UITableViewController"; title = "Выбор Кампуса"; ObjectID = "8ef-0k-w9x"; */
+/* Class = "UITableViewController"; title = "Choose Campus"; ObjectID = "8ef-0k-w9x"; */
 "8ef-0k-w9x.title" = "Выбор Кампуса";
 
-/* Class = "UILabel"; text = "Загрузить расписания"; ObjectID = "Ab2-fc-OF6"; */
+/* Class = "UILabel"; text = "To Load Schedules"; ObjectID = "Ab2-fc-OF6"; */
 "Ab2-fc-OF6.text" = "Загрузить расписания";
 
-/* Class = "UILabel"; text = "Кампус"; ObjectID = "Aks-9o-lvh"; */
+/* Class = "UILabel"; text = "Campus"; ObjectID = "Aks-9o-lvh"; */
 "Aks-9o-lvh.text" = "Кампус";
 
 /* Class = "UIButton"; normalTitle = "IV"; ObjectID = "Bbk-ZU-XJe"; */
 "Bbk-ZU-XJe.normalTitle" = "IV";
 
-/* Class = "UILabel"; text = "Пара"; ObjectID = "Cjr-I5-UZS"; */
+/* Class = "UILabel"; text = "Lesson"; ObjectID = "Cjr-I5-UZS"; */
 "Cjr-I5-UZS.text" = "Пара";
 
-/* Class = "UILabel"; text = "Кампус"; ObjectID = "Fnw-fZ-De6"; */
+/* Class = "UILabel"; text = "Campus"; ObjectID = "Fnw-fZ-De6"; */
 "Fnw-fZ-De6.text" = "Кампус";
 
 /* Class = "UILabel"; text = "© 2015 LionSoft LLC"; ObjectID = "GHg-ck-XBr"; */
@@ -53,64 +54,64 @@
 /* Class = "UIButton"; normalTitle = "VII"; ObjectID = "IGz-II-kTd"; */
 "IGz-II-kTd.normalTitle" = "VII";
 
-/* Class = "UITableViewSection"; footerTitle = "Кампус будет определяться по геокоординатам автоматически либо основной"; ObjectID = "L3e-pc-eRK"; */
+/* Class = "UITableViewSection"; footerTitle = "The campus will be determined by geocoordinates automatically or the default"; ObjectID = "L3e-pc-eRK"; */
 "L3e-pc-eRK.footerTitle" = "Кампус будет определяться по геокоординатам автоматически либо основной";
 
-/* Class = "UITableViewSection"; headerTitle = "Основной кампус"; ObjectID = "L3e-pc-eRK"; */
+/* Class = "UITableViewSection"; headerTitle = "Default Campus"; ObjectID = "L3e-pc-eRK"; */
 "L3e-pc-eRK.headerTitle" = "Основной кампус";
 
 /* Class = "UIButton"; normalTitle = "Donate"; ObjectID = "MqE-pc-HLc"; */
 "MqE-pc-HLc.normalTitle" = "Donate";
 
-/* Class = "UISegmentedControl"; OGV-aH-kKZ.segmentTitles[0] = "из Дубков"; ObjectID = "OGV-aH-kKZ"; */
+/* Class = "UISegmentedControl"; OGV-aH-kKZ.segmentTitles[0] = "from Dubki"; ObjectID = "OGV-aH-kKZ"; */
 "OGV-aH-kKZ.segmentTitles[0]" = "из Дубков";
 
-/* Class = "UISegmentedControl"; OGV-aH-kKZ.segmentTitles[1] = "в Дубки"; ObjectID = "OGV-aH-kKZ"; */
+/* Class = "UISegmentedControl"; OGV-aH-kKZ.segmentTitles[1] = "to Dubki"; ObjectID = "OGV-aH-kKZ"; */
 "OGV-aH-kKZ.segmentTitles[1]" = "в Дубки";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "Qpn-ut-pTJ"; */
 "Qpn-ut-pTJ.text" = "Title";
 
-/* Class = "UIViewController"; title = "Выбор Времени"; ObjectID = "Quy-T8-08k"; */
+/* Class = "UIViewController"; title = "Choose Time"; ObjectID = "Quy-T8-08k"; */
 "Quy-T8-08k.title" = "Выбор Времени";
 
-/* Class = "UINavigationItem"; title = "Подробности"; ObjectID = "QzF-ys-3Nf"; */
+/* Class = "UINavigationItem"; title = "Detail"; ObjectID = "QzF-ys-3Nf"; */
 "QzF-ys-3Nf.title" = "Подробности";
 
-/* Class = "UINavigationItem"; title = "Выбор Времени"; ObjectID = "Rdo-jJ-LFw"; */
+/* Class = "UINavigationItem"; title = "Choose Time"; ObjectID = "Rdo-jJ-LFw"; */
 "Rdo-jJ-LFw.title" = "Выбор Времени";
 
 /* Class = "UIButton"; normalTitle = "I"; ObjectID = "Y25-ee-sj5"; */
 "Y25-ee-sj5.normalTitle" = "I";
 
-/* Class = "UILabel"; text = "Дубки"; ObjectID = "ZRY-3U-3jx"; */
+/* Class = "UILabel"; text = "Dubki"; ObjectID = "ZRY-3U-3jx"; */
 "ZRY-3U-3jx.text" = "Дубки";
 
-/* Class = "UINavigationItem"; title = "Дубки"; ObjectID = "a2Y-KP-vMU"; */
+/* Class = "UINavigationItem"; title = "Dubki"; ObjectID = "a2Y-KP-vMU"; */
 "a2Y-KP-vMU.title" = "Дубки";
 
-/* Class = "UITableViewSection"; headerTitle = "в/из корпус"; ObjectID = "dkb-U7-uWw"; */
-"dkb-U7-uWw.headerTitle" = "в Кампус";
+/* Class = "UITableViewSection"; headerTitle = "to/from Campus"; ObjectID = "dkb-U7-uWw"; */
+"dkb-U7-uWw.headerTitle" = "в/из Кампус(а)";
 
-/* Class = "UIBarButtonItem"; title = "Настройки"; ObjectID = "eVh-T4-0RY"; */
+/* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "eVh-T4-0RY"; */
 "eVh-T4-0RY.title" = "Настройки";
 
 /* Class = "UIButton"; normalTitle = "III"; ObjectID = "fF9-Ii-h1V"; */
 "fF9-Ii-h1V.normalTitle" = "III";
 
-/* Class = "UILabel"; text = "Сейчас"; ObjectID = "fxx-Ay-wNT"; */
+/* Class = "UILabel"; text = "Now"; ObjectID = "fxx-Ay-wNT"; */
 "fxx-Ay-wNT.text" = "Сейчас";
 
-/* Class = "UITableViewSection"; headerTitle = "Я хочу добраться"; ObjectID = "giT-Av-Sy6"; */
+/* Class = "UITableViewSection"; headerTitle = "I want to reach"; ObjectID = "giT-Av-Sy6"; */
 "giT-Av-Sy6.headerTitle" = "Я хочу добраться";
 
-/* Class = "UILabel"; text = "Цитата"; ObjectID = "grz-pC-jSH"; */
+/* Class = "UILabel"; text = "FortuneQuote"; ObjectID = "grz-pC-jSH"; */
 "grz-pC-jSH.text" = "Цитата";
 
-/* Class = "UINavigationItem"; title = "Настройки"; ObjectID = "jQw-yJ-Tee"; */
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "jQw-yJ-Tee"; */
 "jQw-yJ-Tee.title" = "Настройки";
 
-/* Class = "UILabel"; text = "Автозагрузка"; ObjectID = "kfy-18-06L"; */
+/* Class = "UILabel"; text = "Autoload"; ObjectID = "kfy-18-06L"; */
 "kfy-18-06L.text" = "Автозагрузка";
 
 /* Class = "UIButton"; normalTitle = "II"; ObjectID = "sXb-v4-B4s"; */
@@ -119,13 +120,13 @@
 /* Class = "UIButton"; normalTitle = "VI"; ObjectID = "t02-Y4-0yb"; */
 "t02-Y4-0yb.normalTitle" = "VI";
 
-/* Class = "UILabel"; text = "Поехали!"; ObjectID = "tp7-wT-IDT"; */
+/* Class = "UILabel"; text = "Go!"; ObjectID = "tp7-wT-IDT"; */
 "tp7-wT-IDT.text" = "Поехали!";
 
-/* Class = "UILabel"; text = "О программе"; ObjectID = "ucV-2w-Ilc"; */
+/* Class = "UILabel"; text = "About"; ObjectID = "ucV-2w-Ilc"; */
 "ucV-2w-Ilc.text" = "О программе";
 
-/* Class = "UINavigationItem"; title = "О программе"; ObjectID = "xtM-uf-itR"; */
+/* Class = "UINavigationItem"; title = "About"; ObjectID = "xtM-uf-itR"; */
 "xtM-uf-itR.title" = "О программе";
 
 /* Class = "UIButton"; normalTitle = "VIII"; ObjectID = "zcx-O7-qLd"; */
