@@ -10,10 +10,17 @@ import UIKit
 
 class AboutViewController: UIViewController {
 
+    @IBOutlet weak var versionLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String
+        let build = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String
+        
+        versionLabel.text = String(format: "ver. %@ (build %@)", version, build)
     }
 
     override func didReceiveMemoryWarning() {

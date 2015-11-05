@@ -168,7 +168,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Dubki" id="a2Y-KP-vMU">
-                        <barButtonItem key="rightBarButtonItem" title="Setting" id="eVh-T4-0RY">
+                        <barButtonItem key="rightBarButtonItem" image="Settings" id="eVh-T4-0RY">
                             <connections>
                                 <segue destination="IS7-44-Jdw" kind="show" identifier="SettingsPick" id="hts-qc-AX7">
                                     <nil key="action"/>
@@ -375,8 +375,37 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dubki" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRY-3U-3jx">
+                                <rect key="frame" x="20" y="80" width="280" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author: Alexander Morenko" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3iP-CU-Atl">
+                                <rect key="frame" x="20" y="313" width="280" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MqE-pc-HLc">
+                                <rect key="frame" x="20" y="342" width="280" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Donate"/>
+                                <connections>
+                                    <action selector="donatePressButton:" destination="bGy-00-8i1" eventType="touchUpInside" id="9gy-7m-cT4"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPS-do-6aO">
+                                <rect key="frame" x="20" y="103" width="280" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JV-3x-H3i">
-                                <rect key="frame" x="20" y="109" width="280" height="138"/>
+                                <rect key="frame" x="20" y="150" width="280" height="138"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="138" id="UM9-SG-O2B"/>
@@ -387,43 +416,25 @@ to plan their route from dorm to campus and vice versa.</string>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dubki" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRY-3U-3jx">
-                                <rect key="frame" x="20" y="80" width="280" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author: Alexander Morenko" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3iP-CU-Atl">
-                                <rect key="frame" x="20" y="279" width="280" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MqE-pc-HLc">
-                                <rect key="frame" x="20" y="308" width="280" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Donate"/>
-                                <connections>
-                                    <action selector="donatePressButton:" destination="bGy-00-8i1" eventType="touchUpInside" id="9gy-7m-cT4"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZRY-3U-3jx" firstAttribute="top" secondItem="OME-U4-Z6Z" secondAttribute="bottom" constant="16" id="1cH-V0-KyF"/>
-                            <constraint firstItem="0JV-3x-H3i" firstAttribute="top" secondItem="ZRY-3U-3jx" secondAttribute="bottom" constant="8" symbolic="YES" id="2bP-va-w9B"/>
+                            <constraint firstItem="0JV-3x-H3i" firstAttribute="top" secondItem="ZRY-3U-3jx" secondAttribute="bottom" constant="49" id="2bP-va-w9B"/>
                             <constraint firstAttribute="bottom" secondItem="GHg-ck-XBr" secondAttribute="bottom" constant="20" symbolic="YES" id="5pc-Ex-Dzv"/>
+                            <constraint firstItem="UPS-do-6aO" firstAttribute="trailing" secondItem="ZRY-3U-3jx" secondAttribute="trailing" id="GgE-Kw-D9G"/>
                             <constraint firstItem="MqE-pc-HLc" firstAttribute="top" secondItem="3iP-CU-Atl" secondAttribute="bottom" constant="8" symbolic="YES" id="JbO-7T-enq"/>
                             <constraint firstItem="0JV-3x-H3i" firstAttribute="trailing" secondItem="3iP-CU-Atl" secondAttribute="trailing" id="NDn-sd-fdo"/>
                             <constraint firstItem="MqE-pc-HLc" firstAttribute="leading" secondItem="3iP-CU-Atl" secondAttribute="leading" id="O2Q-XB-oCj"/>
                             <constraint firstItem="0JV-3x-H3i" firstAttribute="trailing" secondItem="ZRY-3U-3jx" secondAttribute="trailing" id="Per-Ba-tI7"/>
                             <constraint firstItem="ZRY-3U-3jx" firstAttribute="leading" secondItem="4bv-b1-HyJ" secondAttribute="leadingMargin" constant="4" id="SOo-9n-jSz"/>
-                            <constraint firstItem="3iP-CU-Atl" firstAttribute="top" secondItem="0JV-3x-H3i" secondAttribute="bottom" constant="32" id="dVe-0F-jNi"/>
+                            <constraint firstItem="UPS-do-6aO" firstAttribute="leading" secondItem="ZRY-3U-3jx" secondAttribute="leading" id="XaG-6V-li3"/>
+                            <constraint firstItem="3iP-CU-Atl" firstAttribute="top" secondItem="0JV-3x-H3i" secondAttribute="bottom" constant="25" id="dVe-0F-jNi"/>
+                            <constraint firstItem="UPS-do-6aO" firstAttribute="top" secondItem="ZRY-3U-3jx" secondAttribute="bottom" constant="2" id="hH1-xi-L0r"/>
                             <constraint firstItem="ZRY-3U-3jx" firstAttribute="centerX" secondItem="4bv-b1-HyJ" secondAttribute="centerX" id="if0-Ki-BLO"/>
                             <constraint firstItem="ZRY-3U-3jx" firstAttribute="leading" secondItem="0JV-3x-H3i" secondAttribute="leading" id="n1f-Kk-mSh"/>
+                            <constraint firstItem="0JV-3x-H3i" firstAttribute="top" secondItem="UPS-do-6aO" secondAttribute="bottom" constant="26" id="szD-Fo-kMJ"/>
                             <constraint firstItem="MqE-pc-HLc" firstAttribute="trailing" secondItem="3iP-CU-Atl" secondAttribute="trailing" id="wRI-MR-q95"/>
                             <constraint firstItem="3iP-CU-Atl" firstAttribute="leading" secondItem="GHg-ck-XBr" secondAttribute="leading" id="xVp-cf-GKM"/>
                             <constraint firstItem="3iP-CU-Atl" firstAttribute="trailing" secondItem="GHg-ck-XBr" secondAttribute="trailing" id="xxj-L7-DEC"/>
@@ -432,6 +443,9 @@ to plan their route from dorm to campus and vice versa.</string>
                     </view>
                     <navigationItem key="navigationItem" title="About" id="xtM-uf-itR"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="versionLabel" destination="UPS-do-6aO" id="bWW-eW-j83"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hO1-Ep-Hpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -704,7 +718,10 @@ to plan their route from dorm to campus and vice versa.</string>
             <point key="canvasLocation" x="1122" y="2634"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Settings" width="20" height="20"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YKJ-aB-cJn"/>
+        <segue reference="uxu-sj-sAU"/>
     </inferredMetricsTieBreakers>
 </document>
