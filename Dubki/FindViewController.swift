@@ -15,7 +15,6 @@ class FindViewController: UITableViewController {
     @IBOutlet weak var campusLabel: UILabel!
     @IBOutlet weak var whenLabel: UILabel!
     @IBOutlet weak var fortuneQuoteLabel: UILabel!
-    var fromToLabel: UILabel?
     
     // variable of view controller
     
@@ -61,9 +60,10 @@ class FindViewController: UITableViewController {
         //campusButton.layer.borderColor = UIColor.blueColor().CGColor
         
         // clear campus TODO: get from setting or location
-        campus = nil
-        fromToLabel = tableView.headerViewForSection(1)?.textLabel
-        fromToLabel?.text = NSLocalizedString("ToCampus", comment: "").uppercaseString
+        campus = RouteDataModel.sharedInstance.campuses![1] as? Dictionary<String, AnyObject>
+        
+        //fromToLabel = tableView.headerViewForSection(1)?.textLabel
+        //fromToLabel?.text = NSLocalizedString("ToCampus", comment: "").uppercaseString
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,12 +84,7 @@ class FindViewController: UITableViewController {
 
     // when direction segment change value
     @IBAction func directionValueChanged(sender: AnyObject) {
-        //fromToLabel.
-        if directionSegmentControl.selectedSegmentIndex == 0 {
-            fromToLabel?.text = NSLocalizedString("ToCampus", comment: "").uppercaseString
-        } else {
-            fromToLabel?.text = NSLocalizedString("FromCampus", comment: "").uppercaseString
-        }
+        tableView.reloadData()
     }
     
     @IBAction func goButtonPress(sender: AnyObject) {
@@ -108,21 +103,36 @@ class FindViewController: UITableViewController {
             }
         }
     }
-/*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "CampusPick" {
-            if let campusPickerViewController = segue.destinationViewController as? CampusPickerViewController {
-//                campusPickerViewController.selectedCampus = toCampus
-                campusPickerViewController.setCampus = 2
+        
+        if segue.identifier == "RouteShow" {
+            if campus != nil {
+                if when != nil {
+                    RouteDataModel.sharedInstance.calculateRoute(directionSegmentControl.selectedSegmentIndex, campus: campus!, when: when!)
+                } else {
+                    let timestamp = NSDate().dateByAddingTimeInterval(600) // now + 10 minute
+                    RouteDataModel.sharedInstance.calculateRoute(directionSegmentControl.selectedSegmentIndex, campus: campus!, when: timestamp)
+                }
+            } else {
+                print("error route parameter!")
+                print("to/from: \(campus)")
             }
         }
+        
+//        if segue.identifier == "CampusPick" {
+//            if let campusPickerViewController = segue.destinationViewController as? CampusPickerViewController {
+////                campusPickerViewController.selectedCampus = toCampus
+//                campusPickerViewController.setCampus = 2
+//            }
+//        }
     }
-*/
+
     
 //    // when press button cancel on view controller
 //    @IBAction func cancelSelect(segue:UIStoryboardSegue) {
@@ -151,6 +161,32 @@ class FindViewController: UITableViewController {
 
     // when press button save on settings view controller
     @IBAction func saveSettings(segue:UIStoryboardSegue) {
+    }
+
+    // MARK: - Table View Delegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    // MARK: - Table View Data Source
+    
+    // заголовки секций таблицы
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch (section) {
+        case 0:
+            return NSLocalizedString("IWantToReach", comment: "") // Я хочу добраться
+        case 1:
+            if directionSegmentControl.selectedSegmentIndex == 0 {
+                return NSLocalizedString("ToCampus", comment: "") // в Кампус
+            } else {
+                return NSLocalizedString("FromCampus", comment: "") // из Кампуса
+            }
+        case 2:
+            return NSLocalizedString("When", comment: "") // Когда
+        default:
+            return ""
+        }
     }
 }
 

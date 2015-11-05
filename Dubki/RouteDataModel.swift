@@ -12,16 +12,28 @@ import UIKit
 struct RouteStep {
     var from: String?        // откуда (станция метро, ж/д, автобуса)
     var to: String?          // куда (станция метро, ж/д, автобуса)
+    var stations: String?    // остановки ж/д или станции пересадки метро
     var departure: NSDate?   // время отправления
     var arrival: NSDate?     // время прибытия
     var time: Int?           // время в пути (в минутах)
     var title: String?       // заголовок шага - вид шага и время в пути (для вывода на экран)
     var detail: String?      // описание шага - станции откуда/куда и время отправления/прибытия (для вывода на экран)
     var map: String?         // имя файла карты для показа делелей шага маршрута
+    var url: String?         // ссылка на расписание
+
+    init() {
+        
+    }
     
     init(title:String, detail: String) {
         self.title = title
         self.detail = detail
+    }
+
+    init(title:String, detail: String, url: String) {
+        self.title = title
+        self.detail = detail
+        self.url = url
     }
 }
 
@@ -46,14 +58,14 @@ class RouteDataModel: NSObject {
     let onfoot = NSLocalizedString("OnFoot", comment: "") // "🚶 Пешком"
 
     // for route
-    var direction: Int?
-    var campus: Dictionary<String, AnyObject>?
-    var when: NSDate?
-    var route = [
-        ["title": "Не заданы параметры маршрута", "detail": ""],
-    ]
+    var direction: Int? // Направление из/в Дубки
+    var campus: Dictionary<String, AnyObject>? // Кампус в/из
+    var when: NSDate? // когда - время
+//    var route = [
+//        ["title": "Не заданы параметры маршрута", "detail": ""],
+//    ]
     // Маршрут
-    var route2: [RouteStep]?
+    var route: [RouteStep] = [RouteStep(title: "Не заданы параметры маршрута", detail: "")]
     
     override init() {
         super.init()
@@ -72,20 +84,34 @@ class RouteDataModel: NSObject {
         self.when = when
         
         if direction == 0 {
+//            route = [
+//                ["title": "Дубки → Строгино", "detail": "отправление: 09:00 | прибытие: 10:18"],
+//                ["title": bus, "detail": "Дубки (09:10) → Одинцово (09:25)"],
+//                ["title": rail, "detail": "Кубинка 1 - Москва (Белорусский вокзал) (09:31 → 09:47)\nОстановки: везде\nВыходите на станции: Кунцево", "url": "http://rasp.yandex.ru/"],
+//                ["title": subway, "detail":"Кунцевская (09:57) → Строгино (10:12)"],
+//                ["title": onfoot, "detail":"Примерно 6 минут"]
+//            ]
             route = [
-                ["title": "Дубки → Строгино", "detail": "отправление: 09:00 | прибытие: 10:18"],
-                ["title": bus, "detail": "Дубки (09:10) → Одинцово (09:25)"],
-                ["title": rail, "detail": "Кубинка 1 - Москва (Белорусский вокзал) (09:31 → 09:47)\nОстановки: везде\nВыходите на станции: Кунцево", "url": "http://rasp.yandex.ru/"],
-                ["title": subway, "detail":"Кунцевская (09:57) → Строгино (10:12)"],
-                ["title": onfoot, "detail":"Примерно 6 минут"]
+                RouteStep(title: "Дубки → Строгино", detail: "отправление: 09:00 | прибытие: 10:18"),
+                RouteStep(title: bus, detail: "Дубки (09:10) → Одинцово (09:25)"),
+                RouteStep(title: rail, detail: "Кубинка 1 - Москва (Белорусский вокзал) (09:31 → 09:47)\nОстановки: везде\nВыходите на станции: Кунцево", url: "http://rasp.yandex.ru/"),
+                RouteStep(title: subway, detail: "Кунцевская (09:57) → Строгино (10:12)"),
+                RouteStep(title: onfoot, detail: "Примерно 6 минут", url: "strogino.jpg")
             ]
         } else {
+//            route = [
+//                ["title": "Строгино → Дубки", "detail": "отправление: 15:31 | прибытие: 17:35"],
+//                ["title": onfoot, "detail": "Примерно 6 минут"],
+//                ["title": subway, "detail": "Строгино (15:37) → Кунцевская (15:52)"],
+//                ["title": rail, "detail": "Москва (Белорусский вокзал) - Можайск (16:27 → 16:39)\nОстановки: Рабочий Посёлок, Сетунь, Одинцово\nВыходите на станции: Одинцово", "url": "http://rasp.yandex.ru/"],
+//                ["title": bus, "detail": "Одинцово (17:20) → Дубки (17:35)"]
+//            ]
             route = [
-                ["title": "Строгино → Дубки", "detail": "отправление: 15:31 | прибытие: 17:35"],
-                ["title": onfoot, "detail": "Примерно 6 минут"],
-                ["title": subway, "detail": "Строгино (15:37) → Кунцевская (15:52)"],
-                ["title": rail, "detail": "Москва (Белорусский вокзал) - Можайск (16:27 → 16:39)\nОстановки: Рабочий Посёлок, Сетунь, Одинцово\nВыходите на станции: Одинцово", "url": "http://rasp.yandex.ru/"],
-                ["title": bus, "detail": "Одинцово (17:20) → Дубки (17:35)"]
+                RouteStep(title: "Строгино → Дубки", detail: "отправление: 15:31 | прибытие: 17:35"),
+                RouteStep(title: onfoot, detail: "Примерно 6 минут", url: "strogino.jpg"),
+                RouteStep(title: subway, detail: "Строгино (15:37) → Кунцевская (15:52)"),
+                RouteStep(title: rail, detail: "Москва (Белорусский вокзал) - Можайск (16:27 → 16:39)\nОстановки: Рабочий Посёлок, Сетунь, Одинцово\nВыходите на станции: Одинцово", url: "http://rasp.yandex.ru/"),
+                RouteStep(title: bus, detail: "Одинцово (17:20) → Дубки (17:35)")
             ]
         }
         
@@ -96,7 +122,7 @@ class RouteDataModel: NSObject {
     let BUS_API_URL = "http://dubkiapi2.appspot.com/sch"
     
     // from and to should be in {'Одинцово', 'Дубки'}
-    func getNearestBus(from: String, to: String, inout timestamp: NSDate) -> Dictionary<String, AnyObject> {
+    func getNearestBus(from: String, to: String, inout timestamp: NSDate) -> RouteStep {
         //assert from in {'Одинцово', 'Дубки'}
         //assert to in {'Одинцово', 'Дубки'}
         //assert from != to
@@ -120,9 +146,11 @@ class RouteDataModel: NSObject {
             }
         }
 
-        var result: Dictionary<String, AnyObject> = ["from": from, "to": to]
+        var bus: RouteStep = RouteStep()
+        bus.from = from
+        bus.to = to
         
-        return result
+        return bus
     }
 
     // MARK: - Route On Train
@@ -178,10 +206,12 @@ class RouteDataModel: NSObject {
     
     let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%s&format=json&date=%s&from=%s&to=%s&lang=ru&transport_types=suburban"
 
-    func getNearestTrain(from: String, to: String, inout timestamp: NSDate) -> Dictionary<String, AnyObject> {
-        var result: Dictionary<String, AnyObject> = ["from": from, "to": to]
+    func getNearestTrain(from: String, to: String, inout timestamp: NSDate) -> RouteStep {
+        var train: RouteStep = RouteStep()
+        train.from = from
+        train.to = to
         
-        return result
+        return train
     }
 
     // MARK: - Route On Subway
@@ -258,21 +288,23 @@ class RouteDataModel: NSObject {
         return 0
     }
     
-    func getNearestSubway(from: String, to: String, inout timestamp: NSDate) -> Dictionary<String, AnyObject> {
-        var result: Dictionary<String, AnyObject> = ["from": from, "to": to]
+    func getNearestSubway(from: String, to: String, inout timestamp: NSDate) -> RouteStep {
+        var subway: RouteStep = RouteStep()
+        subway.from = from
+        subway.to = to
 
         let subwayCloses = dateChangeTime(timestamp, time: subwayClosesTime)
         let subwayOpens = dateChangeTime(timestamp, time: subwayOpensTime)
         // subwayCloses <= timestamp <= subwayOpens
-        if subwayCloses.compare(timestamp) != NSComparisonResult.OrderedDescending
-            && timestamp.compare(subwayOpens) != NSComparisonResult.OrderedDescending {
+        if subwayCloses.compare(timestamp) != .OrderedDescending
+            && timestamp.compare(subwayOpens) != .OrderedDescending {
             // subway is still closed
             timestamp = subwayOpens
         }
-        result["departure"] = timestamp
-        result["arrival"] = dateByAddingMinute(timestamp, minute: getSubwayData(from, to: to))
+        subway.departure = timestamp
+        subway.arrival = dateByAddingMinute(timestamp, minute: getSubwayData(from, to: to))
         
-        return result
+        return subway
     }
 
     // MARK: - Route On Foot
@@ -325,15 +357,16 @@ class RouteDataModel: NSObject {
         return nil
     }
     
-    func getNearestOnFoot(edu: Dictionary<String, AnyObject>, timestamp: NSDate) -> Dictionary<String, AnyObject> {
+    func getNearestOnFoot(edu: Dictionary<String, AnyObject>, timestamp: NSDate) -> RouteStep {
         let onFootEduDeltas: Int = edu["onfoot"] as! Int
 
-        var result: Dictionary<String, AnyObject> = ["departure": timestamp]
-        result["arrival"] = dateByAddingMinute(timestamp, minute: onFootEduDeltas)
-        result["time"] = onFootEduDeltas
-        result["mapsrc"] = formMapUrl(edu["mapsrc"] as! String)
+        var onfoot: RouteStep = RouteStep()
+        onfoot.departure = timestamp
+        onfoot.arrival = dateByAddingMinute(timestamp, minute: onFootEduDeltas)
+        onfoot.time = onFootEduDeltas
+        onfoot.map = formMapUrl(edu["mapsrc"] as! String)
         
-        return result
+        return onfoot
     }
 
     /*******************************/

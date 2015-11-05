@@ -47,21 +47,16 @@ class RouteTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RouteCell", forIndexPath: indexPath)
 
+        let routeStep = routeDataModel.route[indexPath.row]
+        
         // Configure the cell...
-        cell.textLabel?.text = routeDataModel.route[indexPath.row]["title"]
-        cell.detailTextLabel?.text = routeDataModel.route[indexPath.row]["detail"]
-//        switch indexPath.row {
-//        case 0:
-//            let from = routeDataModel.fromCampus!["title"] as! String
-//            let to = routeDataModel.toCampus!["title"] as! String
-//            let dateFormatter = NSDateFormatter()
-//            dateFormatter.dateFormat = "HH:mm EEE, dd MMMM yyyy"
-//            let when = dateFormatter.stringFromDate(routeDataModel.when!)
-//            cell.textLabel?.text = "\(from) -> \(to)"
-//            cell.detailTextLabel?.text = when
-//        default:
-//            break
-//        }
+        cell.textLabel?.text = routeStep.title
+        cell.detailTextLabel?.text = routeStep.detail
+        if routeStep.url != nil || routeStep.map != nil {
+            cell.accessoryType = .DetailButton
+        } else {
+            cell.accessoryType = .None
+        }
 
         return cell
     }

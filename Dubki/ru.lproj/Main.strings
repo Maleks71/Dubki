@@ -74,8 +74,8 @@
 /* Class = "UIViewController"; title = "Выбор Времени"; ObjectID = "Quy-T8-08k"; */
 "Quy-T8-08k.title" = "Выбор Времени";
 
-/* Class = "UINavigationItem"; title = "Информация"; ObjectID = "QzF-ys-3Nf"; */
-"QzF-ys-3Nf.title" = "Информация";
+/* Class = "UINavigationItem"; title = "Подробности"; ObjectID = "QzF-ys-3Nf"; */
+"QzF-ys-3Nf.title" = "Подробности";
 
 /* Class = "UINavigationItem"; title = "Выбор Времени"; ObjectID = "Rdo-jJ-LFw"; */
 "Rdo-jJ-LFw.title" = "Выбор Времени";

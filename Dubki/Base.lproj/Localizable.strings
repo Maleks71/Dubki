@@ -11,7 +11,11 @@
 "Subway" = "🚇 Subway";
 "OnFoot" = "🚶 On Foot";
 
-"Now" = "Now";
+"IWantToReach" = "I want to reach";
 
 "ToCampus"   = "to Campus";
 "FromCampus" = "from Campus";
+
+"When" = "When";
+"Now" = "Now";
+
