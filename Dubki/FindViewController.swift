@@ -95,18 +95,9 @@ class FindViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "RouteShow" {
-            if campus != nil {
-                if when != nil {
-                    RouteDataModel.sharedInstance.calculateRoute(directionSegmentControl.selectedSegmentIndex, campus: campus!, when: when!)
-                } else {
-                    let timestamp = NSDate().dateByAddingTimeInterval(600) // now + 10 minute
-                    RouteDataModel.sharedInstance.calculateRoute(directionSegmentControl.selectedSegmentIndex, campus: campus!, when: timestamp)
-                }
-                //tabBarController.selectedIndex = 1 // Route Tab
-            } else {
-                print("error route parameter!")
-                print("to/from: \(campus)")
-            }
+            // посторить маршрут
+            RouteDataModel.sharedInstance.calculateRoute(directionSegmentControl.selectedSegmentIndex, campus: campus, when: when)
+            //tabBarController.selectedIndex = 1 // Route Tab
         }
         
         if segue.identifier == "CampusPick" {

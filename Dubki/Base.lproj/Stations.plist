@@ -20,7 +20,7 @@
 		<key>title</key>
 		<string>Kuncevo</string>
 		<key>subway</key>
-		<string>Kuncevskaya</string>
+		<string>kuntsevskaya</string>
 		<key>onfoot</key>
 		<integer>10</integer>
 	</dict>
@@ -31,7 +31,7 @@
 		<key>title</key>
 		<string>Fili</string>
 		<key>subway</key>
-		<string>Fili</string>
+		<string>fili</string>
 		<key>onfoot</key>
 		<integer>7</integer>
 	</dict>
@@ -42,7 +42,7 @@
 		<key>title</key>
 		<string>Begovaya</string>
 		<key>subway</key>
-		<string>Begovaya</string>
+		<string>begovaya</string>
 		<key>onfoot</key>
 		<integer>5</integer>
 	</dict>
@@ -53,7 +53,7 @@
 		<key>title</key>
 		<string>Belorusskaya</string>
 		<key>subway</key>
-		<string>Belorusskaya</string>
+		<string>belorusskaya</string>
 		<key>onfoot</key>
 		<integer>5</integer>
 	</dict>
