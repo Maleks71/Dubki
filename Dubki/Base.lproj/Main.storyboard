@@ -359,7 +359,7 @@
         <!--About-->
         <scene sceneID="0Sy-X0-GM5">
             <objects>
-                <viewController id="bGy-00-8i1" sceneMemberID="viewController">
+                <viewController id="bGy-00-8i1" customClass="AboutViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OME-U4-Z6Z"/>
                         <viewControllerLayoutGuide type="bottom" id="zzf-8Q-bU6"/>
@@ -405,6 +405,9 @@ to plan their route from dorm to campus and vice versa.</string>
                                 <rect key="frame" x="20" y="308" width="280" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Donate"/>
+                                <connections>
+                                    <action selector="donatePressButton:" destination="bGy-00-8i1" eventType="touchUpInside" id="9gy-7m-cT4"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
