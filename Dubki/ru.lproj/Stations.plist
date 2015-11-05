@@ -10,8 +10,8 @@
 		<string>Одинцово</string>
 		<key>subway</key>
 		<string>--</string>
-		<key>onfoot</key>
-		<integer>0</integer>
+		<key>transit</key>
+		<integer>5</integer>
 	</dict>
 	<key>kuncevo</key>
 	<dict>
@@ -21,7 +21,7 @@
 		<string>Кунцево</string>
 		<key>subway</key>
 		<string>kuntsevskaya</string>
-		<key>onfoot</key>
+		<key>transit</key>
 		<integer>10</integer>
 	</dict>
 	<key>fili</key>
@@ -32,7 +32,7 @@
 		<string>Фили</string>
 		<key>subway</key>
 		<string>fili</string>
-		<key>onfoot</key>
+		<key>transit</key>
 		<integer>7</integer>
 	</dict>
 	<key>begovaya</key>
@@ -43,7 +43,7 @@
 		<string>Беговая</string>
 		<key>subway</key>
 		<string>begovaya</string>
-		<key>onfoot</key>
+		<key>transit</key>
 		<integer>5</integer>
 	</dict>
 	<key>belorusskaya</key>
@@ -54,7 +54,7 @@
 		<string>Белорусская</string>
 		<key>subway</key>
 		<string>belorusskaya</string>
-		<key>onfoot</key>
+		<key>transit</key>
 		<integer>5</integer>
 	</dict>
 </dict>
