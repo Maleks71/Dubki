@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		219C1DFC1BE76F3C0084CC5C /* Stations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 219C1DFA1BE76F3C0084CC5C /* Stations.plist */; };
 		219C1E001BE786BC0084CC5C /* Subways.plist in Resources */ = {isa = PBXBuildFile; fileRef = 219C1DFE1BE786BC0084CC5C /* Subways.plist */; };
+		219CFFD01BEBECE7008F2EE8 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219CFFCF1BEBECE7008F2EE8 /* AboutViewController.swift */; };
 		219FA9C91BEA2BAC00161450 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219FA9C81BEA2BAC00161450 /* SettingsTableViewController.swift */; };
 		21BC21F51BE95601002E0DFF /* Dormitories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21BC21F31BE95601002E0DFF /* Dormitories.plist */; };
 		21C89BBF1BE6501500816449 /* Campuses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C89BC11BE6501500816449 /* Campuses.plist */; };
@@ -32,6 +33,7 @@
 		219C1DFD1BE770850084CC5C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/Stations.plist; sourceTree = "<group>"; };
 		219C1DFF1BE786BC0084CC5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Subways.plist; sourceTree = "<group>"; };
 		219C1E011BE788AB0084CC5C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/Subways.plist; sourceTree = "<group>"; };
+		219CFFCF1BEBECE7008F2EE8 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		219FA9C81BEA2BAC00161450 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		219FA9CB1BEA2F3200161450 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		21BC21F41BE95601002E0DFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Dormitories.plist; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				A6BC8BEB1BE2BEAC006A91F7 /* TimePickerViewController.swift */,
 				A6BC8BED1BE2BEC7006A91F7 /* RouteTableViewController.swift */,
 				219FA9C81BEA2BAC00161450 /* SettingsTableViewController.swift */,
+				219CFFCF1BEBECE7008F2EE8 /* AboutViewController.swift */,
 				A6BC8BF11BE3C232006A91F7 /* RouteDataModel.swift */,
 				A6BC8BDB1BE2B21F006A91F7 /* Main.storyboard */,
 				A6BC8BE01BE2B21F006A91F7 /* LaunchScreen.storyboard */,
@@ -216,6 +219,7 @@
 				A6BC8BEA1BE2BE9B006A91F7 /* CampusPickerViewController.swift in Sources */,
 				A6BC8BD81BE2B21F006A91F7 /* AppDelegate.swift in Sources */,
 				A6BC8BF21BE3C232006A91F7 /* RouteDataModel.swift in Sources */,
+				219CFFD01BEBECE7008F2EE8 /* AboutViewController.swift in Sources */,
 				219FA9C91BEA2BAC00161450 /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
