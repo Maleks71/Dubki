@@ -331,7 +331,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <segue destination="bGy-00-8i1" kind="show" id="9bn-Yh-F0P">
+                                            <segue destination="bGy-00-8i1" kind="show" identifier="AboutShow" id="9bn-Yh-F0P">
                                                 <nil key="action"/>
                                             </segue>
                                         </connections>
@@ -348,6 +348,9 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="rzv-QT-Ipi"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="campusLabel" destination="Fnw-fZ-De6" id="GVb-5N-57c"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JyV-Gy-fm4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -468,6 +471,9 @@
                                     <animations/>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <segue destination="Q8G-dz-r4e" kind="unwind" identifier="SaveSelectedCampus" unwindAction="unwindWithSelectedCampus:" id="znz-RR-yrI"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -475,12 +481,11 @@
                             <outlet property="delegate" destination="8ef-0k-w9x" id="f5K-Lk-vsI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Выбор Кампуса" id="0FI-BX-ts6">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="gHI-RZ-vnf"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Выбор Кампуса" id="0FI-BX-ts6"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Djn-Mc-0bk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Q8G-dz-r4e" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1985" y="2567"/>
         </scene>
@@ -584,7 +589,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Выбор Времени" id="Rdo-jJ-LFw">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="sBg-3i-lEt"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="sBg-3i-lEt">
+                            <connections>
+                                <segue destination="uVQ-A4-NxS" kind="unwind" identifier="SaveSelectedTime" unwindAction="unwindSelectedTime:" id="MYy-to-igU"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -592,6 +601,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jNs-Hu-4ac" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="uVQ-A4-NxS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1985" y="3113"/>
         </scene>
@@ -691,6 +701,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uxu-sj-sAU"/>
+        <segue reference="YKJ-aB-cJn"/>
     </inferredMetricsTieBreakers>
 </document>

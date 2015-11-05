@@ -10,6 +10,22 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
 
+    @IBOutlet weak var campusLabel: UILabel!
+
+    // selected campus
+    var campus: Dictionary<String, AnyObject>? {
+        didSet {
+            // after set value of when need set label text
+            if campusLabel != nil {
+                if campus != nil {
+                    campusLabel.text = campus!["title"] as? String
+                } else {
+                    campusLabel.text = ""
+                }
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,8 +41,15 @@ class SettingsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
+    // when press button done on campus picker view controller
+    @IBAction func unwindWithSelectedCampus(segue:UIStoryboardSegue) {
+        if let campusPickerViewController = segue.sourceViewController as? CampusPickerViewController, campusIndex = campusPickerViewController.selectedCampusIndex {
+            campus = RouteDataModel.sharedInstance.campuses![campusIndex + 1] as? Dictionary<String, AnyObject>
+        }
+    }
 
+    // MARK: - Table view data source
+    /*
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
@@ -36,7 +59,7 @@ class SettingsTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
-
+    */
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)

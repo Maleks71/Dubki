@@ -26,17 +26,19 @@ class CampusPickerViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "SaveSelectedCampus" {
+            if let cell = sender as? UITableViewCell {
+                let indexPath = tableView.indexPathForCell(cell)
+                selectedCampusIndex = indexPath?.row
+            }
+        }
     }
-    */
 
     // MARK: - Table View Delegate
 
@@ -74,6 +76,11 @@ class CampusPickerViewController: UITableViewController {
         
         cell.textLabel?.text = campus["title"] as? String
         cell.detailTextLabel?.text = campus["description"] as? String
+        if indexPath.row == selectedCampusIndex {
+            cell.accessoryType = .Checkmark
+        } else {
+            cell.accessoryType = .None
+        }
         
         return cell;
     }

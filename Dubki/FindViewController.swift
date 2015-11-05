@@ -60,7 +60,7 @@ class FindViewController: UITableViewController {
         //campusButton.layer.borderColor = UIColor.blueColor().CGColor
         
         // clear campus TODO: get from setting or location
-        campus = RouteDataModel.sharedInstance.campuses![1] as? Dictionary<String, AnyObject>
+        campus = RouteDataModel.sharedInstance.campuses![2] as? Dictionary<String, AnyObject>
         
         //fromToLabel = tableView.headerViewForSection(1)?.textLabel
         //fromToLabel?.text = NSLocalizedString("ToCampus", comment: "").uppercaseString
@@ -87,23 +87,6 @@ class FindViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    @IBAction func goButtonPress(sender: AnyObject) {
-        if let tabBarController = self.tabBarController {
-            if campus != nil {
-                if when != nil {
-                    RouteDataModel.sharedInstance.calculateRoute(directionSegmentControl.selectedSegmentIndex, campus: campus!, when: when!)
-                } else {
-                    let timestamp = NSDate().dateByAddingTimeInterval(600) // now + 10 minute
-                    RouteDataModel.sharedInstance.calculateRoute(directionSegmentControl.selectedSegmentIndex, campus: campus!, when: timestamp)
-                }
-                tabBarController.selectedIndex = 1 // Route Tab
-            } else {
-                print("error route parameter!")
-                print("to/from: \(campus)")
-            }
-        }
-    }
-
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -119,40 +102,36 @@ class FindViewController: UITableViewController {
                     let timestamp = NSDate().dateByAddingTimeInterval(600) // now + 10 minute
                     RouteDataModel.sharedInstance.calculateRoute(directionSegmentControl.selectedSegmentIndex, campus: campus!, when: timestamp)
                 }
+                //tabBarController.selectedIndex = 1 // Route Tab
             } else {
                 print("error route parameter!")
                 print("to/from: \(campus)")
             }
         }
         
-//        if segue.identifier == "CampusPick" {
-//            if let campusPickerViewController = segue.destinationViewController as? CampusPickerViewController {
-////                campusPickerViewController.selectedCampus = toCampus
-//                campusPickerViewController.setCampus = 2
-//            }
-//        }
-    }
+        if segue.identifier == "CampusPick" {
+            if let campusPickerViewController = segue.destinationViewController as? CampusPickerViewController {
+                campusPickerViewController.selectedCampusIndex = (campus!["id"] as? Int)! - 2
+            }
+        }
 
-    
-//    // when press button cancel on view controller
-//    @IBAction func cancelSelect(segue:UIStoryboardSegue) {
-//        // not action for cancel
-//    }
-    
-    // when press button done on campus picker view controller
-    @IBAction func doneCampusSelect(segue:UIStoryboardSegue) {
-        if let campusPickerViewController = segue.sourceViewController as? CampusPickerViewController {
-            //print(campusPickerViewController.selectedPlace)
-            if let campusIndex = campusPickerViewController.selectedCampusIndex {
-                campus = RouteDataModel.sharedInstance.campuses![campusIndex + 1] as? Dictionary<String, AnyObject>
-            } else {
-                campus = nil
+        if segue.identifier == "TimePick" {
+            if let timePickerViewController = segue.destinationViewController as? TimePickerViewController {
+                timePickerViewController.selectedDate = when
             }
         }
     }
 
+    
+    // when press button done on campus picker view controller
+    @IBAction func unwindWithSelectedCampus(segue:UIStoryboardSegue) {
+        if let campusPickerViewController = segue.sourceViewController as? CampusPickerViewController, campusIndex = campusPickerViewController.selectedCampusIndex {
+                campus = RouteDataModel.sharedInstance.campuses![campusIndex + 1] as? Dictionary<String, AnyObject>
+        }
+    }
+
     // when press button done on time picker view controller
-    @IBAction func doneTimeSelect(segue:UIStoryboardSegue) {
+    @IBAction func unwindSelectedTime(segue:UIStoryboardSegue) {
         if let timePickerViewController = segue.sourceViewController as? TimePickerViewController {
             //print(timePickerViewController.selectedDate)
             when = timePickerViewController.selectedDate

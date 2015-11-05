@@ -42,24 +42,22 @@ class TimePickerViewController: UIViewController {
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         
-        selectedDate = dateFormatter.dateFromString(dateString)!
-        datePicker.date = selectedDate!
+        let date = dateFormatter.dateFromString(dateString)!
+        if date.compare(NSDate()) == .OrderedDescending {
+            datePicker.date = date
+        } else {
+            datePicker.date = NSDate()
+        }
     }
 
-    @IBAction func datePickerChangeValue(sender: UIDatePicker) {
-        selectedDate = datePicker.date
-    }
-
-/*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "DoneTimeSelect" {
+        if segue.identifier == "SaveSelectedTime" {
             selectedDate = datePicker.date
         }
     }
-*/
 }
