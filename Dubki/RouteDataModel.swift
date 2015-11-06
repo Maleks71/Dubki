@@ -302,13 +302,25 @@ class RouteDataModel: NSObject {
 
     // MARK: - Route On Bus
 
-    let BUS_API_URL = "http://dubkiapi2.appspot.com/sch"
+    // загрузка расписания автобусов Дубки-Одинцово в файл bus.json
+    func loadBusSchedule() {
+        let BUS_API_URL = "http://dubkiapi2.appspot.com/sch"
+        
+        if let busSchedule = NSData(contentsOfURL: NSURL(string: BUS_API_URL)!) {
+            let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+            //let destinationPath = documentsPath.stringByAppendingPathComponent("filename.ext")
+            let filePath = "\(documentsPath)/bus.json"
+            busSchedule.writeToFile(filePath, atomically: true)
+        }
+    }
     
     // from and to should be in {'Одинцово', 'Дубки'}
     func getNearestBus(from: String, to: String, timestamp: NSDate) -> RouteStep {
         //assert from in {'Одинцово', 'Дубки'}
         //assert to in {'Одинцово', 'Дубки'}
         //assert from != to
+        
+        loadBusSchedule()
         
         var _from: String
         var _to: String
@@ -591,7 +603,37 @@ class RouteDataModel: NSObject {
         "gnezdo":        "Малый Гнездниковский переулок (метро Тверская)"
     ]
 */
-     
+
+    // MARK: - Function for URL request
+    
+     // Synchronous Request
+    func synchronousRequest(url: NSURL) -> NSData? {
+        var result: NSData? = nil
+        
+        let session = NSURLSession.sharedSession()
+        
+        // set semaphore
+        let sem = dispatch_semaphore_create(0)
+        
+        let task1 = session.dataTaskWithURL(url, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            //print(response)
+            //print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            
+            //let jsonData = JSON(data: data!)
+            result = data
+            
+            // delete semophore
+            dispatch_semaphore_signal(sem)
+        })
+        // run parallel thread
+        task1.resume()
+        
+        // white delete semophore
+        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER)
+        
+        return result
+    }
+
     // MARK: - Function for working with date
     
     func dateChangeTime(date: NSDate, time: String) -> NSDate {
