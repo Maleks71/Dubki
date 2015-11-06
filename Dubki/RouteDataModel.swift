@@ -18,6 +18,7 @@ class RouteStep {
         case Train
         case Subway
         case Onfoot
+        case Transition
     }
     
     var type: RouteStepType  // вид шага
@@ -53,6 +54,9 @@ class RouteStep {
             
             case .Onfoot:
                 return NSLocalizedString("OnFoot", comment: "") // "🚶 Пешком"
+
+            case .Transition:
+                return NSLocalizedString("Transition", comment: "") // "🚶 Переход"
             }
         }
     }
@@ -86,6 +90,10 @@ class RouteStep {
             case .Onfoot:
                 let detailFormat = NSLocalizedString("OnfootDetailFormat", comment: "")
                 return String(format: detailFormat, time ?? 0)
+
+            case .Transition:
+                let detailFormat = NSLocalizedString("TransitDetailFormat", comment: "")
+                return String(format: detailFormat, from ?? "?", to ?? "?", time ?? 0)
             }
         }
     }
@@ -180,8 +188,7 @@ class RouteDataModel: NSObject {
             // Маршрут: Автобус->Переход->Электричка->Переход->Метро->Пешком
 
             // автобусом
-            var timestamp = self.when
-            let bus = getNearestBus("Дубки", to: "Одинцово", timestamp: timestamp!)
+            let bus = getNearestBus("Дубки", to: "Одинцово", timestamp: self.when!)
             route.append(bus)
             
             // станции ж/д
@@ -189,26 +196,41 @@ class RouteDataModel: NSObject {
             let stationTo = stations![(campus!["station"] as? String)!] as! Dictionary<String, AnyObject>
 
             // переход
-            var transitionTime = stationFrom["transit"] as! Int
-            timestamp = dateByAddingMinute(bus.arrival!, minute: transitionTime)
+            let transit1 = RouteStep(type: .Transition)
+            transit1.from = "Автобус"
+            transit1.to = "Станция"
+            transit1.time = stationFrom["transit"] as? Int
+            transit1.departure = bus.arrival!
+            transit1.arrival = dateByAddingMinute(transit1.departure!, minute: transit1.time!)
+            if transit1.time > 0 {
+                route.append(transit1)
+            }
 
             // электричкой
-            let train = getNearestTrain(stationFrom, to: stationTo, timestamp: timestamp!)
+            let train = getNearestTrain(stationFrom, to: stationTo, timestamp: transit1.arrival!)
             route.append(train)
-            
-            // переход
-            transitionTime = stationTo["transit"] as! Int
-            timestamp = dateByAddingMinute(train.arrival!, minute: transitionTime)
 
-            // на метро
+            // станции метро
             let subwayFrom = stationTo["subway"] as? String
             let subwayTo = campus!["subway"] as? String
-            let subway = getNearestSubway(subwayFrom!, to: subwayTo!, timestamp: timestamp!)
+
+            // переход
+            let transit2 = RouteStep(type: .Transition)
+            transit2.from = stationTo["title"] as? String
+            transit2.to = subways![subwayFrom!] as? String
+            transit2.time = stationTo["transit"] as? Int
+            transit2.departure = train.arrival!
+            transit2.arrival = dateByAddingMinute(transit2.departure!, minute: transit2.time!)
+            if transit2.time > 0 {
+                route.append(transit2)
+            }
+
+            // на метро
+            let subway = getNearestSubway(subwayFrom!, to: subwayTo!, timestamp: transit2.arrival!)
             route.append(subway)
             
             // пешком
-            timestamp = subway.arrival
-            let onfoot = getNearestOnFoot(campus!, timestamp: timestamp!)
+            let onfoot = getNearestOnFoot(campus!, timestamp: subway.arrival!)
             route.append(onfoot)
             
             // форматирование информации о пути
@@ -228,8 +250,7 @@ class RouteDataModel: NSObject {
             // Маршрут: Пешком->Метро->Переход->Электричка->Переход->Автобус
 
             // пешком
-            var timestamp = self.when
-            let onfoot = getNearestOnFoot(campus!, timestamp: timestamp!)
+            let onfoot = getNearestOnFoot(campus!, timestamp: self.when!)
             route.append(onfoot)
             
             // станции ж/д
@@ -239,24 +260,37 @@ class RouteDataModel: NSObject {
             // на метро
             let subwayFrom = campus!["subway"] as? String
             let subwayTo = stationFrom["subway"] as? String
-            timestamp = onfoot.arrival
-            let subway = getNearestSubway(subwayFrom!, to: subwayTo!, timestamp: timestamp!)
+            let subway = getNearestSubway(subwayFrom!, to: subwayTo!, timestamp: onfoot.arrival!)
             route.append(subway)
 
             // переход
-            var transitionTime = stationFrom["transit"] as! Int
-            timestamp = dateByAddingMinute(subway.arrival!, minute: transitionTime)
+            let transit1 = RouteStep(type: .Transition)
+            transit1.from = subways![subwayTo!] as? String
+            transit1.to = stationFrom["title"] as? String
+            transit1.time = stationFrom["transit"] as? Int
+            transit1.departure = subway.arrival
+            transit1.arrival = dateByAddingMinute(transit1.departure!, minute: transit1.time!)
+            if transit1.time > 0 {
+                route.append(transit1)
+            }
 
             //электричкой
-            let train = getNearestTrain(stationFrom, to: stationTo, timestamp: timestamp!)
+            let train = getNearestTrain(stationFrom, to: stationTo, timestamp: transit1.arrival!)
             route.append(train)
 
             // переход
-            transitionTime = stationTo["transit"] as! Int
-            timestamp = dateByAddingMinute(train.arrival!, minute: transitionTime)
+            let transit2 = RouteStep(type: .Transition)
+            transit2.from = "Станция"
+            transit2.to = "Автобус"
+            transit2.time = stationTo["transit"] as? Int
+            transit2.departure = train.arrival
+            transit2.arrival = dateByAddingMinute(transit2.departure!, minute: transit2.time!)
+            if transit2.time > 0 {
+                route.append(transit2)
+            }
 
             // автобусом
-            let bus = getNearestBus("Одинцово", to: "Дубки", timestamp: timestamp!)
+            let bus = getNearestBus("Одинцово", to: "Дубки", timestamp: transit2.arrival!)
             route.append(bus)
             
             // форматирование информации о пути

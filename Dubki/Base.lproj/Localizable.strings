@@ -13,11 +13,13 @@
 "Train"  = "🚆 Train";
 "Subway" = "🚇 Subway";
 "OnFoot" = "🚶 On Foot";
+"Transition" = "🚶 Transition";
 
 // форматы для информации о шаге маршрута
 "TotalDetailFormat" = "departure: %@ | arrival: %@";
 "TrainDetailFormat" = "%@ (%@ → %@)\nStations: %@\nEntry into stations: %@";
 "OnfootDetailFormat" = "About %d minutes";
+"TransitDetailFormat" = "%@ → %@\nAbout %d minutes";
 
 "IWantToReach" = "I want to reach";
 
