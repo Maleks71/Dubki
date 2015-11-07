@@ -240,7 +240,7 @@ class RouteDataModel: NSObject {
                 }
                 
                 // время прибытия
-               transitArrival = transit.arrival!
+                transitArrival = transit.arrival!
            } else {
                 // станции ж/д
                 let stationFrom = stations![(dorm["station"] as? String)!] as! Dictionary<String, AnyObject>
@@ -534,6 +534,10 @@ class RouteDataModel: NSObject {
                 slBlvdBus = time.containsString("*")
             }
         }
+        if busDeparture == nil {
+            print("Автобус не найден")
+             return RouteStep()
+        }
 
         let bus: RouteStep = RouteStep(type: .Bus)
   
@@ -554,24 +558,116 @@ class RouteDataModel: NSObject {
 
     // MARK: - Route On Train
 
+    /*
+    A module which calculates the nearest train using an external API (Yandex.Rasp)
+    Note that developer key for Yandex.Rasp is required (stored in .train_api_key)
+    Also caches a schedule for today and two days later for faster access
+    Key location and cached schedules' files are likely to change in future
+    */
+
     let YANDEX_API_KEY = "6666221e-446b-44d3-8bcb-274e5103aacc"
     
+    // URL of train schedule API provider
     let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%@&format=json&date=%@&from=%@&to=%@&lang=ru&transport_types=suburban"
 
+    /*
+    Caches a schedule between all stations
+    */
+    func cacheEverything() {
+        let from = "Одинцово"
+        let toStations = ["Кунцево", "Фили", "Беговая", "Белорусская"]
+        for to in toStations {
+            cacheScheduleTrain(from, to: to, timestamp: NSDate())
+            cacheScheduleTrain(to, to: from, timestamp: NSDate())
+        }
+    }
+
+    /*
+    Caches a schedule between stations from arguments starting with certain day
+    Writes the cached schedule for day and two days later to train_cached_* files
+    
+    Args:
+        from(String): departure train station
+        to(String): arrival train station
+        timestamp(NSDate): date to cache schedule for
+    */
+    func cacheScheduleTrain(from: String, to: String, timestamp: NSDate) {
+        
+    }
+
+    /*
+    Returns a cached schedule between stations in arguments
+    If no cached schedule is available, download and return a fresh one
+    
+    Args:
+        from(String): departure train station
+        to(String): arrival train station
+        timestamp(NSDate): date to get schedule for
+    */
+    func getScheduleTrain(from: String, to: String, timestamp: NSDate) -> JSON? {
+        let departure = stringFromDate(dateChangeTime(timestamp, time: "09:00"), dateFormat: "yyyy-MM-dd HH:mm:ss")
+        let arrival = stringFromDate(dateChangeTime(timestamp, time: "09:35"), dateFormat: "yyyy-MM-dd HH:mm:ss")
+        let data = "[{\"departure\":\"\(departure)\",\"arrival\":\"\(arrival)\",\"stops\":\"везде\",\"thread\":{\"title\":\"Кубинка 1 - Москва (Белорусский вокзал)\"}}]"
+
+        return JSON(data: data.dataUsingEncoding(NSUTF8StringEncoding)!)
+    }
+    
+    /*
+    Returns the nearest train
+    
+    Args:
+        from(Dictionary): place of departure
+        to(Dictionary): place of arrival
+        timestamp(NSDate): time of departure
+    
+    Note:
+        'from' and 'to' should not be equal and should be in STATIONS
+    */
     func getNearestTrain(from: Dictionary<String, AnyObject>, to: Dictionary<String, AnyObject>, timestamp: NSDate) -> RouteStep {
         //assert _from in STATIONS
         //assert _to in STATIONS
+        
+        let fromCode = from["code"] as? String
+        let toCode = to["code"] as? String
+        let schedule = getScheduleTrain(fromCode!, to: toCode!, timestamp: timestamp)
+        
+        var trains = [Dictionary<String, String>]()
+        for item in (schedule?.array)! {
+            var train = Dictionary<String, String>()
+            train["arrival"] = item["arrival"].string
+            train["departure"] = item["departure"].string
+            train["stops"] = item["stops"].string
+            train["title"] = item["thread"]["title"].string
+            trains.append(train)
+        }
+        
+        // поиск ближайшего рейса (минимум ожидания)
+        var minInterval: Double = 24*60*60 // мин. интервал (сутки)
+        var trainInfo: Dictionary<String, String>? // поезд
+        for train in trains {
+            let departure = dateFromString(train["departure"]!, dateFormat: "yyyy-MM-dd HH:mm:ss")
+            let interval: Double = departure.timeIntervalSinceDate(timestamp)
+            if interval > 0 && interval < minInterval {
+                minInterval = interval
+                trainInfo = train
+            }
+        }
+
+        if trainInfo == nil {
+            print("Не найдена электричка")
+            return RouteStep()
+        }
         
         let train: RouteStep = RouteStep(type: .Train)
         
         train.from = from["title"] as? String
         train.to = to["title"] as? String
-        train.trainName = "Кубинка 1 - Москва (Белорусский вокзал)"
+        train.trainName = trainInfo!["title"] //"Кубинка 1 - Москва (Белорусский вокзал)"
+        train.stations = trainInfo!["stops"] //"везде"
+        train.departure = dateFromString(trainInfo!["departure"]!, dateFormat: "yyyy-MM-dd HH:mm:ss")
+        train.arrival = dateFromString(trainInfo!["departure"]!, dateFormat: "yyyy-MM-dd HH:mm:ss")
+        train.duration = Int(train.arrival!.timeIntervalSinceDate(train.departure!) / 60)
         train.url = "http://rasp.yandex.ru/"
-        
-        train.stations = "везде"
-        train.departure = timestamp
-        train.arrival = dateByAddingMinute(timestamp, minute: 15)
         
         return train
     }
@@ -771,6 +867,18 @@ class RouteDataModel: NSObject {
         let weekDay = myComponents.weekday - 1
         return weekDay
         //return weekdayName[weekDay]
+    }
+    
+    func dateFromString(date: String, dateFormat: String) -> NSDate {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.dateFromString(date)!
+    }
+    
+    func stringFromDate(date: NSDate, dateFormat: String) -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.stringFromDate(date)
     }
     
     // get interval from two date (of date on further date and pass the earlier date as parameter, this would give the time difference in seconds)
