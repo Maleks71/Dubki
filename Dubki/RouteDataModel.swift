@@ -191,42 +191,68 @@ class RouteDataModel: NSObject {
             let bus = getNearestBus("Дубки", to: "Одинцово", timestamp: self.when!)
             route.append(bus)
             
-            // станции ж/д
-            let stationFrom = stations![(dorm["station"] as? String)!] as! Dictionary<String, AnyObject>
-            let stationTo = stations![(campus!["station"] as? String)!] as! Dictionary<String, AnyObject>
-
-            // переход
-            let transit1 = RouteStep(type: .Transition)
-            transit1.from = "Автобус"
-            transit1.to = "Станция"
-            transit1.time = stationFrom["transit"] as? Int
-            transit1.departure = bus.arrival!
-            transit1.arrival = dateByAddingMinute(transit1.departure!, minute: transit1.time!)
-            if transit1.time > 0 {
-                route.append(transit1)
-            }
-
-            // электричкой
-            let train = getNearestTrain(stationFrom, to: stationTo, timestamp: transit1.arrival!)
-            route.append(train)
-
             // станции метро
-            let subwayFrom = stationTo["subway"] as? String
-            let subwayTo = campus!["subway"] as? String
+            var subwayFrom: String?     // станция метро после транзита
+            var transitArrival: NSDate? // время пребытия к метро
+            
+            if bus.to == "Славянский бульвар" {
+                // станции метро
 
-            // переход
-            let transit2 = RouteStep(type: .Transition)
-            transit2.from = stationTo["title"] as? String
-            transit2.to = subways![subwayFrom!] as? String
-            transit2.time = stationTo["transit"] as? Int
-            transit2.departure = train.arrival!
-            transit2.arrival = dateByAddingMinute(transit2.departure!, minute: transit2.time!)
-            if transit2.time > 0 {
-                route.append(transit2)
+                subwayFrom = "slavyanskiy_bulvar"
+                // переход
+                let transit = RouteStep(type: .Transition)
+                transit.from = "Автобус"
+                transit.to = bus.to
+                transit.time = 5
+                transit.departure = bus.arrival!
+                transit.arrival = dateByAddingMinute(transit.departure!, minute: transit.time!)
+                if transit.time > 0 {
+                    route.append(transit)
+                }
+                
+                // время прибытия
+               transitArrival = transit.arrival!
+           } else {
+                // станции ж/д
+                let stationFrom = stations![(dorm["station"] as? String)!] as! Dictionary<String, AnyObject>
+                let stationTo = stations![(campus!["station"] as? String)!] as! Dictionary<String, AnyObject>
+                
+                // переход
+                let transit1 = RouteStep(type: .Transition)
+                transit1.from = "Автобус"
+                transit1.to = "Станция"
+                transit1.time = stationFrom["transit"] as? Int
+                transit1.departure = bus.arrival!
+                transit1.arrival = dateByAddingMinute(transit1.departure!, minute: transit1.time!)
+                if transit1.time > 0 {
+                    route.append(transit1)
+                }
+                
+                // электричкой
+                let train = getNearestTrain(stationFrom, to: stationTo, timestamp: transit1.arrival!)
+                route.append(train)
+                
+                // станции метро
+                subwayFrom = stationTo["subway"] as? String
+                
+                // переход
+                let transit2 = RouteStep(type: .Transition)
+                transit2.from = stationTo["title"] as? String
+                transit2.to = subways![subwayFrom!] as? String
+                transit2.time = stationTo["transit"] as? Int
+                transit2.departure = train.arrival!
+                transit2.arrival = dateByAddingMinute(transit2.departure!, minute: transit2.time!)
+                if transit2.time > 0 {
+                    route.append(transit2)
+                }
+                
+                // время прибытия
+                transitArrival = transit2.arrival
             }
 
             // на метро
-            let subway = getNearestSubway(subwayFrom!, to: subwayTo!, timestamp: transit2.arrival!)
+            let subwayTo = campus!["subway"] as? String
+            let subway = getNearestSubway(subwayFrom!, to: subwayTo!, timestamp: transitArrival!)
             route.append(subway)
             
             // пешком
@@ -255,7 +281,6 @@ class RouteDataModel: NSObject {
             
             // станции ж/д
             let stationFrom = stations![(campus!["station"] as? String)!] as! Dictionary<String, AnyObject>
-            let stationTo = stations![(dorm["station"] as? String)!] as! Dictionary<String, AnyObject>
             
             // на метро
             let subwayFrom = campus!["subway"] as? String
@@ -263,6 +288,8 @@ class RouteDataModel: NSObject {
             let subway = getNearestSubway(subwayFrom!, to: subwayTo!, timestamp: onfoot.arrival!)
             route.append(subway)
 
+            //TODO: добавить обработку автобуса от м.Славянский бульвар
+            
             // переход
             let transit1 = RouteStep(type: .Transition)
             transit1.from = subways![subwayTo!] as? String
@@ -275,6 +302,7 @@ class RouteDataModel: NSObject {
             }
 
             //электричкой
+            let stationTo = stations![(dorm["station"] as? String)!] as! Dictionary<String, AnyObject>
             let train = getNearestTrain(stationFrom, to: stationTo, timestamp: transit1.arrival!)
             route.append(train)
 
@@ -330,21 +358,13 @@ class RouteDataModel: NSObject {
         return nil
     }
     
-    // from and to should be in {'Одинцово', 'Дубки'}
-    func getNearestBus(from: String, to: String, timestamp: NSDate) -> RouteStep {
-        let vals = ["Одинцово", "Дубки"]
-        //assert from in {'Одинцово', 'Дубки'}
-        assert(vals.contains(from))
-        //assert to in {'Одинцово', 'Дубки'}
-        assert(vals.contains(to))
-        //assert(from != to)
-        assert(from != to, "From equal To")
-        
+    // получить расписание автобусов на день
+    func getBusSchedule(from: String, to: String, timestamp: NSDate, useAsterisk: Bool = true) -> [String] {
         var _from: String = from
         var _to: String = to
         
         let weekday = getDayOfWeek(timestamp)
-        // today is either {'','*Суббота', '*Воскресенье'}
+        // today is either {'', '*Суббота', '*Воскресенье'}
         if weekday == 7 {
             if from == "Дубки" {
                 _from = "ДубкиСуббота"
@@ -358,13 +378,11 @@ class RouteDataModel: NSObject {
                 _to = "ДубкиВоскресенье"
             }
         }
-
+        
         // загрузка расписания
+        var times = [String]() // время отправления автобуса
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         if let busSchedule = loadBusSchedule() {
-        
-            var times = [String]() // время отправления автобуса
-
             // find current schedule
             for elem in busSchedule.array! {
                 let elemFrom = elem["from"].string
@@ -380,18 +398,112 @@ class RouteDataModel: NSObject {
             }
             
             if times.count == 0 {
+                //TODO: добавить сообщение об ошибки пользователю
+                print("Ошибка: В расписании автобуса нет направления \(_from)->\(_to)")
+            }
+        } else {
+            //TODO: добавить сообщение об ошибки пользователю
+            print("Не получилось загрузить расписание автобуса")
+        }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        
+        return times
+    }
+    
+    // from and to should be in {'Одинцово', 'Дубки'}
+    func getNearestBus(from: String, to: String, timestamp: NSDate, useAsterisk: Bool = true) -> RouteStep {
+        let vals = ["Одинцово", "Дубки"]
+        //assert from in {'Одинцово', 'Дубки'}
+        assert(vals.contains(from))
+        //assert to in {'Одинцово', 'Дубки'}
+        assert(vals.contains(to))
+        //assert(from != to)
+        assert(from != to, "From equal To")
+        
+        var _from: String = from
+        var _to: String = to
+        
+        let weekday = getDayOfWeek(timestamp)
+        // today is either {'', '*Суббота', '*Воскресенье'}
+        if weekday == 7 {
+            if from == "Дубки" {
+                _from = "ДубкиСуббота"
+            } else if to == "Дубки" {
+                _to = "ДубкиСуббота"
+            }
+        } else if weekday == 0 {
+            if from == "Дубки" {
+                _from = "ДубкиВоскресенье"
+            } else if to == "Дубки" {
+                _to = "ДубкиВоскресенье"
+            }
+        }
+
+        // загрузка расписания
+        var times = [String]() // время отправления автобуса
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        if let busSchedule = loadBusSchedule() {
+            // find current schedule
+            for elem in busSchedule.array! {
+                let elemFrom = elem["from"].string
+                let elemTo = elem["to"].string
+                if elemFrom == _from && elemTo == _to {
+                    let currentSchedule = elem["hset"].array
+                    // convert to array of time
+                    for time in currentSchedule! {
+                        times.append(time["time"].string!)
+                    }
+                    break
+                }
+            }
+            
+            if times.count == 0 {
+                //TODO: добавить сообщение об ошибки пользователю
                 print("Ошибка: В расписании автобуса нет направления \(_from)->\(_to)")
                 return RouteStep()
             }
+        } else {
+            //TODO: добавить сообщение об ошибки пользователю
+            print("Не получилось загрузить расписание автобуса")
+            return RouteStep()
         }
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+ 
+        // поиск ближайшего рейса (минимум ожидания)
+        var minInterval: Double = 24*60*60 // мин. интервал (сутки)
+        var busDeparture: NSDate?          // время отправления
+        var slBlvdBus: Bool = false        // автобус до м.Славянский бульвара
+
+        for time in times {
+            var timeWithoutAsteriks = time
+            // asterisk indicates bus arrival/departure station is 'Славянский бульвар'
+            // it needs special handling
+            if time.containsString("*") {
+                if !useAsterisk { continue } // не использовать автобус до м. Славянский бульвар
+                timeWithoutAsteriks = time.substringToIndex(time.endIndex.predecessor())
+            }
+            let departure = dateChangeTime(timestamp, time: timeWithoutAsteriks)
+            let interval: Double = departure.timeIntervalSinceDate(timestamp)
+            //TODO: # FIXME works incorrectly between weekday 6-7-1
+            if interval > 0 && interval < minInterval {
+                minInterval = interval
+                busDeparture = departure
+                slBlvdBus = time.containsString("*")
+            }
+        }
 
         let bus: RouteStep = RouteStep(type: .Bus)
   
         bus.from = from
-        bus.to = to
-        bus.time = 15 // время автобуса в пути
-        bus.departure = timestamp
+        if useAsterisk && slBlvdBus {
+            bus.to = "Славянский бульвар"
+            bus.time = 50 // время автобуса в пути
+        } else {
+            bus.to = to
+            bus.time = 15 // время автобуса в пути
+        }
+        bus.departure = busDeparture
+        //TODO: # FIXME: more real arrival time?
         bus.arrival = dateByAddingMinute(bus.departure!, minute: bus.time!)
         
         return bus
@@ -399,58 +511,14 @@ class RouteDataModel: NSObject {
 
     // MARK: - Route On Train
 
-/*
-    // maps edus to preferred stations
-    // TODO: move to Campuses.plist
-    let prefStations = [
-        "aeroport":      "Белорусская",
-        "strogino":      "Кунцево",
-        "myasnitskaya":  "Беговая",
-        "vavilova":      "Кунцево",
-        "izmailovo":     "Кунцево",
-        "tekstilshiki":  "Беговая",
-        "st_basmannaya": "Кунцево",
-        "shabolovskaya": "Беговая",
-        "petrovka":      "Беговая",
-        "paveletskaya":  "Беговая",
-        "ilyinka":       "Беговая",
-        "trehsvyat_b":   "Беговая",
-        "trehsvyat_m":   "Беговая",
-        "hitra":         "Беговая",
-        "gnezdo":        "Белорусская"
-    ]
-
-    // delta to pass from railway station to subway station
-    // TODO: move to Stations.plist
-    let ttsDeltas = [
-        "Кунцево":    10,
-        "Фили":        7,
-        "Беговая":     5,
-        "Белорусская": 5
-    ]
-
-    // relation between railway station and subway station
-    // TODO: move to Stations.plist
-    let ttsNames = [
-        "Кунцево":     "Кунцевская",
-        "Фили":        "Фили",
-        "Беговая":     "Беговая",
-        "Белорусская": "Белорусская"
-    ]
-    
-    let STATIONS = [
-        "Одинцово" :   "c10743",
-        "Кунцево":     "s9601728",
-        "Фили":        "s9600821",
-        "Беговая":     "s9601666",
-        "Белорусская": "s2000006"
-    ]
-*/
     let API_KEY_FILE = ".train_api_key"
     
     let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%@&format=json&date=%@&from=%@&to=%@&lang=ru&transport_types=suburban"
 
     func getNearestTrain(from: Dictionary<String, AnyObject>, to: Dictionary<String, AnyObject>, timestamp: NSDate) -> RouteStep {
+        //assert _from in STATIONS
+        //assert _to in STATIONS
+        
         let train: RouteStep = RouteStep(type: .Train)
         
         train.from = from["title"] as? String
@@ -466,27 +534,6 @@ class RouteDataModel: NSObject {
     }
 
     // MARK: - Route On Subway
-
-/*
-    // TODO: move to Campuses.plist
-    let subways = [
-        "aeroport":      "Аэропорт",
-        "myasnitskaya":  "Лубянка",
-        "strogino":      "Строгино",
-        "st_basmannaya": "Курская",
-        "tekstilshiki":  "Текстильщики",
-        "vavilova":      "Ленинский проспект",
-        "izmailovo":     "Семёновская",
-        "shabolovskaya": "Шаболовская",
-        "petrovka":      "Кузнецкий мост",
-        "paveletskaya":  "Павелецкая",
-        "ilyinka":       "Китай-город",
-        "trehsvyat_b":   "Китай-город",
-        "trehsvyat_m":   "Китай-город",
-        "hitra":         "Китай-город",
-        "gnezdo":        "Тверская"
-    ]
-*/
 
     // Subway Route Data (timedelta in minutes)
     let subwayData = [
@@ -562,46 +609,7 @@ class RouteDataModel: NSObject {
     }
 
     // MARK: - Route On Foot
-/*
-    // On Foot Data (timedelta in minutes) 
-    // TODO: move to Campuses.plist
-    let onFootEduDeltas = [
-        "aeroport":      14,
-        "strogino":       6,
-        "myasnitskaya":   6,
-        "vavilova":       5,
-        "izmailovo":     16,
-        "tekstilshiki":  10,
-        "st_basmannaya": 16,
-        "shabolovskaya":  4,
-        "petrovka":       6,
-        "paveletskaya":   5,
-        "ilyinka":        7,
-        "trehsvyat_b":   13,
-        "trehsvyat_m":   15,
-        "hitra":         13,
-        "gnezdo":         5
-    ]
-    
-    // TODO: move to Campuses.plist
-    let mapSources = [
-        "aeroport":      "9kfYmO7lbg2o_YuSTvZqiY9rCevo23cs",
-        "strogino":      "pMeBRyKZjz3PnQn4HCZKIlagbMIv2Bxp",
-        "myasnitskaya":  "GGWd7qLfRklaR5KSQQpKFOiJT8RPFGO-",
-        "vavilova":      "_Cz-NprpRRfD15AECXvyxGQb5N7RY3xC",
-        "izmailovo":     "tTSwzei04UwodpOe5ThQSKwo47ZiR8aO",
-        "tekstilshiki":  "IcVLk9vNC1afHy5ge05Ae07wahHXZZ7H",
-        "st_basmannaya": "LwunOFh66TXk8NyRAgKpsssV0Gdy34pG",
-        "shabolovskaya": "0enMIqcJ_dLy8ShEHN34Lu-4XBAHsrno",
-        "petrovka":      "pSiE6gI2ftRfAGBDauSW0G0H2o9R726u",
-        "paveletskaya":  "1SimW8pYfuzER0tbTEYFs1RFaNUFnhh-",
-        "ilyinka":       "7UEkPE7kT0Bhb4rOzDbk2O57LdWBE8Lq",
-        "trehsvyat_b":   "_WWkurGGUbabsiPE9xgdLP_iJ61vbJrZ",
-        "trehsvyat_m":   "jBGwqmV8V-JjFzbG2M_13sGlAUVqug-9",
-        "hitra":         "j1cHqL5k2jw_MK31dlBLEwPPPmj72NNg",
-        "gnezdo":        "_a_UjKz_rMbmf2l_mWtsRUjlaqlRySIS"
-    ]
-*/
+
     func formMapUrl(mapSource: String, type: String = "img") -> String? {
         if type == "img" {
             return "https://api-maps.yandex.ru/services/constructor/1.0/static/?sid=" + mapSource
@@ -622,33 +630,6 @@ class RouteDataModel: NSObject {
         
         return onfoot
     }
-
-    /*******************************/
-/*
-    // dormitory
-    let dorms = [
-        "dubki": "Дубки",
-    ]
-    
-    // campus
-    let edus = [
-        "aeroport":      "Кочновский проезд (метро Аэропорт)",
-        "strogino":      "Строгино",
-        "myasnitskaya":  "Мясницкая (метро Лубянка)",
-        "vavilova":      "Вавилова (метро Ленинский проспект)",
-        "izmailovo":     "Кирпичная улица (метро Семёновская)",
-        "tekstilshiki":  "Текстильщики",
-        "st_basmannaya": "Старая Басманная",
-        "shabolovskaya": "Шаболовская",
-        "petrovka":      "Петровка (метро Кузнецкий мост)",
-        "paveletskaya":  "Малая Пионерская (метро Павелецкая)",
-        "ilyinka":       "Ильинка (метро Китай-город)",
-        "trehsvyat_b":   "Большой Трёхсвятительский переулок (метро Китай-город)",
-        "trehsvyat_m":   "Малый Трёхсвятительский переулок (метро Китай-город)",
-        "hitra":         "Хитровский переулок (метро Китай-город)",
-        "gnezdo":        "Малый Гнездниковский переулок (метро Тверская)"
-    ]
-*/
 
     // MARK: - Function for URL request
     
