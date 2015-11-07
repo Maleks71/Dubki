@@ -28,7 +28,7 @@ class RouteStep {
     var stations: String?    // остановки ж/д или станции пересадки метро
     var departure: NSDate?   // время отправления
     var arrival: NSDate?     // время прибытия
-    var time: Int?           // время в пути (в минутах)
+    var duration: Int?       // время в пути (в минутах)
     var map: String?         // имя файла карты для показа делелей шага маршрута
     var url: String?         // ссылка на расписание
     
@@ -41,7 +41,7 @@ class RouteStep {
  
             case .Total:
                 let titleFormat = NSLocalizedString("TotalTitleFormat", comment: "")
-                return String (format: titleFormat, from ?? "?", to ?? "?", time ?? 0)
+                return String (format: titleFormat, from ?? "?", to ?? "?", duration ?? 0)
             
             case .Bus:
                 return NSLocalizedString("Bus", comment: "") // "🚌 Автобус"
@@ -89,11 +89,11 @@ class RouteStep {
             
             case .Onfoot:
                 let detailFormat = NSLocalizedString("OnfootDetailFormat", comment: "")
-                return String(format: detailFormat, time ?? 0)
+                return String(format: detailFormat, duration ?? 0)
 
             case .Transition:
                 let detailFormat = NSLocalizedString("TransitDetailFormat", comment: "")
-                return String(format: detailFormat, from ?? "?", to ?? "?", time ?? 0)
+                return String(format: detailFormat, from ?? "?", to ?? "?", duration ?? 0)
             }
         }
     }
@@ -203,10 +203,10 @@ class RouteDataModel: NSObject {
                 let transit = RouteStep(type: .Transition)
                 transit.from = "Автобус"
                 transit.to = bus.to
-                transit.time = 5
+                transit.duration = 5
                 transit.departure = bus.arrival!
-                transit.arrival = dateByAddingMinute(transit.departure!, minute: transit.time!)
-                if transit.time > 0 {
+                transit.arrival = dateByAddingMinute(transit.departure!, minute: transit.duration!)
+                if transit.duration > 0 {
                     route.append(transit)
                 }
                 
@@ -221,10 +221,10 @@ class RouteDataModel: NSObject {
                 let transit1 = RouteStep(type: .Transition)
                 transit1.from = "Автобус"
                 transit1.to = "Станция"
-                transit1.time = stationFrom["transit"] as? Int
+                transit1.duration = stationFrom["transit"] as? Int
                 transit1.departure = bus.arrival!
-                transit1.arrival = dateByAddingMinute(transit1.departure!, minute: transit1.time!)
-                if transit1.time > 0 {
+                transit1.arrival = dateByAddingMinute(transit1.departure!, minute: transit1.duration!)
+                if transit1.duration > 0 {
                     route.append(transit1)
                 }
                 
@@ -239,10 +239,10 @@ class RouteDataModel: NSObject {
                 let transit2 = RouteStep(type: .Transition)
                 transit2.from = stationTo["title"] as? String
                 transit2.to = subways![subwayFrom!] as? String
-                transit2.time = stationTo["transit"] as? Int
+                transit2.duration = stationTo["transit"] as? Int
                 transit2.departure = train.arrival!
-                transit2.arrival = dateByAddingMinute(transit2.departure!, minute: transit2.time!)
-                if transit2.time > 0 {
+                transit2.arrival = dateByAddingMinute(transit2.departure!, minute: transit2.duration!)
+                if transit2.duration > 0 {
                     route.append(transit2)
                 }
                 
@@ -262,7 +262,7 @@ class RouteDataModel: NSObject {
             // форматирование информации о пути
             way.departure = bus.departure
             way.arrival = onfoot.arrival
-            way.time = Int(way.arrival!.timeIntervalSinceDate(way.departure!) / 60.0)
+            way.duration = Int(way.arrival!.timeIntervalSinceDate(way.departure!) / 60.0)
             
         } else {
             // в Дубки
@@ -294,10 +294,10 @@ class RouteDataModel: NSObject {
             let transit1 = RouteStep(type: .Transition)
             transit1.from = subways![subwayTo!] as? String
             transit1.to = stationFrom["title"] as? String
-            transit1.time = stationFrom["transit"] as? Int
+            transit1.duration = stationFrom["transit"] as? Int
             transit1.departure = subway.arrival
-            transit1.arrival = dateByAddingMinute(transit1.departure!, minute: transit1.time!)
-            if transit1.time > 0 {
+            transit1.arrival = dateByAddingMinute(transit1.departure!, minute: transit1.duration!)
+            if transit1.duration > 0 {
                 route.append(transit1)
             }
 
@@ -310,10 +310,10 @@ class RouteDataModel: NSObject {
             let transit2 = RouteStep(type: .Transition)
             transit2.from = "Станция"
             transit2.to = "Автобус"
-            transit2.time = stationTo["transit"] as? Int
+            transit2.duration = stationTo["transit"] as? Int
             transit2.departure = train.arrival
-            transit2.arrival = dateByAddingMinute(transit2.departure!, minute: transit2.time!)
-            if transit2.time > 0 {
+            transit2.arrival = dateByAddingMinute(transit2.departure!, minute: transit2.duration!)
+            if transit2.duration > 0 {
                 route.append(transit2)
             }
 
@@ -324,7 +324,7 @@ class RouteDataModel: NSObject {
             // форматирование информации о пути
             way.departure = onfoot.departure
             way.arrival = bus.arrival
-            way.time = Int(way.arrival!.timeIntervalSinceDate(way.departure!) / 60.0)
+            way.duration = Int(way.arrival!.timeIntervalSinceDate(way.departure!) / 60.0)
         }
     }
 
@@ -497,21 +497,21 @@ class RouteDataModel: NSObject {
         bus.from = from
         if useAsterisk && slBlvdBus {
             bus.to = "Славянский бульвар"
-            bus.time = 50 // время автобуса в пути
+            bus.duration = 50 // время автобуса в пути
         } else {
             bus.to = to
-            bus.time = 15 // время автобуса в пути
+            bus.duration = 15 // время автобуса в пути
         }
         bus.departure = busDeparture
         //TODO: # FIXME: more real arrival time?
-        bus.arrival = dateByAddingMinute(bus.departure!, minute: bus.time!)
+        bus.arrival = dateByAddingMinute(bus.departure!, minute: bus.duration!)
         
         return bus
     }
 
     // MARK: - Route On Train
 
-    let API_KEY_FILE = ".train_api_key"
+    let YANDEX_API_KEY = "6666221e-446b-44d3-8bcb-274e5103aacc"
     
     let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%@&format=json&date=%@&from=%@&to=%@&lang=ru&transport_types=suburban"
 
@@ -536,7 +536,7 @@ class RouteDataModel: NSObject {
     // MARK: - Route On Subway
 
     // Subway Route Data (timedelta in minutes)
-    let subwayData = [
+    let subwayDuration = [
         "kuntsevskaya": [ // Кунцевская
             "strogino":            15, // Строгино
             "semenovskaya":        28, // Семёновская
@@ -571,13 +571,13 @@ class RouteDataModel: NSObject {
     let subwayClosesTime = "01:00"
     let subwayOpensTime = "05:50"
 
-    func getSubwayData(from: String, to: String) -> Int {
-        if let fromStation = subwayData[from] {
+    func getSubwayDuration(from: String, to: String) -> Int {
+        if let fromStation = subwayDuration[from] {
             if let result = fromStation[to] {
                 return result
             }
         }
-        if let toStation = subwayData[to] {
+        if let toStation = subwayDuration[to] {
             if let result = toStation[from] {
                 return result
             }
@@ -602,8 +602,8 @@ class RouteDataModel: NSObject {
         } else {
             subway.departure = timestamp
         }
-        subway.time = getSubwayData(from, to: to)
-        subway.arrival = dateByAddingMinute(subway.departure!, minute: subway.time!)
+        subway.duration = getSubwayDuration(from, to: to)
+        subway.arrival = dateByAddingMinute(subway.departure!, minute: subway.duration!)
         
         return subway
     }
@@ -622,9 +622,9 @@ class RouteDataModel: NSObject {
     func getNearestOnFoot(edu: Dictionary<String, AnyObject>, timestamp: NSDate) -> RouteStep {
         let onfoot: RouteStep = RouteStep(type: .Onfoot)
         
-        onfoot.time = edu["onfoot"] as? Int
+        onfoot.duration = edu["onfoot"] as? Int
         onfoot.departure = timestamp
-        onfoot.arrival = dateByAddingMinute(timestamp, minute: onfoot.time!)
+        onfoot.arrival = dateByAddingMinute(timestamp, minute: onfoot.duration!)
         //onfoot.map = formMapUrl(edu["mapsrc"] as! String)
         onfoot.map = edu["name"] as? String
         
