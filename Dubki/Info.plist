@@ -5,7 +5,7 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<false/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location is required to retrieve the campus info for your current place.</string>

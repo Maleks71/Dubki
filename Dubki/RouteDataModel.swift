@@ -302,51 +302,97 @@ class RouteDataModel: NSObject {
 
     // MARK: - Route On Bus
 
+
     // загрузка расписания автобусов Дубки-Одинцово в файл bus.json
-    func loadBusSchedule() {
-        let BUS_API_URL = "http://dubkiapi2.appspot.com/sch"
+    func loadBusSchedule() -> JSON? {
+        let BUS_API_URL = "https://dubkiapi2.appspot.com/sch"
+        let BUS_SCHEDULE_FILE = "bus.json"
         
+        // полный путь к файлу bus.json
+        //let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
+        //let destinationUrl = documentsUrl.URLByAppendingPathComponent("filteredImage.png")
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        //let destinationPath = documentsPath.stringByAppendingPathComponent("filename.ext")
+        let filePath = "\(documentsPath)/\(BUS_SCHEDULE_FILE)"
+
+        // загрузка распияния из интернета
         if let busSchedule = NSData(contentsOfURL: NSURL(string: BUS_API_URL)!) {
-            let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-            //let destinationPath = documentsPath.stringByAppendingPathComponent("filename.ext")
-            let filePath = "\(documentsPath)/bus.json"
+            // сохранить расписание в файл bus.json
             busSchedule.writeToFile(filePath, atomically: true)
+            
+            return JSON(data: busSchedule)
         }
+
+        // загрузка расписания из файла bus.json
+        if let busSchedule = NSData(contentsOfFile: filePath) {
+            return JSON(data: busSchedule)
+        }
+        return nil
     }
     
     // from and to should be in {'Одинцово', 'Дубки'}
     func getNearestBus(from: String, to: String, timestamp: NSDate) -> RouteStep {
+        let vals = ["Одинцово", "Дубки"]
         //assert from in {'Одинцово', 'Дубки'}
+        assert(vals.contains(from))
         //assert to in {'Одинцово', 'Дубки'}
-        //assert from != to
+        assert(vals.contains(to))
+        //assert(from != to)
+        assert(from != to, "From equal To")
         
-        loadBusSchedule()
-        
-        var _from: String
-        var _to: String
+        var _from: String = from
+        var _to: String = to
         
         let weekday = getDayOfWeek(timestamp)
         // today is either {'','*Суббота', '*Воскресенье'}
         if weekday == 7 {
-            if from == "dubki" {
+            if from == "Дубки" {
                 _from = "ДубкиСуббота"
-            } else if to == "dubki" {
+            } else if to == "Дубки" {
                 _to = "ДубкиСуббота"
             }
         } else if weekday == 0 {
-            if from == "dubki" {
+            if from == "Дубки" {
                 _from = "ДубкиВоскресенье"
-            } else if to == "dubki" {
+            } else if to == "Дубки" {
                 _to = "ДубкиВоскресенье"
             }
         }
+
+        // загрузка расписания
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        if let busSchedule = loadBusSchedule() {
+        
+            var times = [String]() // время отправления автобуса
+
+            // find current schedule
+            for elem in busSchedule.array! {
+                let elemFrom = elem["from"].string
+                let elemTo = elem["to"].string
+                if elemFrom == _from && elemTo == _to {
+                    let currentSchedule = elem["hset"].array
+                    // convert to array of time
+                    for time in currentSchedule! {
+                        times.append(time["time"].string!)
+                    }
+                    break
+                }
+            }
+            
+            if times.count == 0 {
+                print("Ошибка: В расписании автобуса нет направления \(_from)->\(_to)")
+                return RouteStep()
+            }
+        }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 
         let bus: RouteStep = RouteStep(type: .Bus)
   
         bus.from = from
         bus.to = to
+        bus.time = 15 // время автобуса в пути
         bus.departure = timestamp
-        bus.arrival = dateByAddingMinute(timestamp, minute: 15)
+        bus.arrival = dateByAddingMinute(bus.departure!, minute: bus.time!)
         
         return bus
     }
@@ -402,7 +448,7 @@ class RouteDataModel: NSObject {
 */
     let API_KEY_FILE = ".train_api_key"
     
-    let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%s&format=json&date=%s&from=%s&to=%s&lang=ru&transport_types=suburban"
+    let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%@&format=json&date=%@&from=%@&to=%@&lang=ru&transport_types=suburban"
 
     func getNearestTrain(from: Dictionary<String, AnyObject>, to: Dictionary<String, AnyObject>, timestamp: NSDate) -> RouteStep {
         let train: RouteStep = RouteStep(type: .Train)
