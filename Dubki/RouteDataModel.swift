@@ -158,6 +158,35 @@ class RouteDataModel: NSObject {
         
     }
     
+    /**
+    Calculates a route as if timestamp is the time of arrival
+    
+    Args:
+        direction (Int): flow from/to dormitory
+        campus (Dictionary): place edu of arrival/departure
+        timestampEnd(NSDate): expected time of arrival
+    
+    Returns:
+        route (Array): a calculated route
+    */
+    func calculateRouteReverse(direction: Int, campus: Dictionary<String, AnyObject>, timestampEnd: NSDate) {
+        let departureTime = dateByAddingMinute(timestampEnd, minute: -(2*60 + 30)) // -02:30
+        calculateRoute(direction, campus: campus, when: departureTime)
+    }
+
+    /**
+    Calculates a route as if timestamp is the time of departure
+    
+    Args:
+        direction (Int): flow from/to dormitory
+        campus (Dictionary): place edu of arrival/departure
+        timestamp(Optional[NSDate]): time of departure.
+            Defaults to the current time plus 10 minutes.
+        src(Optional[str]): function caller ID (used for logging)
+    
+    Returns:
+        route (Array): a calculated route
+    */
     func calculateRoute(direction: Int, campus: Dictionary<String, AnyObject>?, when: NSDate?) {
         
         self.direction = direction
@@ -358,7 +387,10 @@ class RouteDataModel: NSObject {
         return nil
     }
     
-    // получить расписание автобусов на день
+    /**
+    Caches the bus schedule to `SCHEDULE_FILE`
+    Получить расписание автобусов на день
+    */
     func getBusSchedule(from: String, to: String, timestamp: NSDate, useAsterisk: Bool = true) -> [String] {
         var _from: String = from
         var _to: String = to
@@ -410,8 +442,19 @@ class RouteDataModel: NSObject {
         return times
     }
     
-    // from and to should be in {'Одинцово', 'Дубки'}
+    /**
+    Returns the nearest bus
+    
+    Args:
+        from(String): place of departure
+        to(String): place of arrival
+        timestamp(NSDate): time of departure
+    
+    Note:
+        'from' and 'to' should not be equal and should be in {'Одинцово', 'Дубки'}
+    */
     func getNearestBus(from: String, to: String, timestamp: NSDate, useAsterisk: Bool = true) -> RouteStep {
+        // from and to should be in {'Одинцово', 'Дубки'}
         let vals = ["Одинцово", "Дубки"]
         //assert from in {'Одинцово', 'Дубки'}
         assert(vals.contains(from))
@@ -571,6 +614,16 @@ class RouteDataModel: NSObject {
     let subwayClosesTime = "01:00"
     let subwayOpensTime = "05:50"
 
+    /**
+    Returns the time required to get from one subway station to another
+    
+    Args:
+        from(String): Russian name of station of departure
+        to(String): Russian name of station of arrival
+    
+    Note:
+        'from' and 'to' must exist in SUBWAY_DATA.keys or any of SUBWAY_DATA[key].values
+    */
     func getSubwayDuration(from: String, to: String) -> Int {
         if let fromStation = subwayDuration[from] {
             if let result = fromStation[to] {
@@ -586,6 +639,17 @@ class RouteDataModel: NSObject {
         return 0
     }
     
+    /**
+    Returns the nearest subway route
+    
+    Args:
+        from(String): Russian name of station of departure
+        to(String): Russian name of station of arrival
+        timestamp(NSDate): time of departure
+    
+    Note:
+        'from' and 'to' must exist in SUBWAY_DATA.keys or any of SUBWAY_DATA[key].values
+    */
     func getNearestSubway(from: String, to: String, timestamp: NSDate) -> RouteStep {
         let subway: RouteStep = RouteStep(type: .Subway)
 
@@ -610,15 +674,32 @@ class RouteDataModel: NSObject {
 
     // MARK: - Route On Foot
 
-    func formMapUrl(mapSource: String, type: String = "img") -> String? {
-        if type == "img" {
-            return "https://api-maps.yandex.ru/services/constructor/1.0/static/?sid=" + mapSource
-        } else if type == "script" {
-            return "https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=" + mapSource
-        }
-        return nil
+    /**
+    Returns a map url for displaying in a webpage
+    
+    Args:
+        edu(Dictionary): which education campus the route's destination is
+        urlType(Optional[String]): whether the map should be interactive
+    
+    Note:
+        'edu' should be a value from EDUS
+        'urlType' should be in {'static', 'js'}
+    */
+    func formMapUrl(edu: Dictionary<String, AnyObject>, urlType: String = "static") -> String? {
+        let mapSource = edu["mapsrc"] as! String
+        return String(format: "https://api-maps.yandex.ru/services/constructor/1.0/%@/?sid=%@", urlType, mapSource)
     }
     
+    /**
+    Returns the nearest onfoot route
+    
+    Args:
+        edu(Dictionary): place of arrival
+        timestamp(NSDate): time of departure from subway exit
+    
+    Note:
+        'edu' should be a value from EDUS
+    */
     func getNearestOnFoot(edu: Dictionary<String, AnyObject>, timestamp: NSDate) -> RouteStep {
         let onfoot: RouteStep = RouteStep(type: .Onfoot)
         
