@@ -25,7 +25,7 @@ class RouteStep {
     var from: String?        // откуда (станция метро, ж/д, автобуса)
     var to: String?          // куда (станция метро, ж/д, автобуса)
     var trainName: String?   // название поезда или ветки метро
-    var stations: String?    // остановки ж/д или станции пересадки метро
+    var stops: String?       // остановки ж/д или станции пересадки метро
     var departure: NSDate?   // время отправления
     var arrival: NSDate?     // время прибытия
     var duration: Int?       // время в пути (в минутах)
@@ -64,16 +64,16 @@ class RouteStep {
     // описание шага - станции откуда/куда и время отправления/прибытия (для вывода на экран)
     var detail: String? {
         get {
-            let timeDeparture = getTimeFromDate(departure)
-            let timeArrival = getTimeFromDate(arrival)
+            let timeDeparture = departure?.stringByFormat("HH:mm") ?? "?"
+            let timeArrival = arrival?.stringByFormat("HH:mm") ?? "?"
 
             switch (type) {
             case .None:
                 return ""
             
             case .Total:
-                let dateDeparture = stringFromDate(departure)
-                //let dateArrival = stringFromDate(arrival)
+                let dateDeparture = departure?.stringByFormat("dd MMM HH:mm") ?? "?"
+                //let dateArrival = arrival?.stringByFormat("dd MMM HH:mm") ?? "?"
                 let detailFormat = NSLocalizedString("TotalDetailFormat", comment: "")
                 return String(format: detailFormat, dateDeparture, timeArrival)
             
@@ -82,7 +82,7 @@ class RouteStep {
             
             case .Train:
                 let detailFormat = NSLocalizedString("TrainDetailFormat", comment: "")
-                return String(format: detailFormat, trainName ?? "?", timeDeparture, timeArrival, stations ?? "везде", to ?? "?")
+                return String(format: detailFormat, trainName ?? "?", timeDeparture, timeArrival, stops ?? "везде", to ?? "?")
             
             case .Subway:
                 return String(format: "%@ (%@) → %@ (%@)", from ?? "?", timeDeparture, to ?? "?", timeArrival)
@@ -104,20 +104,6 @@ class RouteStep {
     
     init(type: RouteStepType) {
         self.type = type
-    }
-
-    func stringFromDate(date: NSDate?, dateFormat: String = "dd MMM HH:mm") -> String {
-        if date == nil {
-            return "?"
-        }
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = dateFormat
-        return dateFormatter.stringFromDate(date!)
-    }
-
-    func getTimeFromDate(date: NSDate?) -> String {
-        return stringFromDate(date, dateFormat: "HH:mm")
     }
 }
 
@@ -164,7 +150,7 @@ class RouteDataModel: NSObject {
         route (Array): a calculated route
     */
     func calculateRouteReverse(direction: Int, campus: Dictionary<String, AnyObject>, timestampEnd: NSDate) {
-        let departureTime = dateByAddingMinute(timestampEnd, minute: -(2*60 + 30)) // -02:30
+        let departureTime = timestampEnd.dateByAddingMinute(-(2*60 + 30)) // -02:30
         calculateRoute(direction, campus: campus, when: departureTime)
     }
 
@@ -228,7 +214,7 @@ class RouteDataModel: NSObject {
                 transit.to = bus.to
                 transit.duration = 5
                 transit.departure = bus.arrival!
-                transit.arrival = dateByAddingMinute(transit.departure!, minute: transit.duration!)
+                transit.arrival = transit.departure!.dateByAddingMinute(transit.duration!)
                 if transit.duration > 0 {
                     route.append(transit)
                 }
@@ -246,7 +232,7 @@ class RouteDataModel: NSObject {
                 transit1.to = "Станция"
                 transit1.duration = stationFrom["transit"] as? Int
                 transit1.departure = bus.arrival!
-                transit1.arrival = dateByAddingMinute(transit1.departure!, minute: transit1.duration!)
+                transit1.arrival = transit1.departure!.dateByAddingMinute(transit1.duration!)
                 if transit1.duration > 0 {
                     route.append(transit1)
                 }
@@ -264,7 +250,7 @@ class RouteDataModel: NSObject {
                 transit2.to = subways![subwayFrom!] as? String
                 transit2.duration = stationTo["transit"] as? Int
                 transit2.departure = train.arrival!
-                transit2.arrival = dateByAddingMinute(transit2.departure!, minute: transit2.duration!)
+                transit2.arrival = transit2.departure!.dateByAddingMinute(transit2.duration!)
                 if transit2.duration > 0 {
                     route.append(transit2)
                 }
@@ -319,7 +305,7 @@ class RouteDataModel: NSObject {
             transit1.to = stationFrom["title"] as? String
             transit1.duration = stationFrom["transit"] as? Int
             transit1.departure = subway.arrival
-            transit1.arrival = dateByAddingMinute(transit1.departure!, minute: transit1.duration!)
+            transit1.arrival = transit1.departure!.dateByAddingMinute(transit1.duration!)
             if transit1.duration > 0 {
                 route.append(transit1)
             }
@@ -335,7 +321,7 @@ class RouteDataModel: NSObject {
             transit2.to = "Автобус"
             transit2.duration = stationTo["transit"] as? Int
             transit2.departure = train.arrival
-            transit2.arrival = dateByAddingMinute(transit2.departure!, minute: transit2.duration!)
+            transit2.arrival = transit2.departure!.dateByAddingMinute(transit2.duration!)
             if transit2.duration > 0 {
                 route.append(transit2)
             }
@@ -389,15 +375,14 @@ class RouteDataModel: NSObject {
         var _from: String = from
         var _to: String = to
         
-        let weekday = getDayOfWeek(timestamp)
         // today is either {'', '*Суббота', '*Воскресенье'}
-        if weekday == 7 {
+        if timestamp.weekday() == 7 {
             if from == "Дубки" {
                 _from = "ДубкиСуббота"
             } else if to == "Дубки" {
                 _to = "ДубкиСуббота"
             }
-        } else if weekday == 0 {
+        } else if timestamp.weekday() == 1 {
             if from == "Дубки" {
                 _from = "ДубкиВоскресенье"
             } else if to == "Дубки" {
@@ -460,15 +445,14 @@ class RouteDataModel: NSObject {
         var _from: String = from
         var _to: String = to
         
-        let weekday = getDayOfWeek(timestamp)
         // today is either {'', '*Суббота', '*Воскресенье'}
-        if weekday == 7 {
+        if timestamp.weekday() == 7 {
             if from == "Дубки" {
                 _from = "ДубкиСуббота"
             } else if to == "Дубки" {
                 _to = "ДубкиСуббота"
             }
-        } else if weekday == 0 {
+        } else if timestamp.weekday() == 1 {
             if from == "Дубки" {
                 _from = "ДубкиВоскресенье"
             } else if to == "Дубки" {
@@ -519,8 +503,8 @@ class RouteDataModel: NSObject {
                 if !useAsterisk { continue } // не использовать автобус до м. Славянский бульвар
                 timeWithoutAsteriks = time.substringToIndex(time.endIndex.predecessor())
             }
-            let departure = dateChangeTime(timestamp, time: timeWithoutAsteriks)
-            let interval: Double = departure.timeIntervalSinceDate(timestamp)
+            let departure = timestamp.dateByWithTime(timeWithoutAsteriks)
+            let interval: Double = departure!.timeIntervalSinceDate(timestamp)
             //TODO: # FIXME works incorrectly between weekday 6-7-1
             if interval > 0 && interval < minInterval {
                 minInterval = interval
@@ -531,8 +515,8 @@ class RouteDataModel: NSObject {
         if busDeparture == nil {
             //print("Ближайший автобус не найден")
             // get nearest bus on next day
-            let newTimestamp = dateChangeTime(dateByAddingDay(timestamp, day: 1), time: "00:00")
-            return getNearestBus(from, to: to, timestamp: newTimestamp)
+            let newTimestamp = timestamp.dateByAddingDay(1)?.dateByWithTime("00:00")
+            return getNearestBus(from, to: to, timestamp: newTimestamp!)
         }
 
         let bus: RouteStep = RouteStep(type: .Bus)
@@ -547,7 +531,7 @@ class RouteDataModel: NSObject {
         }
         bus.departure = busDeparture
         //TODO: # FIXME: more real arrival time?
-        bus.arrival = dateByAddingMinute(bus.departure!, minute: bus.duration!)
+        bus.arrival = bus.departure!.dateByAddingMinute(bus.duration!)
         
         return bus
     }
@@ -601,9 +585,9 @@ class RouteDataModel: NSObject {
         timestamp(NSDate): date to get schedule for
     */
     func getScheduleTrain(from: String, to: String, timestamp: NSDate) -> JSON? {
-        let departure = stringFromDate(dateChangeTime(timestamp, time: "09:00"), dateFormat: "yyyy-MM-dd HH:mm:ss")
-        let arrival = stringFromDate(dateChangeTime(timestamp, time: "09:35"), dateFormat: "yyyy-MM-dd HH:mm:ss")
-        let data = "[{\"departure\":\"\(departure)\",\"arrival\":\"\(arrival)\",\"stops\":\"везде\",\"thread\":{\"title\":\"Кубинка 1 - Москва (Белорусский вокзал)\"}}]"
+        let departure = timestamp.dateByWithTime("09:00")?.stringByFormat()
+        let arrival = timestamp.dateByWithTime("09:35")?.stringByFormat()
+        let data = "[{\"departure\":\"\(departure!)\",\"arrival\":\"\(arrival!)\",\"stops\":\"везде\",\"thread\":{\"title\":\"Кубинка 1 - Москва (Белорусский вокзал)\"}}]"
 
         return JSON(data: data.dataUsingEncoding(NSUTF8StringEncoding)!)
     }
@@ -641,8 +625,8 @@ class RouteDataModel: NSObject {
         var minInterval: Double = 24*60*60 // мин. интервал (сутки)
         var trainInfo: Dictionary<String, String>? // поезд
         for train in trains {
-            let departure = dateFromString(train["departure"]!, dateFormat: "yyyy-MM-dd HH:mm:ss")
-            let interval: Double = departure.timeIntervalSinceDate(timestamp)
+            let departure = train["departure"]!.dateByFormat()
+            let interval: Double = departure!.timeIntervalSinceDate(timestamp)
             if interval > 0 && interval < minInterval {
                 minInterval = interval
                 trainInfo = train
@@ -652,8 +636,8 @@ class RouteDataModel: NSObject {
         if trainInfo == nil {
             //print("Ближайшая электричка не найдена")
             // get nearest train on next day
-            let newTimestamp = dateChangeTime(dateByAddingDay(timestamp, day: 1), time: "00:00")
-            return getNearestTrain(from, to: to, timestamp: newTimestamp)
+            let newTimestamp = timestamp.dateByAddingDay(1)?.dateByWithTime("00:00")
+            return getNearestTrain(from, to: to, timestamp: newTimestamp!)
         }
         
         let train: RouteStep = RouteStep(type: .Train)
@@ -661,9 +645,9 @@ class RouteDataModel: NSObject {
         train.from = from["title"] as? String
         train.to = to["title"] as? String
         train.trainName = trainInfo!["title"] //"Кубинка 1 - Москва (Белорусский вокзал)"
-        train.stations = trainInfo!["stops"] //"везде"
-        train.departure = dateFromString(trainInfo!["departure"]!, dateFormat: "yyyy-MM-dd HH:mm:ss")
-        train.arrival = dateFromString(trainInfo!["arrival"]!, dateFormat: "yyyy-MM-dd HH:mm:ss")
+        train.stops = trainInfo!["stops"] //"везде"
+        train.departure = trainInfo!["departure"]!.dateByFormat()
+        train.arrival = trainInfo!["arrival"]!.dateByFormat()
         train.duration = Int(train.arrival!.timeIntervalSinceDate(train.departure!) / 60)
         train.url = "http://rasp.yandex.ru/"
         
@@ -750,18 +734,18 @@ class RouteDataModel: NSObject {
         subway.from = subways![from] as? String
         subway.to = subways![to] as? String
 
-        let subwayCloses = dateChangeTime(timestamp, time: subwayClosesTime)
-        let subwayOpens = dateChangeTime(timestamp, time: subwayOpensTime)
+        let subwayCloses = timestamp.dateByWithTime(subwayClosesTime)
+        let subwayOpens = timestamp.dateByWithTime(subwayOpensTime)
         // subwayCloses <= timestamp <= subwayOpens
-        if subwayCloses.compare(timestamp) != .OrderedDescending
-            && timestamp.compare(subwayOpens) != .OrderedDescending {
+        if subwayCloses!.compare(timestamp) != .OrderedDescending
+            && timestamp.compare(subwayOpens!) != .OrderedDescending {
             // subway is still closed
             subway.departure = subwayOpens
         } else {
             subway.departure = timestamp
         }
         subway.duration = getSubwayDuration(from, to: to)
-        subway.arrival = dateByAddingMinute(subway.departure!, minute: subway.duration!)
+        subway.arrival = subway.departure!.dateByAddingMinute(subway.duration!)
         
         return subway
     }
@@ -799,7 +783,7 @@ class RouteDataModel: NSObject {
         
         onfoot.duration = edu["onfoot"] as? Int
         onfoot.departure = timestamp
-        onfoot.arrival = dateByAddingMinute(timestamp, minute: onfoot.duration!)
+        onfoot.arrival = timestamp.dateByAddingMinute(onfoot.duration!)
         //onfoot.map = formMapUrl(edu["mapsrc"] as! String)
         onfoot.map = edu["name"] as? String
         
@@ -835,70 +819,97 @@ class RouteDataModel: NSObject {
         
         return result
     }
-
-    // MARK: - Function for working with date
     
-    func dateChangeTime(date: NSDate, time: String) -> NSDate {
+}
+
+// MARK: - Function for working with date
+
+extension String {
+    
+    func dateByFormat(dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> NSDate? {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd "
-        
-        let dateString = dateFormatter.stringFromDate(date) + time
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        
-        return dateFormatter.dateFromString(dateString)!
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.dateFromString(self)
     }
+}
 
-    func dateByAddingMinute(date: NSDate, minute: Int) -> NSDate {
-        return date.dateByAddingTimeInterval(Double(minute * 60))
-        //let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        //let myCalendar = NSCalendar.currentCalendar()
-        //return myCalendar.dateByAddingUnit([.Minute], value: minute, toDate: date, options: [])!
+extension NSDate {
+/*
+    static func dateFromString(string: String, dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> NSDate? {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.dateFromString(string)
+    }
+*/
+    func stringByFormat(dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.stringFromDate(self)
     }
     
-    func dateByAddingDay(date: NSDate, day: Int) -> NSDate {
-        //let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let myCalendar = NSCalendar.currentCalendar()
+    func dateByAddingMinute(minute: Int) -> NSDate? {
+        //return self.dateByAddingTimeInterval(Double(minute * 60))
+        //let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let calendar = NSCalendar.currentCalendar()
         if #available(iOS 8.0, *) {
-            return myCalendar.dateByAddingUnit([.Day], value: day, toDate: date, options: [])!
+            return calendar.dateByAddingUnit([.Minute], value: minute, toDate: self, options: [])
         } else {
             // Fallback on earlier versions
-            let dateComponents = NSDateComponents()
-            dateComponents.day = day
-            return myCalendar.dateByAddingComponents(dateComponents, toDate: date, options: [])!
+            let components = NSDateComponents()
+            components.minute = minute
+            return calendar.dateByAddingComponents(components, toDate: self, options: [])
+        }
+    }
+    
+    func dateByAddingDay(day: Int) -> NSDate? {
+        //let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let calendar = NSCalendar.currentCalendar()
+        if #available(iOS 8.0, *) {
+            return calendar.dateByAddingUnit([.Day], value: day, toDate: self, options: [])
+        } else {
+            // Fallback on earlier versions
+            let components = NSDateComponents()
+            components.day = day
+            return calendar.dateByAddingComponents(components, toDate: self, options: [])
         }
     }
 
-    func getDayOfWeek(todayDate: NSDate) -> Int {
-        //let weekdayName = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"]
-        
+    /*
+    The number of the weekday unit for the receiver.
+    Weekday units are the numbers 1 through n, where n is the number of days in the week. For example, in the Gregorian calendar, n is 7 and Sunday is represented by 1.
+    */
+    func weekday() -> Int {
         //let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let myCalendar = NSCalendar.currentCalendar()
-        let myComponents = myCalendar.components(NSCalendarUnit.Weekday, fromDate: todayDate)
-        let weekDay = myComponents.weekday - 1
-        return weekDay
-        //return weekdayName[weekDay]
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(NSCalendarUnit.Weekday, fromDate: self)
+        return components.weekday
+        //let weekDay = myComponents.weekday - 1
     }
     
-    func dateFromString(date: String, dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> NSDate {
+    func weekdayName() -> String {
+        return stringByFormat("EEE")
+        //let weekdayName = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"]
+        //return weekdayName[weekday() - 1]
+    }
+
+    func dateByWithTime(time: String) -> NSDate? {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = dateFormat
-        return dateFormatter.dateFromString(date)!
+        dateFormatter.dateFormat = "yyyy-MM-dd "
+        
+        let dateString = dateFormatter.stringFromDate(self) + time
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        return dateFormatter.dateFromString(dateString)
     }
-    
-    func stringFromDate(date: NSDate, dateFormat: String = "dd MMM HH:mm") -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = dateFormat
-        return dateFormatter.stringFromDate(date)
-    }
-    
+
     // get interval from two date (of date on further date and pass the earlier date as parameter, this would give the time difference in seconds)
     //let interval = date1.timeIntervalSinceDate(date2)
     
     // get component from date
-//    let date = NSDate()
-//    let calendar = NSCalendar.currentCalendar()
-//    let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date)
-//    let hour = components.hour
-//    let minutes = components.minute
+    //let date = NSDate()
+    //let calendar = NSCalendar.currentCalendar()
+    //let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date)
+    //let hour = components.hour
+    //let minutes = components.minute
 }
