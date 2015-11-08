@@ -7,3 +7,6 @@
 */
 
 NSLocationWhenInUseUsageDescription = "Location is required to retrieve the campus info for your current place.";
+
+CFBundleDisplayName = "Dubki";
+CFBundleName = "Dubki";
