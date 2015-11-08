@@ -13,6 +13,7 @@
 		219CFFD41BEBFA24008F2EE8 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219CFFD31BEBFA24008F2EE8 /* LocationService.swift */; };
 		219FA9C91BEA2BAC00161450 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219FA9C81BEA2BAC00161450 /* SettingsTableViewController.swift */; };
 		21AA803B1BEFA1BC00F942F8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA803A1BEFA1BC00F942F8 /* Date.swift */; };
+		21AA803D1BEFA2D000F942F8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 21AA803C1BEFA2D000F942F8 /* LICENSE */; };
 		21BC21F51BE95601002E0DFF /* Dormitories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21BC21F31BE95601002E0DFF /* Dormitories.plist */; };
 		21C89BBF1BE6501500816449 /* Campuses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C89BC11BE6501500816449 /* Campuses.plist */; };
 		21C89BC51BE69E2700816449 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C89BC31BE69E2700816449 /* Localizable.strings */; };
@@ -40,6 +41,7 @@
 		219FA9C81BEA2BAC00161450 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		219FA9CB1BEA2F3200161450 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		21AA803A1BEFA1BC00F942F8 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		21AA803C1BEFA2D000F942F8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		21BC21F41BE95601002E0DFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Dormitories.plist; sourceTree = "<group>"; };
 		21BC21F61BE95626002E0DFF /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/Dormitories.plist; sourceTree = "<group>"; };
 		21C89BBE1BE64FE800816449 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		A6BC8BCB1BE2B21F006A91F7 = {
 			isa = PBXGroup;
 			children = (
+				21AA803C1BEFA2D000F942F8 /* LICENSE */,
 				A6BC8BEF1BE2D417006A91F7 /* README.md */,
 				A6BC8BD61BE2B21F006A91F7 /* Dubki */,
 				A6BC8BD51BE2B21F006A91F7 /* Products */,
@@ -202,6 +205,7 @@
 				A6BC8BE21BE2B21F006A91F7 /* LaunchScreen.storyboard in Resources */,
 				21C89BBF1BE6501500816449 /* Campuses.plist in Resources */,
 				A6BC8BDF1BE2B21F006A91F7 /* Assets.xcassets in Resources */,
+				21AA803D1BEFA2D000F942F8 /* LICENSE in Resources */,
 				A6BC8BDD1BE2B21F006A91F7 /* Main.storyboard in Resources */,
 				21BC21F51BE95601002E0DFF /* Dormitories.plist in Resources */,
 				219C1E001BE786BC0084CC5C /* Subways.plist in Resources */,
