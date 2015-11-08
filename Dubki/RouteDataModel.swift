@@ -535,8 +535,10 @@ class RouteDataModel: NSObject {
             }
         }
         if busDeparture == nil {
-            print("Автобус не найден")
-             return RouteStep()
+            //print("Ближайший автобус не найден")
+            // get nearest bus on next day
+            let newTimestamp = dateChangeTime(dateByAddingDay(timestamp, day: 1), time: "00:00")
+            return getNearestBus(from, to: to, timestamp: newTimestamp)
         }
 
         let bus: RouteStep = RouteStep(type: .Bus)
@@ -654,8 +656,10 @@ class RouteDataModel: NSObject {
         }
 
         if trainInfo == nil {
-            print("Не найдена электричка")
-            return RouteStep()
+            //print("Ближайшая электричка не найдена")
+            // get nearest train on next day
+            let newTimestamp = dateChangeTime(dateByAddingDay(timestamp, day: 1), time: "00:00")
+            return getNearestTrain(from, to: to, timestamp: newTimestamp)
         }
         
         let train: RouteStep = RouteStep(type: .Train)
@@ -665,7 +669,7 @@ class RouteDataModel: NSObject {
         train.trainName = trainInfo!["title"] //"Кубинка 1 - Москва (Белорусский вокзал)"
         train.stations = trainInfo!["stops"] //"везде"
         train.departure = dateFromString(trainInfo!["departure"]!, dateFormat: "yyyy-MM-dd HH:mm:ss")
-        train.arrival = dateFromString(trainInfo!["departure"]!, dateFormat: "yyyy-MM-dd HH:mm:ss")
+        train.arrival = dateFromString(trainInfo!["arrival"]!, dateFormat: "yyyy-MM-dd HH:mm:ss")
         train.duration = Int(train.arrival!.timeIntervalSinceDate(train.departure!) / 60)
         train.url = "http://rasp.yandex.ru/"
         
@@ -858,6 +862,19 @@ class RouteDataModel: NSObject {
         //return myCalendar.dateByAddingUnit([.Minute], value: minute, toDate: date, options: [])!
     }
     
+    func dateByAddingDay(date: NSDate, day: Int) -> NSDate {
+        //let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let myCalendar = NSCalendar.currentCalendar()
+        if #available(iOS 8.0, *) {
+            return myCalendar.dateByAddingUnit([.Day], value: day, toDate: date, options: [])!
+        } else {
+            // Fallback on earlier versions
+            let dateComponents = NSDateComponents()
+            dateComponents.day = day
+            return myCalendar.dateByAddingComponents(dateComponents, toDate: date, options: [])!
+        }
+    }
+
     func getDayOfWeek(todayDate: NSDate) -> Int {
         //let weekdayName = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"]
         
