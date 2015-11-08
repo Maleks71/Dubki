@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Dubki
+
+  Created by Игорь Моренко on 08.11.15.
+  Copyright © 2015 Alexander Morenko. All rights reserved.
+*/
+
+NSLocationWhenInUseUsageDescription = "Location is required to retrieve the campus info for your current place.";

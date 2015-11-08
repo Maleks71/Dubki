@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  Dubki
+
+  Created by Игорь Моренко on 08.11.15.
+  Copyright © 2015 Alexander Morenko. All rights reserved.
+*/
+
+NSLocationWhenInUseUsageDescription = "Местоположение требуется для определения кампуса для Вашего текущего места.";
+
+CFBundleDisplayName = "Дубки";
+CFBundleName = "Дубки";

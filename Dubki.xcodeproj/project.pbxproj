@@ -14,6 +14,7 @@
 		219FA9C91BEA2BAC00161450 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219FA9C81BEA2BAC00161450 /* SettingsTableViewController.swift */; };
 		21AA803B1BEFA1BC00F942F8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA803A1BEFA1BC00F942F8 /* Date.swift */; };
 		21AA803D1BEFA2D000F942F8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 21AA803C1BEFA2D000F942F8 /* LICENSE */; };
+		21AA80401BEFA77800F942F8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21AA803E1BEFA77800F942F8 /* InfoPlist.strings */; };
 		21BC21F51BE95601002E0DFF /* Dormitories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21BC21F31BE95601002E0DFF /* Dormitories.plist */; };
 		21C89BBF1BE6501500816449 /* Campuses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C89BC11BE6501500816449 /* Campuses.plist */; };
 		21C89BC51BE69E2700816449 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C89BC31BE69E2700816449 /* Localizable.strings */; };
@@ -42,6 +43,8 @@
 		219FA9CB1BEA2F3200161450 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		21AA803A1BEFA1BC00F942F8 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		21AA803C1BEFA2D000F942F8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		21AA803F1BEFA77800F942F8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		21AA80411BEFA7F400F942F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		21BC21F41BE95601002E0DFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Dormitories.plist; sourceTree = "<group>"; };
 		21BC21F61BE95626002E0DFF /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/Dormitories.plist; sourceTree = "<group>"; };
 		21C89BBE1BE64FE800816449 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 				21C89BC11BE6501500816449 /* Campuses.plist */,
 				219C1DFA1BE76F3C0084CC5C /* Stations.plist */,
 				219C1DFE1BE786BC0084CC5C /* Subways.plist */,
+				21AA803E1BEFA77800F942F8 /* InfoPlist.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -210,6 +214,7 @@
 				21BC21F51BE95601002E0DFF /* Dormitories.plist in Resources */,
 				219C1E001BE786BC0084CC5C /* Subways.plist in Resources */,
 				219C1DFC1BE76F3C0084CC5C /* Stations.plist in Resources */,
+				21AA80401BEFA77800F942F8 /* InfoPlist.strings in Resources */,
 				21DBB37B1BE6AD3600879415 /* FortuneQuotes.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,6 +260,15 @@
 				219C1E011BE788AB0084CC5C /* ru */,
 			);
 			name = Subways.plist;
+			sourceTree = "<group>";
+		};
+		21AA803E1BEFA77800F942F8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21AA80411BEFA7F400F942F8 /* Base */,
+				21AA803F1BEFA77800F942F8 /* ru */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		21BC21F31BE95601002E0DFF /* Dormitories.plist */ = {
