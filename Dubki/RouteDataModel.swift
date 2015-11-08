@@ -106,24 +106,18 @@ class RouteStep {
         self.type = type
     }
 
-    func stringFromDate(date: NSDate?) -> String {
+    func stringFromDate(date: NSDate?, dateFormat: String = "dd MMM HH:mm") -> String {
         if date == nil {
             return "?"
         }
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd MMM HH:mm"
+        dateFormatter.dateFormat = dateFormat
         return dateFormatter.stringFromDate(date!)
     }
 
     func getTimeFromDate(date: NSDate?) -> String {
-        if date == nil {
-            return "?"
-        }
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        return dateFormatter.stringFromDate(date!)
+        return stringFromDate(date, dateFormat: "HH:mm")
     }
 }
 
@@ -886,13 +880,13 @@ class RouteDataModel: NSObject {
         //return weekdayName[weekDay]
     }
     
-    func dateFromString(date: String, dateFormat: String) -> NSDate {
+    func dateFromString(date: String, dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> NSDate {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = dateFormat
         return dateFormatter.dateFromString(date)!
     }
     
-    func stringFromDate(date: NSDate, dateFormat: String) -> String {
+    func stringFromDate(date: NSDate, dateFormat: String = "dd MMM HH:mm") -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = dateFormat
         return dateFormatter.stringFromDate(date)

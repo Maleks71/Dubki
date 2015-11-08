@@ -39,7 +39,7 @@ class FindViewController: UITableViewController {
             if whenLabel != nil {
                 if when != nil {
                     let dateFormatter = NSDateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+                    dateFormatter.dateFormat = "dd MMM HH:mm"
                     whenLabel.text = dateFormatter.stringFromDate(when!)
                 } else {
                     whenLabel.text = NSLocalizedString("Now", comment: "")
