@@ -10,3 +10,5 @@ NSLocationWhenInUseUsageDescription = "Местоположение требуе
 
 CFBundleDisplayName = "Дубки";
 CFBundleName = "Дубки";
+//CFBundleShortVersionString
+NSHumanReadableCopyright = "Copyright © 2015 ООО \"ЛионСофт\" Все права защищены.";

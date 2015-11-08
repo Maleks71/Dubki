@@ -10,3 +10,5 @@ NSLocationWhenInUseUsageDescription = "Location is required to retrieve the camp
 
 CFBundleDisplayName = "Dubki";
 CFBundleName = "Dubki";
+//CFBundleShortVersionString
+NSHumanReadableCopyright = "Copyright © 2015 LionSoft LLC All right reserved.";
