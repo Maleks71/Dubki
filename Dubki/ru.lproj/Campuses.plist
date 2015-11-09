@@ -19,6 +19,10 @@
 		<integer>5</integer>
 		<key>mapsrc</key>
 		<string></string>
+		<key>lon</key>
+		<string>37.228579 </string>
+		<key>lat</key>
+		<string>55.660150</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -37,6 +41,10 @@
 		<integer>14</integer>
 		<key>mapsrc</key>
 		<string>9kfYmO7lbg2o_YuSTvZqiY9rCevo23cs</string>
+		<key>lon</key>
+		<string>37.541718 </string>
+		<key>lat</key>
+		<string>55.806661</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -55,6 +63,10 @@
 		<integer>6</integer>
 		<key>mapsrc</key>
 		<string>pMeBRyKZjz3PnQn4HCZKIlagbMIv2Bxp</string>
+		<key>lon</key>
+		<string>37.409846 </string>
+		<key>lat</key>
+		<string>55.803469</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -73,6 +85,10 @@
 		<integer>6</integer>
 		<key>mapsrc</key>
 		<string>GGWd7qLfRklaR5KSQQpKFOiJT8RPFGO-</string>
+		<key>lon</key>
+		<string>37.632969</string>
+		<key>lat</key>
+		<string>55.761345</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -91,6 +107,10 @@
 		<integer>5</integer>
 		<key>mapsrc</key>
 		<string>_Cz-NprpRRfD15AECXvyxGQb5N7RY3xC</string>
+		<key>lon</key>
+		<string>37.585358 </string>
+		<key>lat</key>
+		<string>55.704874</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -109,6 +129,10 @@
 		<integer>16</integer>
 		<key>mapsrc</key>
 		<string>tTSwzei04UwodpOe5ThQSKwo47ZiR8aO</string>
+		<key>lon</key>
+		<string>37.733221</string>
+		<key>lat</key>
+		<string>55.778730</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -127,6 +151,10 @@
 		<integer>10</integer>
 		<key>mapsrc</key>
 		<string>IcVLk9vNC1afHy5ge05Ae07wahHXZZ7H</string>
+		<key>lon</key>
+		<string>0</string>
+		<key>lat</key>
+		<string>0</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -145,6 +173,10 @@
 		<integer>16</integer>
 		<key>mapsrc</key>
 		<string>LwunOFh66TXk8NyRAgKpsssV0Gdy34pG</string>
+		<key>lon</key>
+		<string>37.663287 </string>
+		<key>lat</key>
+		<string>55.766734</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -163,6 +195,10 @@
 		<integer>4</integer>
 		<key>mapsrc</key>
 		<string>0enMIqcJ_dLy8ShEHN34Lu-4XBAHsrno</string>
+		<key>lon</key>
+		<string>37.608472 </string>
+		<key>lat</key>
+		<string>55.720418</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -181,6 +217,10 @@
 		<integer>6</integer>
 		<key>mapsrc</key>
 		<string>pSiE6gI2ftRfAGBDauSW0G0H2o9R726u</string>
+		<key>lon</key>
+		<string>37.618515</string>
+		<key>lat</key>
+		<string>55.762840</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -199,6 +239,10 @@
 		<integer>5</integer>
 		<key>mapsrc</key>
 		<string>1SimW8pYfuzER0tbTEYFs1RFaNUFnhh-</string>
+		<key>lon</key>
+		<string>37.635171 </string>
+		<key>lat</key>
+		<string>55.728358</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -217,6 +261,10 @@
 		<integer>7</integer>
 		<key>mapsrc</key>
 		<string>7UEkPE7kT0Bhb4rOzDbk2O57LdWBE8Lq</string>
+		<key>lon</key>
+		<string>37.628028 </string>
+		<key>lat</key>
+		<string>55.755864</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -235,6 +283,10 @@
 		<integer>13</integer>
 		<key>mapsrc</key>
 		<string>_WWkurGGUbabsiPE9xgdLP_iJ61vbJrZ</string>
+		<key>lon</key>
+		<string>37.646471</string>
+		<key>lat</key>
+		<string>55.755368</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -253,6 +305,10 @@
 		<integer>15</integer>
 		<key>mapsrc</key>
 		<string>jBGwqmV8V-JjFzbG2M_13sGlAUVqug-9</string>
+		<key>lon</key>
+		<string>37.645447 </string>
+		<key>lat</key>
+		<string>55.754213</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -271,6 +327,10 @@
 		<integer>13</integer>
 		<key>mapsrc</key>
 		<string>j1cHqL5k2jw_MK31dlBLEwPPPmj72NNg</string>
+		<key>lon</key>
+		<string>37.644773 </string>
+		<key>lat</key>
+		<string>55.753555</string>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -289,6 +349,10 @@
 		<integer>5</integer>
 		<key>mapsrc</key>
 		<string>_a_UjKz_rMbmf2l_mWtsRUjlaqlRySIS</string>
+		<key>lon</key>
+		<string>37.606109 </string>
+		<key>lat</key>
+		<string>55.761690</string>
 	</dict>
 </array>
 </plist>
