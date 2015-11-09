@@ -26,7 +26,7 @@
 		<key>name</key>
 		<string>aeroport</string>
 		<key>title</key>
-		<string>Кочновский проезд</string>
+		<string>Kochnovsky Proezd</string>
 		<key>description</key>
 		<string>Subway Aeroport</string>
 		<key>station</key>
@@ -82,7 +82,7 @@
 		<key>title</key>
 		<string>Vavilovo</string>
 		<key>description</key>
-		<string>Subway Leninskiy prospect</string>
+		<string>Subway Leninskiy Prospekt</string>
 		<key>station</key>
 		<string>kuncevo</string>
 		<key>subway</key>
@@ -98,7 +98,7 @@
 		<key>name</key>
 		<string>izmailovo</string>
 		<key>title</key>
-		<string>Kirpichnaya ulitsa</string>
+		<string>Kirpichnaya Ulitsa</string>
 		<key>description</key>
 		<string>Subway Semenovskaya</string>
 		<key>station</key>

@@ -58,7 +58,8 @@ class FindViewController: UITableViewController {
         //campusButton.layer.borderColor = UIColor.blueColor().CGColor
         
         // clear campus TODO: get from setting or location
-        campus = RouteDataModel.sharedInstance.campuses![2] as? Dictionary<String, AnyObject>
+        let defaultCampus = 2 //NSUserDefaults.standardUserDefaults().integerForKey("campus")
+        campus = RouteDataModel.sharedInstance.campuses![defaultCampus] as? Dictionary<String, AnyObject>
         
         //fromToLabel = tableView.headerViewForSection(1)?.textLabel
         //fromToLabel?.text = NSLocalizedString("ToCampus", comment: "").uppercaseString
