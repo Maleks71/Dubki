@@ -10,20 +10,20 @@
 	<string>Strogino</string>
 	<key>kurskaya</key>
 	<string>Kurskaya</string>
-	<key>tekstilshiki</key>
-	<string>tekstilshiki</string>
-	<key>leninskiy_prospekt</key>
-	<string>Leninskiy Prospekt</string>
-	<key>semenovskaya</key>
-	<string>Semenovskaya</string>
+	<key>tekstilshchiki</key>
+	<string>Tekstilshchiki</string>
+	<key>leninsky_prospekt</key>
+	<string>Leninsky Prospekt</string>
+	<key>semyonovskaya</key>
+	<string>Semyonovskaya</string>
 	<key>shabolovskaya</key>
 	<string>Shabolovskaya</string>
-	<key>kuzneckiy_most</key>
-	<string>Kuzneckiy Most</string>
+	<key>kuznetsky_most</key>
+	<string>Kuznetsky Most</string>
 	<key>paveletskaya</key>
 	<string>Paveletskaya</string>
-	<key>china-town</key>
-	<string>China-town</string>
+	<key>kitay-gorod</key>
+	<string>Kitay-Gorod</string>
 	<key>tverskaya</key>
 	<string>Tverskaya</string>
 	<key>kuntsevskaya</key>
@@ -32,7 +32,7 @@
 	<string>Belorusskaya</string>
 	<key>begovaya</key>
 	<string>Begovaya</string>
-	<key>slavyanskiy_bulvar</key>
-	<string>Slavyanskiy bulvar</string>
+	<key>slavyansky_bulvar</key>
+	<string>Slavyansky Bulvar</string>
 </dict>
 </plist>

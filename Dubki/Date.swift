@@ -20,13 +20,7 @@ extension String {
 }
 
 extension NSDate {
-    /*
-    static func dateFromString(string: String, dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> NSDate? {
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = dateFormat
-    return dateFormatter.dateFromString(string)
-    }
-    */
+
     func stringByFormat(dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = dateFormat
@@ -64,18 +58,19 @@ extension NSDate {
     The number of the weekday unit for the receiver.
     Weekday units are the numbers 1 through n, where n is the number of days in the week. For example, in the Gregorian calendar, n is 7 and Sunday is represented by 1.
     */
-    func weekday() -> Int {
-        //let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(NSCalendarUnit.Weekday, fromDate: self)
-        return components.weekday
-        //let weekDay = myComponents.weekday - 1
+    var weekday: Int {
+        get {
+            //let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+            let calendar = NSCalendar.currentCalendar()
+            let components = calendar.components(NSCalendarUnit.Weekday, fromDate: self)
+            return components.weekday
+        }
     }
     
     func weekdayName() -> String {
         return stringByFormat("EEE")
         //let weekdayName = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"]
-        //return weekdayName[weekday() - 1]
+        //return weekdayName[weekday - 1]
     }
     
     func dateByWithTime(time: String) -> NSDate? {

@@ -113,13 +113,13 @@ class RouteDataModel: NSObject {
     static let sharedInstance = RouteDataModel()
 
     // Описание общежитий
-    let dormitories = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Dormitories", ofType: "plist")!)
+    let dormitories = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Dormitories", ofType: "plist")!) as? [Dictionary<String, AnyObject>]
     // Описание кампусов
-    let campuses = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Campuses", ofType: "plist")!)
+    let campuses = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Campuses", ofType: "plist")!) as? [Dictionary<String, AnyObject>]
     // Названия станций метро
-    let subways = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Subways", ofType: "plist")!)
+    let subways = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Subways", ofType: "plist")!) as? Dictionary<String, AnyObject>
     // Описания станций ж/д
-    let stations = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Stations", ofType: "plist")!)
+    let stations = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Stations", ofType: "plist")!) as? Dictionary<String, AnyObject>
     
     // параметры для маршрута
     var direction: Int? // Направление из/в Дубки
@@ -181,7 +181,7 @@ class RouteDataModel: NSObject {
             return
         }
         
-        let dorm = dormitories![0] as! Dictionary<String, AnyObject>
+        let dorm = dormitories![0] 
 
         route = [RouteStep]() // очистка маршрута
         
@@ -207,7 +207,7 @@ class RouteDataModel: NSObject {
             if bus.to == "Славянский бульвар" {
                 // станции метро
 
-                subwayFrom = "slavyanskiy_bulvar"
+                subwayFrom = "slavyansky_bulvar"
                 // переход
                 let transit = RouteStep(type: .Transition)
                 transit.from = "Автобус"
@@ -376,13 +376,13 @@ class RouteDataModel: NSObject {
         var _to: String = to
         
         // today is either {'', '*Суббота', '*Воскресенье'}
-        if timestamp.weekday() == 7 {
+        if timestamp.weekday == 7 {
             if from == "Дубки" {
                 _from = "ДубкиСуббота"
             } else if to == "Дубки" {
                 _to = "ДубкиСуббота"
             }
-        } else if timestamp.weekday() == 1 {
+        } else if timestamp.weekday == 1 {
             if from == "Дубки" {
                 _from = "ДубкиВоскресенье"
             } else if to == "Дубки" {
@@ -446,13 +446,13 @@ class RouteDataModel: NSObject {
         var _to: String = to
         
         // today is either {'', '*Суббота', '*Воскресенье'}
-        if timestamp.weekday() == 7 {
+        if timestamp.weekday == 7 {
             if from == "Дубки" {
                 _from = "ДубкиСуббота"
             } else if to == "Дубки" {
                 _to = "ДубкиСуббота"
             }
-        } else if timestamp.weekday() == 1 {
+        } else if timestamp.weekday == 1 {
             if from == "Дубки" {
                 _from = "ДубкиВоскресенье"
             } else if to == "Дубки" {
@@ -659,34 +659,36 @@ class RouteDataModel: NSObject {
     // Subway Route Data (timedelta in minutes)
     let subwayDuration = [
         "kuntsevskaya": [ // Кунцевская
-            "strogino":            15, // Строгино
-            "semenovskaya":        28, // Семёновская
-            "kurskaya":            21, // Курская
-            "leninskiy_prospekt" : 28  // Ленинский проспект
+            "strogino":           16, // Строгино
+            "semyonovskaya":      28, // Семёновская
+            "kurskaya":           21, // Курская
+            "leninsky_prospekt" : 28  // Ленинский проспект
         ],
         "belorusskaya": [ // Белорусская
             "aeroport":  6, // Аэропорт
             "tverskaya": 4  // Тверская
         ],
         "begovaya": [ // Беговая
-            "tekstilshiki":   22, // Текстильщики
+            "tekstilshchiki": 23, // Текстильщики
             "lubyanka":       12, // Лубянка
             "shabolovskaya":  20, // Шаболовская
-            "kuzneckiy_most":  9, // Кузнецкий мост
+            "kuznetsky_most":  9, // Кузнецкий мост
             "paveletskaya":   17, // Павелецкая
-            "china-town":     11  // Китай-город
+            "kitay-gorod":    11  // Китай-город
         ],
-        "slavyanskiy_bulvar": [ // Славянский бульвар
-            "strogino":           18, // Строгино
-            "semenovskaya":       25, // Семёновская
-            "kurskaya":           18, // Курская
-            "leninskiy_prospekt": 25, // Ленинский проспект
-            "aeroport":           26, // Аэропорт
-            "tekstilshiki":       35, // Текстильщики
-            "lubyanka":           21, // Лубянка
-            "shabolovskaya":      22, // Шаболовская
-            "kuzneckiy_most":     22, // Кузнецкий мост
-            "tverskaya":          22  // Тверская
+        "slavyansky_bulvar": [ // Славянский бульвар
+            "strogino":          18, // Строгино
+            "semyonovskaya":     25, // Семёновская
+            "kurskaya":          18, // Курская
+            "leninsky_prospekt": 25, // Ленинский проспект
+            "aeroport":          26, // Аэропорт
+            "tverskaya":         22, // Тверская
+            "tekstilshchiki":    35, // Текстильщики
+            "lubyanka":          21, // Лубянка
+            "shabolovskaya":     22, // Шаболовская
+            "kuznetsky_most":    22, // Кузнецкий мост
+            "paveletskaya":      17, // Павелецкая
+            "kitay-gorod":       20  // Китай-город
         ]
     ]
     let subwayClosesTime = "01:00"

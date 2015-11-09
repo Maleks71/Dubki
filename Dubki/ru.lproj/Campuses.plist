@@ -48,7 +48,7 @@
 		<key>description</key>
 		<string>метро Строгино</string>
 		<key>station</key>
-		<string>kuncevo</string>
+		<string>kuntsevo</string>
 		<key>subway</key>
 		<string>strogino</string>
 		<key>onfoot</key>
@@ -84,9 +84,9 @@
 		<key>description</key>
 		<string>метро Ленинский проспект</string>
 		<key>station</key>
-		<string>kuncevo</string>
+		<string>kuntsevo</string>
 		<key>subway</key>
-		<string>leninskiy_prospekt</string>
+		<string>leninsky_prospekt</string>
 		<key>onfoot</key>
 		<integer>5</integer>
 		<key>mapsrc</key>
@@ -102,9 +102,9 @@
 		<key>description</key>
 		<string>метро Семёновская</string>
 		<key>station</key>
-		<string>kuncevo</string>
+		<string>kuntsevo</string>
 		<key>subway</key>
-		<string>semenovskaya</string>
+		<string>semyonovskaya</string>
 		<key>onfoot</key>
 		<integer>16</integer>
 		<key>mapsrc</key>
@@ -114,7 +114,7 @@
 		<key>id</key>
 		<integer>7</integer>
 		<key>name</key>
-		<string>tekstilshiki</string>
+		<string>tekstilshchiki</string>
 		<key>title</key>
 		<string>Текстильщики</string>
 		<key>description</key>
@@ -122,7 +122,7 @@
 		<key>station</key>
 		<string>begovaya</string>
 		<key>subway</key>
-		<string>tekstilshiki</string>
+		<string>tekstilshchiki</string>
 		<key>onfoot</key>
 		<integer>10</integer>
 		<key>mapsrc</key>
@@ -138,7 +138,7 @@
 		<key>description</key>
 		<string>метро Курская</string>
 		<key>station</key>
-		<string>kuncevo</string>
+		<string>kuntsevo</string>
 		<key>subway</key>
 		<string>kurskaya</string>
 		<key>onfoot</key>
@@ -176,7 +176,7 @@
 		<key>station</key>
 		<string>begovaya</string>
 		<key>subway</key>
-		<string>kuznetskiy_most</string>
+		<string>kuznetsky_most</string>
 		<key>onfoot</key>
 		<integer>6</integer>
 		<key>mapsrc</key>
@@ -212,7 +212,7 @@
 		<key>station</key>
 		<string>begovaya</string>
 		<key>subway</key>
-		<string>china-town</string>
+		<string>kitay-gorod</string>
 		<key>onfoot</key>
 		<integer>7</integer>
 		<key>mapsrc</key>
@@ -230,7 +230,7 @@
 		<key>station</key>
 		<string>begovaya</string>
 		<key>subway</key>
-		<string>china-town</string>
+		<string>kitay-gorod</string>
 		<key>onfoot</key>
 		<integer>13</integer>
 		<key>mapsrc</key>
@@ -248,7 +248,7 @@
 		<key>station</key>
 		<string>begovaya</string>
 		<key>subway</key>
-		<string>china-town</string>
+		<string>kitay-gorod</string>
 		<key>onfoot</key>
 		<integer>15</integer>
 		<key>mapsrc</key>
@@ -266,7 +266,7 @@
 		<key>station</key>
 		<string>begovaya</string>
 		<key>subway</key>
-		<string>china-town</string>
+		<string>kitay-gorod</string>
 		<key>onfoot</key>
 		<integer>13</integer>
 		<key>mapsrc</key>

@@ -13,12 +13,12 @@
 		<key>transit</key>
 		<integer>5</integer>
 	</dict>
-	<key>kuncevo</key>
+	<key>kuntsevo</key>
 	<dict>
 		<key>code</key>
 		<string>s9601728</string>
 		<key>title</key>
-		<string>Kuncevo</string>
+		<string>Kuntsevo</string>
 		<key>subway</key>
 		<string>kuntsevskaya</string>
 		<key>transit</key>

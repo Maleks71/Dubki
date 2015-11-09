@@ -48,7 +48,7 @@
 		<key>description</key>
 		<string>Subway Strogino</string>
 		<key>station</key>
-		<string>kuncevo</string>
+		<string>kuntsevo</string>
 		<key>subway</key>
 		<string>strogino</string>
 		<key>onfoot</key>
@@ -82,11 +82,11 @@
 		<key>title</key>
 		<string>Vavilovo</string>
 		<key>description</key>
-		<string>Subway Leninskiy Prospekt</string>
+		<string>Subway Leninsky Prospekt</string>
 		<key>station</key>
-		<string>kuncevo</string>
+		<string>kuntsevo</string>
 		<key>subway</key>
-		<string>leninskiy_prospekt</string>
+		<string>leninsky_prospekt</string>
 		<key>onfoot</key>
 		<integer>5</integer>
 		<key>mapsrc</key>
@@ -100,11 +100,11 @@
 		<key>title</key>
 		<string>Kirpichnaya Ulitsa</string>
 		<key>description</key>
-		<string>Subway Semenovskaya</string>
+		<string>Subway Semyonovskaya</string>
 		<key>station</key>
-		<string>kuncevo</string>
+		<string>kuntsevo</string>
 		<key>subway</key>
-		<string>semenovskaya</string>
+		<string>semyonovskaya</string>
 		<key>onfoot</key>
 		<integer>16</integer>
 		<key>mapsrc</key>
@@ -114,15 +114,15 @@
 		<key>id</key>
 		<integer>7</integer>
 		<key>name</key>
-		<string>tekstilshiki</string>
+		<string>tekstilshchiki</string>
 		<key>title</key>
-		<string>Tekstilshiki</string>
+		<string>Tekstilshchiki</string>
 		<key>description</key>
-		<string>Subway Tekstilshiki</string>
+		<string>Subway Tekstilshchiki</string>
 		<key>station</key>
 		<string>begovaya</string>
 		<key>subway</key>
-		<string>tekstilshiki</string>
+		<string>tekstilshchiki</string>
 		<key>onfoot</key>
 		<integer>10</integer>
 		<key>mapsrc</key>
@@ -138,7 +138,7 @@
 		<key>description</key>
 		<string>Subway Kurskaya</string>
 		<key>station</key>
-		<string>kuncevo</string>
+		<string>kuntsevo</string>
 		<key>subway</key>
 		<string>kurskaya</string>
 		<key>onfoot</key>
@@ -172,11 +172,11 @@
 		<key>title</key>
 		<string>Petrovka</string>
 		<key>description</key>
-		<string>Subway Kuznetskiy most</string>
+		<string>Subway Kuznetsky most</string>
 		<key>station</key>
 		<string>begovaya</string>
 		<key>subway</key>
-		<string>kuznetskiy_most</string>
+		<string>kuznetsky_most</string>
 		<key>onfoot</key>
 		<integer>6</integer>
 		<key>mapsrc</key>
@@ -208,11 +208,11 @@
 		<key>title</key>
 		<string>Ilyinka</string>
 		<key>description</key>
-		<string>Subway China-town</string>
+		<string>Subway Kitay-Gorod</string>
 		<key>station</key>
 		<string>begovaya</string>
 		<key>subway</key>
-		<string>china-town</string>
+		<string>kitay-gorod</string>
 		<key>onfoot</key>
 		<integer>7</integer>
 		<key>mapsrc</key>
@@ -226,11 +226,11 @@
 		<key>title</key>
 		<string>Bolshoy Tryokhsvyatitelsky Pereulok</string>
 		<key>description</key>
-		<string>Subway China-town</string>
+		<string>Subway Kitay-Gorod</string>
 		<key>station</key>
 		<string>begovaya</string>
 		<key>subway</key>
-		<string>china-town</string>
+		<string>kitay-gorod</string>
 		<key>onfoot</key>
 		<integer>13</integer>
 		<key>mapsrc</key>
@@ -244,11 +244,11 @@
 		<key>title</key>
 		<string>Maly Tryokhsvyatitelsky Pereulok</string>
 		<key>description</key>
-		<string>Subway China-town</string>
+		<string>Subway Kitay-Gorod</string>
 		<key>station</key>
 		<string>begovaya</string>
 		<key>subway</key>
-		<string>china-town</string>
+		<string>kitay-gorod</string>
 		<key>onfoot</key>
 		<integer>15</integer>
 		<key>mapsrc</key>
@@ -262,11 +262,11 @@
 		<key>title</key>
 		<string>Khitrovsky Pereulok</string>
 		<key>description</key>
-		<string>Subway China-town</string>
+		<string>Subway Kitay-Gorod</string>
 		<key>station</key>
 		<string>begovaya</string>
 		<key>subway</key>
-		<string>china-town</string>
+		<string>kitay-gorod</string>
 		<key>onfoot</key>
 		<integer>13</integer>
 		<key>mapsrc</key>
