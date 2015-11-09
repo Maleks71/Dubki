@@ -21,6 +21,9 @@
 "OnfootDetailFormat" = "About %d minutes";
 "TransitDetailFormat" = "%@ → %@\nAbout %d minutes";
 
+"Bus" = "Bus";
+"Station" = "Station";
+
 "IWantToReach" = "I want to reach";
 
 "ToCampus"   = "to Campus";

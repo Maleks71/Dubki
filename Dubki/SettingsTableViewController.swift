@@ -44,7 +44,7 @@ class SettingsTableViewController: UITableViewController {
     // when press button done on campus picker view controller
     @IBAction func unwindWithSelectedCampus(segue:UIStoryboardSegue) {
         if let campusPickerViewController = segue.sourceViewController as? CampusPickerViewController, campusIndex = campusPickerViewController.selectedCampusIndex {
-            campus = RouteDataModel.sharedInstance.campuses![campusIndex + 1] as? Dictionary<String, AnyObject>
+            campus = RouteDataModel.sharedInstance.campuses![campusIndex + 1]
         }
     }
 

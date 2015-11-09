@@ -21,6 +21,9 @@
 "OnfootDetailFormat" = "Примерно %d минут";
 "TransitDetailFormat" = "%@ → %@\nПримерно %d минут";
 
+"Bus" = "Автобус";
+"Station" = "Станция";
+
 "IWantToReach" = "Я хочу добраться";
 
 "ToCampus"   = "в Кампус";

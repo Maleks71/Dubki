@@ -72,7 +72,7 @@ class CampusPickerViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CampusCell", forIndexPath: indexPath)
         
-        let campus = campuses![indexPath.row + 1] as! Dictionary<String, AnyObject>
+        let campus = campuses![indexPath.row + 1] 
         
         cell.textLabel?.text = campus["title"] as? String
         cell.detailTextLabel?.text = campus["description"] as? String

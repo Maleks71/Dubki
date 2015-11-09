@@ -210,7 +210,7 @@ class RouteDataModel: NSObject {
                 subwayFrom = "slavyansky_bulvar"
                 // переход
                 let transit = RouteStep(type: .Transition)
-                transit.from = "Автобус"
+                transit.from = NSLocalizedString("Bus", comment: "") // "Автобус"
                 transit.to = bus.to
                 transit.duration = 5
                 transit.departure = bus.arrival!
@@ -228,8 +228,8 @@ class RouteDataModel: NSObject {
                 
                 // переход
                 let transit1 = RouteStep(type: .Transition)
-                transit1.from = "Автобус"
-                transit1.to = "Станция"
+                transit1.from = NSLocalizedString("Bus", comment: "") // "Автобус"
+                transit1.to = NSLocalizedString("Station", comment: "") // "Станция"
                 transit1.duration = stationFrom["transit"] as? Int
                 transit1.departure = bus.arrival!
                 transit1.arrival = transit1.departure!.dateByAddingMinute(transit1.duration!)
@@ -317,8 +317,8 @@ class RouteDataModel: NSObject {
 
             // переход
             let transit2 = RouteStep(type: .Transition)
-            transit2.from = "Станция"
-            transit2.to = "Автобус"
+            transit2.from = NSLocalizedString("Station", comment: "") // "Станция"
+            transit2.to = NSLocalizedString("Bus", comment: "") // "Автобус"
             transit2.duration = stationTo["transit"] as? Int
             transit2.departure = train.arrival
             transit2.arrival = transit2.departure!.dateByAddingMinute(transit2.duration!)
