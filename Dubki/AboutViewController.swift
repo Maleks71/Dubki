@@ -29,7 +29,9 @@ class AboutViewController: UIViewController {
     }
     
     @IBAction func donatePressButton(sender: AnyObject) {
-        UIApplication.sharedApplication().openURL(NSURL(string: "http://lionsoft.ru")!)
+        //let money_url = "https://money.yandex.ru/embed/shop.xml?account=41001824209175&quickpay=shop&payment-type-choice=on&writer=seller&targets=Dubki&targets-hint=&default-sum=100&button-text=03&comment=on&hint=&successURL="
+        let money_url = "http://yasobe.ru/na/dubki_app"
+        UIApplication.sharedApplication().openURL(NSURL(string: money_url)!)
     }
     
     /*
