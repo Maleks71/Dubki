@@ -64,15 +64,15 @@ class RouteStep {
     // описание шага - станции откуда/куда и время отправления/прибытия (для вывода на экран)
     var detail: String? {
         get {
-            let timeDeparture = departure?.stringByFormat("HH:mm") ?? "?"
-            let timeArrival = arrival?.stringByFormat("HH:mm") ?? "?"
+            let timeDeparture = departure?.string("HH:mm") ?? "?"
+            let timeArrival = arrival?.string("HH:mm") ?? "?"
 
             switch (type) {
             case .None:
                 return ""
             
             case .Total:
-                let dateDeparture = departure?.stringByFormat("dd MMM HH:mm") ?? "?"
+                let dateDeparture = departure?.string("dd MMM HH:mm") ?? "?"
                 //let dateArrival = arrival?.stringByFormat("dd MMM HH:mm") ?? "?"
                 let detailFormat = NSLocalizedString("TotalDetailFormat", comment: "")
                 return String(format: detailFormat, dateDeparture, timeArrival)
@@ -587,7 +587,7 @@ class RouteDataModel: NSObject {
         // URL of train schedule API provider
         let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%@&format=json&date=%@&from=%@&to=%@&lang=ru&transport_types=suburban"
         
-        let api_url = String(format: TRAIN_API_URL, YANDEX_API_KEY!, timestamp.stringByFormat("yyyy-MM-dd"), from, to)
+        let api_url = String(format: TRAIN_API_URL, YANDEX_API_KEY!, timestamp.string("yyyy-MM-dd"), from, to)
         
         // загрузка распияния из интернета
         if let trainSchedule = NSData(contentsOfURL: NSURL(string: api_url)!) {
@@ -632,7 +632,7 @@ class RouteDataModel: NSObject {
         var minInterval: Double = 24*60*60 // мин. интервал (сутки)
         var trainInfo: Dictionary<String, String>? // поезд
         for train in trains {
-            let departure = train["departure"]!.dateByFormat()
+            let departure = train["departure"]!.date()
             let interval: Double = departure!.timeIntervalSinceDate(timestamp)
             if interval > 0 && interval < minInterval {
                 minInterval = interval
@@ -653,8 +653,8 @@ class RouteDataModel: NSObject {
         train.to = to["title"] as? String
         train.trainName = trainInfo!["title"] //"Кубинка 1 - Москва (Белорусский вокзал)"
         train.stops = trainInfo!["stops"] //"везде"
-        train.departure = trainInfo!["departure"]!.dateByFormat()
-        train.arrival = trainInfo!["arrival"]!.dateByFormat()
+        train.departure = trainInfo!["departure"]!.date()
+        train.arrival = trainInfo!["arrival"]!.date()
         train.duration = Int(train.arrival!.timeIntervalSinceDate(train.departure!) / 60)
         train.url = "http://rasp.yandex.ru/"
         

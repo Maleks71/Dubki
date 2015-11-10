@@ -38,7 +38,7 @@ class FindViewController: UITableViewController {
             // after set value of when need set label text
             if whenLabel != nil {
                 if when != nil {
-                    whenLabel.text = when!.stringByFormat("dd MMM HH:mm")
+                    whenLabel.text = when!.string("dd MMM HH:mm")
                 } else {
                     whenLabel.text = NSLocalizedString("Now", comment: "")
                 }

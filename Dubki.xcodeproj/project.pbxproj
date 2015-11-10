@@ -16,7 +16,6 @@
 		219CFFD41BEBFA24008F2EE8 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219CFFD31BEBFA24008F2EE8 /* LocationService.swift */; };
 		219FA9C91BEA2BAC00161450 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219FA9C81BEA2BAC00161450 /* SettingsTableViewController.swift */; };
 		21AA803B1BEFA1BC00F942F8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA803A1BEFA1BC00F942F8 /* Date.swift */; };
-		21AA803D1BEFA2D000F942F8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 21AA803C1BEFA2D000F942F8 /* LICENSE */; };
 		21AA80401BEFA77800F942F8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21AA803E1BEFA77800F942F8 /* InfoPlist.strings */; };
 		21BC21F51BE95601002E0DFF /* Dormitories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21BC21F31BE95601002E0DFF /* Dormitories.plist */; };
 		21C89BBF1BE6501500816449 /* Campuses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C89BC11BE6501500816449 /* Campuses.plist */; };
@@ -30,7 +29,6 @@
 		A6BC8BEA1BE2BE9B006A91F7 /* CampusPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC8BE91BE2BE9B006A91F7 /* CampusPickerViewController.swift */; };
 		A6BC8BEC1BE2BEAD006A91F7 /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC8BEB1BE2BEAC006A91F7 /* TimePickerViewController.swift */; };
 		A6BC8BEE1BE2BEC7006A91F7 /* RouteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC8BED1BE2BEC7006A91F7 /* RouteTableViewController.swift */; };
-		A6BC8BF01BE2D417006A91F7 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = A6BC8BEF1BE2D417006A91F7 /* README.md */; };
 		A6BC8BF21BE3C232006A91F7 /* RouteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC8BF11BE3C232006A91F7 /* RouteDataModel.swift */; };
 		A6D496581BE6560800073024 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D496561BE6560800073024 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
@@ -221,7 +219,6 @@
 				21C89BBF1BE6501500816449 /* Campuses.plist in Resources */,
 				A6BC8BDF1BE2B21F006A91F7 /* Assets.xcassets in Resources */,
 				213C31181BF08D3D00085C77 /* Settings.bundle in Resources */,
-				21AA803D1BEFA2D000F942F8 /* LICENSE in Resources */,
 				A6BC8BDD1BE2B21F006A91F7 /* Main.storyboard in Resources */,
 				21BC21F51BE95601002E0DFF /* Dormitories.plist in Resources */,
 				219C1E001BE786BC0084CC5C /* Subways.plist in Resources */,
@@ -255,7 +252,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2180D46D1BF1DFB3009FFD4F /* DetailViewController.swift in Sources */,
-				A6BC8BF01BE2D417006A91F7 /* README.md in Sources */,
 				A6BC8BEE1BE2BEC7006A91F7 /* RouteTableViewController.swift in Sources */,
 				A6BC8BDA1BE2B21F006A91F7 /* FindViewController.swift in Sources */,
 				A6D496581BE6560800073024 /* SwiftyJSON.swift in Sources */,
@@ -384,7 +380,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 36;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -430,7 +426,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 36;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -455,7 +451,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 36;
 				INFOPLIST_FILE = Dubki/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -471,7 +467,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 36;
 				INFOPLIST_FILE = Dubki/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -12,7 +12,7 @@ import Foundation
 
 extension String {
     
-    func dateByFormat(dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> NSDate? {
+    func date(dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> NSDate? {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = dateFormat
         return dateFormatter.dateFromString(self)
@@ -21,7 +21,7 @@ extension String {
 
 extension NSDate {
 
-    func stringByFormat(dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
+    func string(dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = dateFormat
         return dateFormatter.stringFromDate(self)
@@ -68,7 +68,7 @@ extension NSDate {
     }
     
     func weekdayName() -> String {
-        return stringByFormat("EEE")
+        return string("EEE")
         //let weekdayName = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"]
         //return weekdayName[weekday - 1]
     }
