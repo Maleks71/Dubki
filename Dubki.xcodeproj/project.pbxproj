@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		213C31181BF08D3D00085C77 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 213C31171BF08D3D00085C77 /* Settings.bundle */; };
 		2180D46D1BF1DFB3009FFD4F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2180D46C1BF1DFB3009FFD4F /* DetailViewController.swift */; };
+		2180D4701BF2415E009FFD4F /* apikeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2180D46E1BF2415E009FFD4F /* apikeys.plist */; };
 		219C1DFC1BE76F3C0084CC5C /* Stations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 219C1DFA1BE76F3C0084CC5C /* Stations.plist */; };
 		219C1E001BE786BC0084CC5C /* Subways.plist in Resources */ = {isa = PBXBuildFile; fileRef = 219C1DFE1BE786BC0084CC5C /* Subways.plist */; };
 		219CFFD01BEBECE7008F2EE8 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219CFFCF1BEBECE7008F2EE8 /* AboutViewController.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		213C31171BF08D3D00085C77 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		2180D46C1BF1DFB3009FFD4F /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		2180D46F1BF2415E009FFD4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/apikeys.plist; sourceTree = "<group>"; };
 		219C1DFB1BE76F3C0084CC5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Stations.plist; sourceTree = "<group>"; };
 		219C1DFD1BE770850084CC5C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/Stations.plist; sourceTree = "<group>"; };
 		219C1DFF1BE786BC0084CC5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Subways.plist; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				A6BC8BDE1BE2B21F006A91F7 /* Assets.xcassets */,
+				2180D46E1BF2415E009FFD4F /* apikeys.plist */,
 				21C89BC31BE69E2700816449 /* Localizable.strings */,
 				21DBB3791BE6AD3600879415 /* FortuneQuotes.plist */,
 				21BC21F31BE95601002E0DFF /* Dormitories.plist */,
@@ -212,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21C89BC51BE69E2700816449 /* Localizable.strings in Resources */,
+				2180D4701BF2415E009FFD4F /* apikeys.plist in Resources */,
 				A6BC8BE21BE2B21F006A91F7 /* LaunchScreen.storyboard in Resources */,
 				21C89BBF1BE6501500816449 /* Campuses.plist in Resources */,
 				A6BC8BDF1BE2B21F006A91F7 /* Assets.xcassets in Resources */,
@@ -252,6 +256,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		2180D46E1BF2415E009FFD4F /* apikeys.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2180D46F1BF2415E009FFD4F /* Base */,
+			);
+			name = apikeys.plist;
+			sourceTree = "<group>";
+		};
 		219C1DFA1BE76F3C0084CC5C /* Stations.plist */ = {
 			isa = PBXVariantGroup;
 			children = (

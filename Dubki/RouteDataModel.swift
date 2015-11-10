@@ -121,6 +121,9 @@ class RouteDataModel: NSObject {
     // Описания станций ж/д
     let stations = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Stations", ofType: "plist")!) as? Dictionary<String, AnyObject>
     
+    // API Keys
+    let apikeys = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("apikeys", ofType: "plist")!) as? Dictionary<String, String>
+    
     // параметры для маршрута
     var direction: Int? // Направление из/в Дубки
     var campus: Dictionary<String, AnyObject>? // в/из Кампус
@@ -580,17 +583,11 @@ class RouteDataModel: NSObject {
         timestamp(NSDate): date to get schedule for
     */
     func getScheduleTrain(from: String, to: String, timestamp: NSDate) -> JSON? {
-//        let departure = timestamp.dateByWithTime("09:00")?.stringByFormat()
-//        let arrival = timestamp.dateByWithTime("09:35")?.stringByFormat()
-//        let data = "[{\"departure\":\"\(departure!)\",\"arrival\":\"\(arrival!)\",\"stops\":\"везде\",\"thread\":{\"title\":\"Кубинка 1 - Москва (Белорусский вокзал)\"}}]"
-//
-//        return JSON(data: data.dataUsingEncoding(NSUTF8StringEncoding)!)
-        
-        let YANDEX_API_KEY = "6666221e-446b-44d3-8bcb-274e5103aacc"
+        let YANDEX_API_KEY = apikeys!["rasp.yandex.ru"]
         // URL of train schedule API provider
         let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%@&format=json&date=%@&from=%@&to=%@&lang=ru&transport_types=suburban"
         
-        let api_url = String(format: TRAIN_API_URL, YANDEX_API_KEY, timestamp.stringByFormat("yyyy-MM-dd"), from, to)
+        let api_url = String(format: TRAIN_API_URL, YANDEX_API_KEY!, timestamp.stringByFormat("yyyy-MM-dd"), from, to)
         
         // загрузка распияния из интернета
         if let trainSchedule = NSData(contentsOfURL: NSURL(string: api_url)!) {
