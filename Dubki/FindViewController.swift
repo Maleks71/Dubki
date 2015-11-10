@@ -58,7 +58,9 @@ class FindViewController: UITableViewController {
         //campusButton.layer.borderColor = UIColor.blueColor().CGColor
         
         // clear campus TODO: get from setting or location
-        var defaultCampus = NSUserDefaults.standardUserDefaults().integerForKey("campus")
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.synchronize()
+        var defaultCampus = userDefaults.integerForKey("campus")
         if defaultCampus == 0 {
             defaultCampus = 2 // Strogino
         }
@@ -103,14 +105,24 @@ class FindViewController: UITableViewController {
         }
         
         if segue.identifier == "CampusPick" {
-            if let campusPickerViewController = segue.destinationViewController as? CampusPickerViewController {
-                campusPickerViewController.selectedCampusIndex = (campus!["id"] as? Int)! - 2
+            if let campusPicker = segue.destinationViewController as? CampusPickerViewController {
+                campusPicker.selectedCampusIndex = (campus!["id"] as! Int) - 2
             }
         }
 
         if segue.identifier == "TimePick" {
-            if let timePickerViewController = segue.destinationViewController as? TimePickerViewController {
-                timePickerViewController.selectedDate = when
+            if let timePicker = segue.destinationViewController as? TimePickerViewController {
+                timePicker.selectedDate = when
+            }
+        }
+
+        if segue.identifier == "SettingsPick" {
+            if let settings = segue.destinationViewController as? SettingsTableViewController {
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                userDefaults.synchronize()
+                settings.campusIndex = userDefaults.integerForKey("campus")
+                settings.autolocation = userDefaults.boolForKey("autolocation")
+                settings.autoload = userDefaults.boolForKey("autoload")
             }
         }
     }
@@ -118,21 +130,28 @@ class FindViewController: UITableViewController {
     
     // when press button done on campus picker view controller
     @IBAction func unwindWithSelectedCampus(segue:UIStoryboardSegue) {
-        if let campusPickerViewController = segue.sourceViewController as? CampusPickerViewController, campusIndex = campusPickerViewController.selectedCampusIndex {
+        if let campusPicker = segue.sourceViewController as? CampusPickerViewController, campusIndex = campusPicker.selectedCampusIndex {
                 campus = RouteDataModel.sharedInstance.campuses![campusIndex + 1]
         }
     }
 
     // when press button done on time picker view controller
     @IBAction func unwindSelectedTime(segue:UIStoryboardSegue) {
-        if let timePickerViewController = segue.sourceViewController as? TimePickerViewController {
+        if let timePicker = segue.sourceViewController as? TimePickerViewController {
             //print(timePickerViewController.selectedDate)
-            when = timePickerViewController.selectedDate
+            when = timePicker.selectedDate
         }
     }
 
     // when press button save on settings view controller
     @IBAction func saveSettings(segue:UIStoryboardSegue) {
+        if let settings = segue.sourceViewController as? SettingsTableViewController {
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setInteger(settings.campusIndex!, forKey: "campus")
+            userDefaults.setBool(settings.autolocation!, forKey: "autolocation")
+            userDefaults.setBool(settings.autoload!, forKey: "autoload")
+            userDefaults.synchronize()
+        }
     }
 
     // MARK: - Table View Delegate

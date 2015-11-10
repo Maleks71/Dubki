@@ -345,14 +345,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="jQw-yJ-Tee">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="rzv-QT-Ipi"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="rzv-QT-Ipi">
+                            <connections>
+                                <segue destination="haz-Ux-xaZ" kind="unwind" identifier="SaveSettings" unwindAction="saveSettings:" id="dIS-1o-e2J"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="autoloadSwitch" destination="eaQ-QX-CTx" id="4KN-Mf-bH0"/>
+                        <outlet property="autolocationSwitch" destination="17Z-Vb-SxA" id="97k-Pf-S4v"/>
                         <outlet property="campusLabel" destination="Fnw-fZ-De6" id="GVb-5N-57c"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JyV-Gy-fm4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="haz-Ux-xaZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1985" y="1979"/>
         </scene>
