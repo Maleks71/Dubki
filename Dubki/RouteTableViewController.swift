@@ -32,6 +32,19 @@ class RouteTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: - Table view delegate
+    
+    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        let routeStep = routeDataModel.route[indexPath.row]
+        if routeStep.url != nil {
+            UIApplication.sharedApplication().openURL(NSURL(string: routeStep.url!)!)
+        }
+        if routeStep.map != nil {
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            performSegueWithIdentifier("RouteDetail", sender: cell)
+        }
+    }
+
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -52,8 +65,7 @@ class RouteTableViewController: UITableViewController {
         // Configure the cell...
         cell.textLabel?.text = routeStep.title
         cell.detailTextLabel?.text = routeStep.detail
-        //if routeStep.url != nil || routeStep.map != nil {
-        if routeStep.map != nil {
+        if routeStep.url != nil || routeStep.map != nil {
             cell.accessoryType = .DetailButton
         } else {
             cell.accessoryType = .None

@@ -656,7 +656,7 @@ class RouteDataModel: NSObject {
         train.departure = trainInfo!["departure"]!.date()
         train.arrival = trainInfo!["arrival"]!.date()
         train.duration = Int(train.arrival!.timeIntervalSinceDate(train.departure!) / 60)
-        train.url = "http://rasp.yandex.ru/"
+        train.url = "https://rasp.yandex.ru/"
         
         return train
     }
