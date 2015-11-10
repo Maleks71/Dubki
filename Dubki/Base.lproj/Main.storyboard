@@ -679,7 +679,7 @@ to plan their route from dorm to campus and vice versa.</string>
         <!--Detail-->
         <scene sceneID="RRy-D8-DIh">
             <objects>
-                <viewController id="Puq-Lm-8O7" sceneMemberID="viewController">
+                <viewController id="Puq-Lm-8O7" customClass="DetailViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fox-bs-PRZ"/>
                         <viewControllerLayoutGuide type="bottom" id="Wp7-es-U1F"/>

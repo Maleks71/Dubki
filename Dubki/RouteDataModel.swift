@@ -787,7 +787,7 @@ class RouteDataModel: NSObject {
         onfoot.departure = timestamp
         onfoot.arrival = timestamp.dateByAddingMinute(onfoot.duration!)
         //onfoot.map = formMapUrl(edu["mapsrc"] as! String)
-        onfoot.map = edu["name"] as? String
+        onfoot.map = (edu["name"] as! String) + ".png"
         
         return onfoot
     }
