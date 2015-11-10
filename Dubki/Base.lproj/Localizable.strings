@@ -17,7 +17,7 @@
 
 // форматы для информации о шаге маршрута
 "TotalDetailFormat" = "departure: %@ | arrival: %@";
-"TrainDetailFormat" = "%@ (%@ → %@)\nStops: %@\nEntry into stations: %@";
+"TrainDetailFormat" = "%@ (%@ → %@)\nStops: %@\nEntry into stations: %@\nData are provided to Yandex.Raspisaniya";
 "OnfootDetailFormat" = "About %d minutes";
 "TransitDetailFormat" = "%@ → %@\nAbout %d minutes";
 
