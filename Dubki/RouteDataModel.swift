@@ -545,11 +545,6 @@ class RouteDataModel: NSObject {
     Key location and cached schedules' files are likely to change in future
     */
 
-    let YANDEX_API_KEY = "6666221e-446b-44d3-8bcb-274e5103aacc"
-    
-    // URL of train schedule API provider
-    let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%@&format=json&date=%@&from=%@&to=%@&lang=ru&transport_types=suburban"
-
     /*
     Caches a schedule between all stations
     */
@@ -585,11 +580,26 @@ class RouteDataModel: NSObject {
         timestamp(NSDate): date to get schedule for
     */
     func getScheduleTrain(from: String, to: String, timestamp: NSDate) -> JSON? {
-        let departure = timestamp.dateByWithTime("09:00")?.stringByFormat()
-        let arrival = timestamp.dateByWithTime("09:35")?.stringByFormat()
-        let data = "[{\"departure\":\"\(departure!)\",\"arrival\":\"\(arrival!)\",\"stops\":\"везде\",\"thread\":{\"title\":\"Кубинка 1 - Москва (Белорусский вокзал)\"}}]"
-
-        return JSON(data: data.dataUsingEncoding(NSUTF8StringEncoding)!)
+//        let departure = timestamp.dateByWithTime("09:00")?.stringByFormat()
+//        let arrival = timestamp.dateByWithTime("09:35")?.stringByFormat()
+//        let data = "[{\"departure\":\"\(departure!)\",\"arrival\":\"\(arrival!)\",\"stops\":\"везде\",\"thread\":{\"title\":\"Кубинка 1 - Москва (Белорусский вокзал)\"}}]"
+//
+//        return JSON(data: data.dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        let YANDEX_API_KEY = "6666221e-446b-44d3-8bcb-274e5103aacc"
+        // URL of train schedule API provider
+        let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%@&format=json&date=%@&from=%@&to=%@&lang=ru&transport_types=suburban"
+        
+        let api_url = String(format: TRAIN_API_URL, YANDEX_API_KEY, timestamp.stringByFormat("yyyy-MM-dd"), from, to)
+        
+        // загрузка распияния из интернета
+        if let trainSchedule = NSData(contentsOfURL: NSURL(string: api_url)!) {
+            // сохранить расписание в файл bus.json
+            //trainSchedule.writeToFile(filePath, atomically: true)
+            
+            return JSON(data: trainSchedule)
+        }
+        return nil
     }
     
     /*
@@ -612,7 +622,7 @@ class RouteDataModel: NSObject {
         let schedule = getScheduleTrain(fromCode!, to: toCode!, timestamp: timestamp)
         
         var trains = [Dictionary<String, String>]()
-        for item in (schedule?.array)! {
+        for item in (schedule!["threads"].array)! {
             var train = Dictionary<String, String>()
             train["arrival"] = item["arrival"].string
             train["departure"] = item["departure"].string
