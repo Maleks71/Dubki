@@ -88,15 +88,7 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Acknowledgements</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-			<key>Title</key>
-			<string>License</string>
-			<key>File</key>
-			<string>License</string>
+			<string>About</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -117,6 +109,20 @@
 			<string>version</string>
 			<key>DefaultValue</key>
 			<string>1.0</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Acknowledgements</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>License</string>
+			<key>File</key>
+			<string>License</string>
 		</dict>
 	</array>
 </dict>
