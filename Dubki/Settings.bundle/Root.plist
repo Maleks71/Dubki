@@ -11,6 +11,8 @@
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Default Campus</string>
+			<key>FooterText</key>
+			<string>CampusFooter</string>
 		</dict>
 		<dict>
 			<key>Type</key>
