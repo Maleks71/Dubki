@@ -365,32 +365,28 @@
                         <viewControllerLayoutGuide type="bottom" id="zzf-8Q-bU6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4bv-b1-HyJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2015 LionSoft LLC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHg-ck-XBr">
-                                <rect key="frame" x="20" y="442" width="280" height="18"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dubki" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRY-3U-3jx">
-                                <rect key="frame" x="20" y="80" width="280" height="21"/>
+                                <rect key="frame" x="130" y="107" width="170" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="44h-zW-TP1"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author: Alexander Morenko" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3iP-CU-Atl">
-                                <rect key="frame" x="20" y="313" width="280" height="21"/>
+                                <rect key="frame" x="20" y="328" width="280" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MqE-pc-HLc">
-                                <rect key="frame" x="20" y="342" width="280" height="30"/>
+                                <rect key="frame" x="20" y="357" width="280" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Donate"/>
                                 <connections>
@@ -398,17 +394,20 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPS-do-6aO">
-                                <rect key="frame" x="20" y="103" width="280" height="21"/>
+                                <rect key="frame" x="130" y="130" width="170" height="21"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="SOl-Pf-pAy"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JV-3x-H3i">
-                                <rect key="frame" x="20" y="150" width="280" height="138"/>
+                                <rect key="frame" x="20" y="182" width="280" height="138"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="138" id="UM9-SG-O2B"/>
+                                    <constraint firstAttribute="height" constant="138" id="QuJ-5l-AVU"/>
                                 </constraints>
                                 <string key="text">Dubki is a service for HSE students who live in dormitory, which allows 
 to plan their route from dorm to campus and vice versa.</string>
@@ -416,33 +415,49 @@ to plan their route from dorm to campus and vice versa.</string>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dubki" translatesAutoresizingMaskIntoConstraints="NO" id="vG9-V3-gKa">
+                                <rect key="frame" x="20" y="72" width="102" height="102"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="102" id="Nta-Wd-WOh"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2015 LionSoft LLC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHg-ck-XBr">
+                                <rect key="frame" x="20" y="530" width="280" height="18"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ZRY-3U-3jx" firstAttribute="top" secondItem="OME-U4-Z6Z" secondAttribute="bottom" constant="16" id="1cH-V0-KyF"/>
-                            <constraint firstItem="0JV-3x-H3i" firstAttribute="top" secondItem="ZRY-3U-3jx" secondAttribute="bottom" constant="49" id="2bP-va-w9B"/>
-                            <constraint firstAttribute="bottom" secondItem="GHg-ck-XBr" secondAttribute="bottom" constant="20" symbolic="YES" id="5pc-Ex-Dzv"/>
-                            <constraint firstItem="UPS-do-6aO" firstAttribute="trailing" secondItem="ZRY-3U-3jx" secondAttribute="trailing" id="GgE-Kw-D9G"/>
-                            <constraint firstItem="MqE-pc-HLc" firstAttribute="top" secondItem="3iP-CU-Atl" secondAttribute="bottom" constant="8" symbolic="YES" id="JbO-7T-enq"/>
-                            <constraint firstItem="0JV-3x-H3i" firstAttribute="trailing" secondItem="3iP-CU-Atl" secondAttribute="trailing" id="NDn-sd-fdo"/>
-                            <constraint firstItem="MqE-pc-HLc" firstAttribute="leading" secondItem="3iP-CU-Atl" secondAttribute="leading" id="O2Q-XB-oCj"/>
-                            <constraint firstItem="0JV-3x-H3i" firstAttribute="trailing" secondItem="ZRY-3U-3jx" secondAttribute="trailing" id="Per-Ba-tI7"/>
-                            <constraint firstItem="ZRY-3U-3jx" firstAttribute="leading" secondItem="4bv-b1-HyJ" secondAttribute="leadingMargin" constant="4" id="SOo-9n-jSz"/>
-                            <constraint firstItem="UPS-do-6aO" firstAttribute="leading" secondItem="ZRY-3U-3jx" secondAttribute="leading" id="XaG-6V-li3"/>
-                            <constraint firstItem="3iP-CU-Atl" firstAttribute="top" secondItem="0JV-3x-H3i" secondAttribute="bottom" constant="25" id="dVe-0F-jNi"/>
-                            <constraint firstItem="UPS-do-6aO" firstAttribute="top" secondItem="ZRY-3U-3jx" secondAttribute="bottom" constant="2" id="hH1-xi-L0r"/>
-                            <constraint firstItem="ZRY-3U-3jx" firstAttribute="centerX" secondItem="4bv-b1-HyJ" secondAttribute="centerX" id="if0-Ki-BLO"/>
-                            <constraint firstItem="ZRY-3U-3jx" firstAttribute="leading" secondItem="0JV-3x-H3i" secondAttribute="leading" id="n1f-Kk-mSh"/>
-                            <constraint firstItem="0JV-3x-H3i" firstAttribute="top" secondItem="UPS-do-6aO" secondAttribute="bottom" constant="26" id="szD-Fo-kMJ"/>
-                            <constraint firstItem="MqE-pc-HLc" firstAttribute="trailing" secondItem="3iP-CU-Atl" secondAttribute="trailing" id="wRI-MR-q95"/>
-                            <constraint firstItem="3iP-CU-Atl" firstAttribute="leading" secondItem="GHg-ck-XBr" secondAttribute="leading" id="xVp-cf-GKM"/>
-                            <constraint firstItem="3iP-CU-Atl" firstAttribute="trailing" secondItem="GHg-ck-XBr" secondAttribute="trailing" id="xxj-L7-DEC"/>
-                            <constraint firstItem="3iP-CU-Atl" firstAttribute="leading" secondItem="0JV-3x-H3i" secondAttribute="leading" id="zrT-Aq-lDt"/>
+                            <constraint firstItem="ZRY-3U-3jx" firstAttribute="leading" secondItem="UPS-do-6aO" secondAttribute="leading" id="27z-kb-pDW"/>
+                            <constraint firstItem="MqE-pc-HLc" firstAttribute="leading" secondItem="GHg-ck-XBr" secondAttribute="leading" id="2X6-Ca-Wl3"/>
+                            <constraint firstItem="ZRY-3U-3jx" firstAttribute="top" secondItem="OME-U4-Z6Z" secondAttribute="bottom" constant="43" id="6DE-6O-eGH"/>
+                            <constraint firstAttribute="bottom" secondItem="GHg-ck-XBr" secondAttribute="bottom" constant="20" symbolic="YES" id="ABJ-fz-wbM"/>
+                            <constraint firstItem="3iP-CU-Atl" firstAttribute="leading" secondItem="MqE-pc-HLc" secondAttribute="leading" id="BcS-il-33J"/>
+                            <constraint firstItem="3iP-CU-Atl" firstAttribute="trailing" secondItem="0JV-3x-H3i" secondAttribute="trailing" id="KSb-1j-RCx"/>
+                            <constraint firstItem="0JV-3x-H3i" firstAttribute="top" secondItem="vG9-V3-gKa" secondAttribute="bottom" constant="8" symbolic="YES" id="Knn-Uf-kln"/>
+                            <constraint firstItem="0JV-3x-H3i" firstAttribute="leading" secondItem="vG9-V3-gKa" secondAttribute="leading" id="Q39-Lb-zHO"/>
+                            <constraint firstItem="0JV-3x-H3i" firstAttribute="leading" secondItem="3iP-CU-Atl" secondAttribute="leading" id="Ugm-Th-4fp"/>
+                            <constraint firstItem="MqE-pc-HLc" firstAttribute="top" secondItem="3iP-CU-Atl" secondAttribute="bottom" constant="8" symbolic="YES" id="WfJ-hD-9B9"/>
+                            <constraint firstItem="0JV-3x-H3i" firstAttribute="top" secondItem="UPS-do-6aO" secondAttribute="bottom" constant="31" id="YBh-Kb-X7D"/>
+                            <constraint firstItem="UPS-do-6aO" firstAttribute="trailing" secondItem="ZRY-3U-3jx" secondAttribute="trailing" id="ZYa-Ek-ERL"/>
+                            <constraint firstItem="UPS-do-6aO" firstAttribute="top" secondItem="ZRY-3U-3jx" secondAttribute="bottom" constant="2" id="Zuy-xl-Ebe"/>
+                            <constraint firstItem="MqE-pc-HLc" firstAttribute="trailing" secondItem="GHg-ck-XBr" secondAttribute="trailing" id="bes-ST-3b9"/>
+                            <constraint firstItem="ZRY-3U-3jx" firstAttribute="leading" secondItem="vG9-V3-gKa" secondAttribute="trailing" constant="8" symbolic="YES" id="g20-Yc-9sA"/>
+                            <constraint firstItem="vG9-V3-gKa" firstAttribute="leading" secondItem="4bv-b1-HyJ" secondAttribute="leadingMargin" constant="4" id="hRl-uI-qK2"/>
+                            <constraint firstItem="UPS-do-6aO" firstAttribute="trailing" secondItem="0JV-3x-H3i" secondAttribute="trailing" id="mLm-Vs-ZgM"/>
+                            <constraint firstItem="GHg-ck-XBr" firstAttribute="centerX" secondItem="4bv-b1-HyJ" secondAttribute="centerX" id="mYI-5C-Y2g"/>
+                            <constraint firstItem="MqE-pc-HLc" firstAttribute="trailing" secondItem="3iP-CU-Atl" secondAttribute="trailing" id="nHC-uW-GbZ"/>
+                            <constraint firstItem="3iP-CU-Atl" firstAttribute="top" secondItem="0JV-3x-H3i" secondAttribute="bottom" constant="8" symbolic="YES" id="ogE-YF-JC6"/>
+                            <constraint firstItem="vG9-V3-gKa" firstAttribute="top" secondItem="OME-U4-Z6Z" secondAttribute="bottom" constant="8" symbolic="YES" id="y4M-uC-hTk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About" id="xtM-uf-itR"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="versionLabel" destination="UPS-do-6aO" id="bWW-eW-j83"/>
                     </connections>
@@ -720,6 +735,7 @@ to plan their route from dorm to campus and vice versa.</string>
     </scenes>
     <resources>
         <image name="Settings" width="20" height="20"/>
+        <image name="dubki" width="136" height="137"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YKJ-aB-cJn"/>
