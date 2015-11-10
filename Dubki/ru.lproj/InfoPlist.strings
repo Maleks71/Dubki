@@ -3,7 +3,7 @@
   Dubki
 
   Created by Игорь Моренко on 08.11.15.
-  Copyright © 2015 Alexander Morenko. All rights reserved.
+  Copyright © 2015 LionSoft, LLC. All rights reserved.
 */
 
 NSLocationWhenInUseUsageDescription = "Местоположение требуется для определения кампуса для Вашего текущего места.";

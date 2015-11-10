@@ -3,7 +3,7 @@
 //  Dubki
 //
 //  Created by Игорь Моренко on 10.11.15.
-//  Copyright © 2015 Alexander Morenko. All rights reserved.
+//  Copyright © 2015 LionSoft, LLC. All rights reserved.
 //
 
 import UIKit

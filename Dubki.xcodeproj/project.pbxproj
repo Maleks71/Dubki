@@ -182,7 +182,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
-				ORGANIZATIONNAME = "Alexander Morenko";
+				ORGANIZATIONNAME = "LionSoft, LLC";
 				TargetAttributes = {
 					A6BC8BD31BE2B21F006A91F7 = {
 						CreatedOnToolsVersion = 7.1;

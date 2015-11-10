@@ -1,6 +1,6 @@
 //
 //  LocationService.swift
-//  MyWeather
+//  Dubki
 //
 //  Created by Игорь Моренко on 13.10.15.
 //  Copyright © 2015 LionSoft LLC. All rights reserved.
