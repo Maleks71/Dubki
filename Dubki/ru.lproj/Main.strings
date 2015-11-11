@@ -9,8 +9,8 @@
 /* Class = "UILabel"; text = "Auto Location"; ObjectID = "0jp-WJ-j4T"; */
 "0jp-WJ-j4T.text" = "Автоопределение";
 
-/* Class = "UITableViewSection"; headerTitle = "When"; ObjectID = "3HH-ta-GBz"; */
-"3HH-ta-GBz.headerTitle" = "Когда";
+/* Class = "UITableViewSection"; headerTitle = "The planned time"; ObjectID = "3HH-ta-GBz"; */
+"3HH-ta-GBz.headerTitle" = "Планируемое время";
 
 /* Class = "UITableViewSection"; footerTitle = "Schedules of electric trains and bus on 01.11.2015"; ObjectID = "3Pe-LC-Ju9"; */
 "3Pe-LC-Ju9.footerTitle" = "Расписания электричек и автобуса на 01.11.2015";
@@ -134,3 +134,6 @@
 
 /* Class = "UIButton"; normalTitle = "VIII"; ObjectID = "zcx-O7-qLd"; */
 "zcx-O7-qLd.normalTitle" = "VIII";
+
+/* Class = "UILabel"; text = "Yandex.Raspisaniya"; ObjectID = "yIu-hP-gsB"; */
+"yIu-hP-gsB.text" = "Данные предоставлены сервисом Яндекс.Расписания";

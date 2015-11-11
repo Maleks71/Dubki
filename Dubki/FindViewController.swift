@@ -147,7 +147,7 @@ class FindViewController: UITableViewController {
     @IBAction func saveSettings(segue:UIStoryboardSegue) {
         if let settings = segue.sourceViewController as? SettingsTableViewController {
             let userDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.setInteger(settings.campusIndex!, forKey: "campus")
+            userDefaults.setInteger((settings.campusIndex! + 1), forKey: "campus")
             userDefaults.setBool(settings.autolocation!, forKey: "autolocation")
             userDefaults.setBool(settings.autoload!, forKey: "autoload")
             userDefaults.synchronize()
@@ -174,7 +174,7 @@ class FindViewController: UITableViewController {
                 return NSLocalizedString("FromCampus", comment: "") // из Кампуса
             }
         case 2:
-            return NSLocalizedString("When", comment: "") // Когда
+            return NSLocalizedString("ThePlannedTime", comment: "") // Планируемое время
         default:
             return ""
         }
