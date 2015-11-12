@@ -137,3 +137,9 @@
 
 /* Class = "UILabel"; text = "Yandex.Raspisaniya"; ObjectID = "yIu-hP-gsB"; */
 "yIu-hP-gsB.text" = "Данные предоставлены сервисом Яндекс.Расписания";
+
+/* Class = "UISegmentedControl"; rGS-ar-ZsZ.segmentTitles[0] = "Departure"; ObjectID = "rGS-ar-ZsZ"; */
+"rGS-ar-ZsZ.segmentTitles[0]" = "Отправления";
+
+/* Class = "UISegmentedControl"; rGS-ar-ZsZ.segmentTitles[1] = "Arrival"; ObjectID = "rGS-ar-ZsZ"; */
+"rGS-ar-ZsZ.segmentTitles[1]" = "Прибытия";

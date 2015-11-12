@@ -11,11 +11,13 @@ import UIKit
 class TimePickerViewController: UIViewController {
     
 //    let lessonTitles = ["I (9:00)", "II (10:30)", "III (12:10)", "IV (13:40)", "V (15:10)", "VI (16:40)", "VII (18:10)", "VIII (19:40)"]
-    let lessonTimes = ["I":" 09:00", "II":" 10:30", "III":" 12:10", "IV":" 13:40", "V":" 15:10", "VI":" 16:40", "VII":" 18:10", "VIII":" 19:40"]
+    let lessonTimes = ["I":"09:00", "II":"10:30", "III":"12:10", "IV":"13:40", "V":"15:10", "VI":"16:40", "VII":"18:10", "VIII":"19:40"]
 
     var selectedDate: NSDate?
     
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var lessonView: UIView!
+    @IBOutlet weak var departureArrivalSegmentControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,7 @@ class TimePickerViewController: UIViewController {
         if selectedDate != nil {
             datePicker.date = selectedDate!
         }
+        lessonView.hidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,21 +35,20 @@ class TimePickerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func departureArrivalValueChange(sender: AnyObject) {
+        lessonView.hidden = departureArrivalSegmentControl.selectedSegmentIndex == 0
+    }
+    
     @IBAction func lessonButtonPress(sender: UIButton) {
         // change time for lesson
         let lessonTime = lessonTimes[(sender.titleLabel?.text)!]
+        let date = datePicker.date.dateByWithTime(lessonTime!)!
 
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dateFormatter.stringFromDate(datePicker.date) + lessonTime!
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        
-        let date = dateFormatter.dateFromString(dateString)!
         if date.compare(NSDate()) == .OrderedDescending {
             datePicker.date = date
         } else {
-            datePicker.date = NSDate()
+            // next day
+            datePicker.date = date.dateByAddingDay(1)!
         }
     }
 
