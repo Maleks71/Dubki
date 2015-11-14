@@ -120,7 +120,8 @@ class FindViewController: UITableViewController {
             if let settings = segue.destinationViewController as? SettingsTableViewController {
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 userDefaults.synchronize()
-                settings.campusIndex = userDefaults.integerForKey("campus")
+                let campusIndex = userDefaults.integerForKey("campus")
+                settings.campusIndex = campusIndex == 0 ? 0 : campusIndex - 1
                 settings.autolocation = userDefaults.boolForKey("autolocation")
                 settings.autoload = userDefaults.boolForKey("autoload")
             }
