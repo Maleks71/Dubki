@@ -8,7 +8,7 @@
 
 // заголовки вида шага маршрута
 "NoneParameter" = "Route parameters aren't set";
-"TotalTitleFormat" = "🏁 %@ → %@ (%d minutes)";
+"TotalTitleFormat" = "🏁 %@ → %@";
 "Bus"    = "🚌 Bus";
 "Train"  = "🚆 Train";
 "Subway" = "🚇 Subway";
@@ -16,8 +16,8 @@
 "Transition" = "🚶 Transition";
 
 // форматы для информации о шаге маршрута
-"TotalDetailFormat" = "departure: %@ | arrival: %@";
-"TrainDetailFormat" = "%@ (%@ → %@)\nStops: %@\nEntry into stations: %@\nData are provided to Yandex.Raspisaniya";
+"TotalDetailFormat" = "Departure: %@ | Arrival: %@\nIn Way: %d minutes";
+"TrainDetailFormat" = "%@ (%@ → %@)\nStops: %@\nEntry into stations: %@";
 "OnfootDetailFormat" = "About %d minutes";
 "TransitDetailFormat" = "%@ → %@\nAbout %d minutes";
 
@@ -29,7 +29,10 @@
 "ToCampus"   = "to Campus";
 "FromCampus" = "from Campus";
 
-"When" = "When";
+"ThePlannedTime" = "The planned time";
+"ThePlannedDepartureTime" = "The planned departure time";
+"ThePlannedArrivalTime" = "The planned arrival time";
 "Now" = "Now";
 
-
+"IWillGo" = "I will go";
+"IWillArrive" = "I will arrive";

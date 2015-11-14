@@ -40,8 +40,8 @@ class RouteStep {
                 return NSLocalizedString("NoneParameter", comment: "")
  
             case .Total:
-                let titleFormat = NSLocalizedString("TotalTitleFormat", comment: "")
-                return String (format: titleFormat, from ?? "?", to ?? "?", duration ?? 0)
+                //let titleFormat = NSLocalizedString("TotalTitleFormat", comment: "")
+                return String (format: "🏁 %@ → %@", from ?? "?", to ?? "?")
             
             case .Bus:
                 return NSLocalizedString("Bus", comment: "") // "🚌 Автобус"
@@ -75,7 +75,7 @@ class RouteStep {
                 let dateDeparture = departure?.string("dd MMM HH:mm") ?? "?"
                 //let dateArrival = arrival?.stringByFormat("dd MMM HH:mm") ?? "?"
                 let detailFormat = NSLocalizedString("TotalDetailFormat", comment: "")
-                return String(format: detailFormat, dateDeparture, timeArrival)
+                return String(format: detailFormat, dateDeparture, timeArrival, duration ?? 0)
             
             case .Bus:
                 return String(format: "%@ (%@) → %@ (%@)", from ?? "?", timeDeparture, to ?? "?", timeArrival)

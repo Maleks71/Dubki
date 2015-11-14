@@ -57,21 +57,40 @@ class RouteTableViewController: UITableViewController {
         return routeDataModel.route.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RouteCell", forIndexPath: indexPath)
-
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let routeStep = routeDataModel.route[indexPath.row]
-        
-        // Configure the cell...
-        cell.textLabel?.text = routeStep.title
-        cell.detailTextLabel?.text = routeStep.detail
-        if routeStep.url != nil || routeStep.map != nil {
-            cell.accessoryType = .DetailButton
+        if routeStep.type == .Train {
+            return 100
         } else {
-            cell.accessoryType = .None
+            return 66
         }
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let routeStep = routeDataModel.route[indexPath.row]
 
-        return cell
+        if routeStep.type == .Train {
+            let cell = tableView.dequeueReusableCellWithIdentifier("TrainRouteCell", forIndexPath: indexPath) as! TrainRouteStepTableViewCell
+            
+            // Configure the cell...
+            cell.titleLabel?.text = routeStep.title
+            cell.detailLabel?.text = routeStep.detail
+
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("RouteCell", forIndexPath: indexPath)
+
+            // Configure the cell...
+            cell.textLabel?.text = routeStep.title
+            cell.detailTextLabel?.text = routeStep.detail
+            if routeStep.url != nil || routeStep.map != nil {
+                cell.accessoryType = .DetailButton
+            } else {
+                cell.accessoryType = .None
+            }
+            return cell
+        }
     }
 
     /*
@@ -126,4 +145,10 @@ class RouteTableViewController: UITableViewController {
         }
     }
 
+}
+
+class TrainRouteStepTableViewCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
+    
 }

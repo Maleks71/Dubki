@@ -11,20 +11,29 @@ import UIKit
 class SettingsTableViewController: UITableViewController {
 
     @IBOutlet weak var campusLabel: UILabel!
-
+    @IBOutlet weak var autolocationSwitch: UISwitch!
+    @IBOutlet weak var autoloadSwitch: UISwitch!
+    
     // selected campus
-    var campus: Dictionary<String, AnyObject>? {
+    var campusIndex: Int? {
         didSet {
             // after set value of when need set label text
             if campusLabel != nil {
-                if campus != nil {
-                    campusLabel.text = campus!["title"] as? String
+                if campusIndex != nil {
+                    let campus = RouteDataModel.sharedInstance.campuses![campusIndex! + 1]
+                    campusLabel.text = campus["title"] as? String
                 } else {
                     campusLabel.text = ""
                 }
             }
         }
     }
+    
+    // selected autolocation
+    var autolocation: Bool?
+    
+    // selected autoload
+    var autoload: Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +43,17 @@ class SettingsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        if campusIndex != nil {
+            let campus = RouteDataModel.sharedInstance.campuses![campusIndex!]
+            campusLabel.text = campus["title"] as? String
+        }
+        if autolocation != nil {
+            autolocationSwitch.on = autolocation!
+        }
+        if autoload != nil {
+            autoloadSwitch.on = autoload!
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,8 +63,8 @@ class SettingsTableViewController: UITableViewController {
 
     // when press button done on campus picker view controller
     @IBAction func unwindWithSelectedCampus(segue:UIStoryboardSegue) {
-        if let campusPickerViewController = segue.sourceViewController as? CampusPickerViewController, campusIndex = campusPickerViewController.selectedCampusIndex {
-            campus = RouteDataModel.sharedInstance.campuses![campusIndex + 1]
+        if let campusPickerViewController = segue.sourceViewController as? CampusPickerViewController {
+            campusIndex = campusPickerViewController.selectedCampusIndex
         }
     }
 
@@ -105,14 +125,23 @@ class SettingsTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "CampusPick" {
+            if let campusPicker = segue.destinationViewController as? CampusPickerViewController {
+                campusPicker.selectedCampusIndex = campusIndex! - 1
+            }
+        }
+
+        if segue.identifier == "SaveSettings" {
+            autolocation = autolocationSwitch.on
+            autoload = autoloadSwitch.on
+        }
     }
-    */
 
 }

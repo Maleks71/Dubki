@@ -19,6 +19,10 @@
 		<integer>5</integer>
 		<key>mapsrc</key>
 		<string></string>
+		<key>lon</key>
+		<string>37.228579 </string>
+		<key>lat</key>
+		<string>55.660150</string>
 	</dict>
 </array>
 </plist>

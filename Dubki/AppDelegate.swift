@@ -22,7 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let build = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String
         let versionString = String(format: "%@ (%@)", version, build)
 
-        NSUserDefaults.standardUserDefaults().setValue(versionString, forKey: "version")
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        //print(userDefaults.stringForKey("version"))
+        userDefaults.setObject(versionString, forKey: "version")
+        userDefaults.synchronize()
 
         return true
     }

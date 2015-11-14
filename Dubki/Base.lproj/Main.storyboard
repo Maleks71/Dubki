@@ -77,7 +77,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="When" id="3HH-ta-GBz">
+                            <tableViewSection headerTitle="The planned time" id="3HH-ta-GBz">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="fxx-Ay-wNT" style="IBUITableViewCellStyleDefault" id="Cme-JB-iue">
                                         <rect key="frame" x="0.0" y="292" width="320" height="44"/>
@@ -345,14 +345,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="jQw-yJ-Tee">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="rzv-QT-Ipi"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="rzv-QT-Ipi">
+                            <connections>
+                                <segue destination="haz-Ux-xaZ" kind="unwind" identifier="SaveSettings" unwindAction="saveSettings:" id="dIS-1o-e2J"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="autoloadSwitch" destination="eaQ-QX-CTx" id="4KN-Mf-bH0"/>
+                        <outlet property="autolocationSwitch" destination="17Z-Vb-SxA" id="97k-Pf-S4v"/>
                         <outlet property="campusLabel" destination="Fnw-fZ-De6" id="GVb-5N-57c"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JyV-Gy-fm4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="haz-Ux-xaZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1985" y="1979"/>
         </scene>
@@ -533,91 +540,121 @@ to plan their route from dorm to campus and vice versa.</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Lvv-De-x6g">
-                                <rect key="frame" x="-4" y="223" width="328" height="216"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rGS-ar-ZsZ">
+                                <rect key="frame" x="16" y="79" width="288" height="29"/>
                                 <animations/>
+                                <segments>
+                                    <segment title="Departure"/>
+                                    <segment title="Arrival"/>
+                                </segments>
+                                <connections>
+                                    <action selector="departureArrivalValueChange:" destination="Quy-T8-08k" eventType="valueChanged" id="nkR-nd-WNO"/>
+                                </connections>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jkq-8I-gPG">
+                                <rect key="frame" x="0.0" y="123" width="320" height="120"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lesson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cjr-I5-UZS">
+                                        <rect key="frame" x="20" y="49" width="72" height="21"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6a6-fM-E1r">
+                                        <rect key="frame" x="83" y="59" width="60" height="60"/>
+                                        <animations/>
+                                        <state key="normal" title="V"/>
+                                        <connections>
+                                            <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="RDx-td-JHF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y25-ee-sj5">
+                                        <rect key="frame" x="83" y="0.0" width="60" height="60"/>
+                                        <animations/>
+                                        <state key="normal" title="I"/>
+                                        <connections>
+                                            <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="jfu-3V-2Q6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sXb-v4-B4s">
+                                        <rect key="frame" x="142" y="0.0" width="60" height="60"/>
+                                        <animations/>
+                                        <state key="normal" title="II"/>
+                                        <connections>
+                                            <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="l3d-rJ-wcJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGz-II-kTd">
+                                        <rect key="frame" x="201" y="59" width="60" height="60"/>
+                                        <animations/>
+                                        <state key="normal" title="VII"/>
+                                        <connections>
+                                            <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="Zmk-5s-PaO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fF9-Ii-h1V">
+                                        <rect key="frame" x="201" y="0.0" width="60" height="60"/>
+                                        <animations/>
+                                        <state key="normal" title="III"/>
+                                        <connections>
+                                            <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="t3R-XH-Cmf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbk-ZU-XJe">
+                                        <rect key="frame" x="260" y="0.0" width="60" height="60"/>
+                                        <animations/>
+                                        <state key="normal" title="IV"/>
+                                        <connections>
+                                            <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="Kpj-4D-50c"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcx-O7-qLd">
+                                        <rect key="frame" x="260" y="59" width="60" height="60"/>
+                                        <animations/>
+                                        <state key="normal" title="VIII"/>
+                                        <connections>
+                                            <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="Tmh-wq-i5v"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t02-Y4-0yb">
+                                        <rect key="frame" x="142" y="59" width="60" height="60"/>
+                                        <animations/>
+                                        <state key="normal" title="VI"/>
+                                        <connections>
+                                            <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="T7U-EY-MeN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="jjV-zR-1o5"/>
+                                    <constraint firstAttribute="height" constant="120" id="ycB-aN-g45"/>
+                                </constraints>
+                            </view>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Lvv-De-x6g">
+                                <rect key="frame" x="-4" y="251" width="328" height="216"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="ffp-y4-h88"/>
+                                </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="468290975.93651199">
                                     <!--2015-11-04 00:49:35 +0000-->
                                 </date>
                             </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y25-ee-sj5">
-                                <rect key="frame" x="83" y="83" width="60" height="60"/>
-                                <animations/>
-                                <state key="normal" title="I"/>
-                                <connections>
-                                    <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="jfu-3V-2Q6"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbk-ZU-XJe">
-                                <rect key="frame" x="260" y="83" width="60" height="60"/>
-                                <animations/>
-                                <state key="normal" title="IV"/>
-                                <connections>
-                                    <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="Kpj-4D-50c"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fF9-Ii-h1V">
-                                <rect key="frame" x="201" y="83" width="60" height="60"/>
-                                <animations/>
-                                <state key="normal" title="III"/>
-                                <connections>
-                                    <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="t3R-XH-Cmf"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sXb-v4-B4s">
-                                <rect key="frame" x="142" y="83" width="60" height="60"/>
-                                <animations/>
-                                <state key="normal" title="II"/>
-                                <connections>
-                                    <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="l3d-rJ-wcJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t02-Y4-0yb">
-                                <rect key="frame" x="142" y="142" width="60" height="60"/>
-                                <animations/>
-                                <state key="normal" title="VI"/>
-                                <connections>
-                                    <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="T7U-EY-MeN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6a6-fM-E1r">
-                                <rect key="frame" x="83" y="142" width="60" height="60"/>
-                                <animations/>
-                                <state key="normal" title="V"/>
-                                <connections>
-                                    <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="RDx-td-JHF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGz-II-kTd">
-                                <rect key="frame" x="201" y="142" width="60" height="60"/>
-                                <animations/>
-                                <state key="normal" title="VII"/>
-                                <connections>
-                                    <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="Zmk-5s-PaO"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcx-O7-qLd">
-                                <rect key="frame" x="260" y="142" width="60" height="60"/>
-                                <animations/>
-                                <state key="normal" title="VIII"/>
-                                <connections>
-                                    <action selector="lessonButtonPress:" destination="Quy-T8-08k" eventType="touchUpInside" id="Tmh-wq-i5v"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lesson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cjr-I5-UZS">
-                                <rect key="frame" x="20" y="132" width="72" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Lvv-De-x6g" firstAttribute="top" secondItem="ZIf-yw-ZUZ" secondAttribute="topMargin" constant="223" id="mfU-1x-t2H"/>
+                            <constraint firstItem="rGS-ar-ZsZ" firstAttribute="leading" secondItem="ZIf-yw-ZUZ" secondAttribute="leadingMargin" id="7LW-MB-woz"/>
+                            <constraint firstItem="Jkq-8I-gPG" firstAttribute="centerX" secondItem="rGS-ar-ZsZ" secondAttribute="centerX" id="Cc9-M4-ush"/>
+                            <constraint firstItem="rGS-ar-ZsZ" firstAttribute="trailing" secondItem="ZIf-yw-ZUZ" secondAttribute="trailingMargin" id="Unw-61-Kgn"/>
+                            <constraint firstItem="Jkq-8I-gPG" firstAttribute="top" secondItem="rGS-ar-ZsZ" secondAttribute="bottom" constant="16" id="eWv-oq-qbw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Lvv-De-x6g" secondAttribute="trailing" constant="-20" id="oqs-Cw-zDv"/>
+                            <constraint firstItem="rGS-ar-ZsZ" firstAttribute="top" secondItem="zuF-s3-gQw" secondAttribute="bottom" constant="15" id="p3d-kv-WAO"/>
                             <constraint firstItem="Lvv-De-x6g" firstAttribute="leading" secondItem="ZIf-yw-ZUZ" secondAttribute="leadingMargin" constant="-20" id="yxk-Jy-zdy"/>
+                            <constraint firstItem="Lvv-De-x6g" firstAttribute="top" secondItem="rGS-ar-ZsZ" secondAttribute="bottom" constant="144" id="zxW-cq-fg2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Choose Time" id="Rdo-jJ-LFw">
@@ -630,6 +667,8 @@ to plan their route from dorm to campus and vice versa.</string>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="datePicker" destination="Lvv-De-x6g" id="nA3-WW-hy2"/>
+                        <outlet property="departureArrivalSegmentControl" destination="rGS-ar-ZsZ" id="44l-w9-BVV"/>
+                        <outlet property="lessonView" destination="Jkq-8I-gPG" id="Bru-5H-LI9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jNs-Hu-4ac" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -641,29 +680,29 @@ to plan their route from dorm to campus and vice versa.</string>
         <scene sceneID="izB-nT-kiG">
             <objects>
                 <tableViewController title="Route" id="3zj-aJ-Xbn" customClass="RouteTableViewController" customModule="Dubki" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="X7u-yb-DeZ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="66" sectionHeaderHeight="28" sectionFooterHeight="28" id="X7u-yb-DeZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RouteCell" textLabel="vBb-sd-dAh" detailTextLabel="pqy-re-O2a" style="IBUITableViewCellStyleSubtitle" id="xZL-cr-TAN">
-                                <rect key="frame" x="0.0" y="92" width="320" height="70"/>
+                                <rect key="frame" x="0.0" y="92" width="320" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xZL-cr-TAN" id="MUz-Pv-0Ri">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vBb-sd-dAh">
-                                            <rect key="frame" x="15" y="18" width="32" height="20"/>
+                                            <rect key="frame" x="15" y="16" width="32" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pqy-re-O2a">
-                                            <rect key="frame" x="15" y="38" width="41" height="14"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pqy-re-O2a">
+                                            <rect key="frame" x="15" y="36" width="41" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -674,6 +713,71 @@ to plan their route from dorm to campus and vice versa.</string>
                                     <animations/>
                                 </tableViewCellContentView>
                                 <animations/>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="TrainRouteCell" rowHeight="100" id="shJ-uW-yKf" customClass="TrainRouteStepTableViewCell" customModule="Dubki" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="158" width="320" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="shJ-uW-yKf" id="GXw-du-u0c">
+                                    <rect key="frame" x="0.0" y="0.0" width="273" height="99"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yandex-rasp" translatesAutoresizingMaskIntoConstraints="NO" id="0RK-FP-1Jc">
+                                            <rect key="frame" x="15" y="70" width="100" height="29"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="tcG-E8-5ad"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dN-DB-EBg">
+                                            <rect key="frame" x="15" y="8" width="257" height="21"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="U32-k6-VJ6"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Train Name: Stops: Entry to Station:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGO-Zo-9C3">
+                                            <rect key="frame" x="15" y="27" width="257" height="41"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data are provided by service of Yandex.Raspisaniya" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIu-hP-gsB">
+                                            <rect key="frame" x="114" y="70" width="158" height="29"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="158" id="34a-OJ-MO9"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstItem="2dN-DB-EBg" firstAttribute="top" secondItem="GXw-du-u0c" secondAttribute="topMargin" id="C7Z-vm-szA"/>
+                                        <constraint firstItem="0RK-FP-1Jc" firstAttribute="bottom" secondItem="yIu-hP-gsB" secondAttribute="bottom" id="EV7-O3-d3B"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="2dN-DB-EBg" secondAttribute="trailing" constant="-7" id="MCl-aw-NKc"/>
+                                        <constraint firstItem="2dN-DB-EBg" firstAttribute="trailing" secondItem="TGO-Zo-9C3" secondAttribute="trailing" id="Oeh-As-bGG"/>
+                                        <constraint firstItem="0RK-FP-1Jc" firstAttribute="top" secondItem="TGO-Zo-9C3" secondAttribute="bottom" constant="2" id="Olp-Zy-ioQ"/>
+                                        <constraint firstItem="TGO-Zo-9C3" firstAttribute="top" secondItem="GXw-du-u0c" secondAttribute="topMargin" constant="19" id="T23-xZ-o4y"/>
+                                        <constraint firstItem="TGO-Zo-9C3" firstAttribute="trailing" secondItem="yIu-hP-gsB" secondAttribute="trailing" id="U3q-JV-UlJ"/>
+                                        <constraint firstItem="0RK-FP-1Jc" firstAttribute="leading" secondItem="TGO-Zo-9C3" secondAttribute="leading" id="WdZ-zS-RmI"/>
+                                        <constraint firstItem="2dN-DB-EBg" firstAttribute="leading" secondItem="GXw-du-u0c" secondAttribute="leadingMargin" constant="7" id="Xq0-92-dXF"/>
+                                        <constraint firstItem="TGO-Zo-9C3" firstAttribute="leading" secondItem="2dN-DB-EBg" secondAttribute="leading" id="YnI-Oe-hHP"/>
+                                        <constraint firstItem="0RK-FP-1Jc" firstAttribute="top" secondItem="yIu-hP-gsB" secondAttribute="top" id="eH4-OX-ZfZ"/>
+                                        <constraint firstAttribute="bottom" secondItem="yIu-hP-gsB" secondAttribute="bottom" id="gTb-BI-xHf"/>
+                                        <constraint firstItem="yIu-hP-gsB" firstAttribute="top" secondItem="2dN-DB-EBg" secondAttribute="bottom" constant="41" id="qZd-2Q-fa2"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <animations/>
+                                <connections>
+                                    <outlet property="detailLabel" destination="TGO-Zo-9C3" id="2kz-nq-vml"/>
+                                    <outlet property="titleLabel" destination="2dN-DB-EBg" id="8g4-Vs-hRW"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -736,8 +840,9 @@ to plan their route from dorm to campus and vice versa.</string>
     <resources>
         <image name="Settings" width="20" height="20"/>
         <image name="dubki" width="136" height="137"/>
+        <image name="yandex-rasp" width="160" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YKJ-aB-cJn"/>
+        <segue reference="uxu-sj-sAU"/>
     </inferredMetricsTieBreakers>
 </document>
