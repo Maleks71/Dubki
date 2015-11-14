@@ -60,7 +60,7 @@ class RouteTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let routeStep = routeDataModel.route[indexPath.row]
         if routeStep.type == .Train {
-            return 100
+            return 120
         } else {
             return 66
         }
