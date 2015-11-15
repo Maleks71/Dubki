@@ -132,7 +132,6 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
                 let campusIndex = userDefaults.integerForKey("campus")
                 settings.campusIndex = campusIndex == 0 ? 0 : campusIndex - 1
                 settings.autolocation = userDefaults.boolForKey("autolocation")
-                settings.autoload = userDefaults.boolForKey("autoload")
             }
         }
     }
@@ -159,7 +158,6 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
             let userDefaults = NSUserDefaults.standardUserDefaults()
             userDefaults.setInteger((settings.campusIndex! + 1), forKey: "campus")
             userDefaults.setBool(settings.autolocation!, forKey: "autolocation")
-            userDefaults.setBool(settings.autoload!, forKey: "autoload")
             userDefaults.synchronize()
         }
     }

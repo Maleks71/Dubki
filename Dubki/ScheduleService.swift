@@ -37,12 +37,6 @@ class ScheduleService: NSObject {
             userDefaults.synchronize()
         }
     }
-    var autoload: Bool {
-        get {
-            userDefaults.synchronize()
-            return userDefaults.boolForKey("autoload")
-        }
-    }
     
     // конструктор
     override init() {

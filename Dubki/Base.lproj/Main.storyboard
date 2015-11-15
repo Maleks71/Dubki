@@ -255,64 +255,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Updating of the schedule" footerTitle="Schedules of electric trains and bus on 01.11.2015" id="3Pe-LC-Ju9">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MNu-hj-1dT">
-                                        <rect key="frame" x="0.0" y="285" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MNu-hj-1dT" id="i7J-RN-0uD">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eaQ-QX-CTx">
-                                                    <rect key="frame" x="253" y="6" width="51" height="31"/>
-                                                    <animations/>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autoload" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfy-18-06L">
-                                                    <rect key="frame" x="15" y="11" width="230" height="21"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstItem="eaQ-QX-CTx" firstAttribute="centerY" secondItem="i7J-RN-0uD" secondAttribute="centerY" id="7QU-Wq-vcT"/>
-                                                <constraint firstItem="eaQ-QX-CTx" firstAttribute="leading" secondItem="kfy-18-06L" secondAttribute="trailing" constant="8" symbolic="YES" id="FZY-aW-6Cx"/>
-                                                <constraint firstItem="kfy-18-06L" firstAttribute="centerY" secondItem="eaQ-QX-CTx" secondAttribute="centerY" id="KDP-Kp-U7B"/>
-                                                <constraint firstItem="kfy-18-06L" firstAttribute="leading" secondItem="i7J-RN-0uD" secondAttribute="leadingMargin" constant="7" id="lGA-Pt-jli"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="eaQ-QX-CTx" secondAttribute="trailing" constant="10" id="taK-sT-qbL"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <animations/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Ab2-fc-OF6" style="IBUITableViewCellStyleDefault" id="6HU-83-ZZn">
-                                        <rect key="frame" x="0.0" y="329" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6HU-83-ZZn" id="pxx-Et-fyQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="To Load Schedules" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ab2-fc-OF6">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <animations/>
-                                        </tableViewCellContentView>
-                                        <animations/>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection id="6Sc-sC-KxS">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ucV-2w-Ilc" style="IBUITableViewCellStyleDefault" id="yCp-vJ-et3">
-                                        <rect key="frame" x="0.0" y="418" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="263" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yCp-vJ-et3" id="Hlv-AI-7ZD">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -353,7 +299,6 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="autoloadSwitch" destination="eaQ-QX-CTx" id="4KN-Mf-bH0"/>
                         <outlet property="autolocationSwitch" destination="17Z-Vb-SxA" id="97k-Pf-S4v"/>
                         <outlet property="campusLabel" destination="Fnw-fZ-De6" id="GVb-5N-57c"/>
                     </connections>
@@ -735,14 +680,14 @@ to plan their route from dorm to campus and vice versa.</string>
                                                 <constraint firstAttribute="height" constant="21" id="U32-k6-VJ6"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Train Name: Stops: Entry to Station:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGO-Zo-9C3">
                                             <rect key="frame" x="15" y="27" width="257" height="59"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data are provided by service of Yandex.Raspisaniya" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIu-hP-gsB">
@@ -752,7 +697,7 @@ to plan their route from dorm to campus and vice versa.</string>
                                                 <constraint firstAttribute="width" constant="158" id="34a-OJ-MO9"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -843,6 +788,6 @@ to plan their route from dorm to campus and vice versa.</string>
         <image name="yandex-rasp" width="160" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uxu-sj-sAU"/>
+        <segue reference="YKJ-aB-cJn"/>
     </inferredMetricsTieBreakers>
 </document>

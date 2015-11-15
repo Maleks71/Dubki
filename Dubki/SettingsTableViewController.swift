@@ -32,9 +32,6 @@ class SettingsTableViewController: UITableViewController {
     // selected autolocation
     var autolocation: Bool?
     
-    // selected autoload
-    var autoload: Bool?
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,9 +47,6 @@ class SettingsTableViewController: UITableViewController {
         }
         if autolocation != nil {
             autolocationSwitch.on = autolocation!
-        }
-        if autoload != nil {
-            autoloadSwitch.on = autoload!
         }
     }
 
@@ -140,7 +134,6 @@ class SettingsTableViewController: UITableViewController {
 
         if segue.identifier == "SaveSettings" {
             autolocation = autolocationSwitch.on
-            autoload = autoloadSwitch.on
         }
     }
 
