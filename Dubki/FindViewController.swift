@@ -18,7 +18,6 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
     @IBOutlet weak var fortuneQuoteLabel: UILabel!
     
     // variable of view controller
-    
     // selected campus
     var campus: Dictionary<String, AnyObject>? {
         didSet {
@@ -33,23 +32,29 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
         }
     }
     
-    // selected end date
-    var when: NSDate? {
+    // selected departure time
+    var departureTime: NSDate? {
         didSet {
             // after set value of when need set label text
-            if whenLabel != nil {
-                if when != nil {
-                    whenLabel.text = when!.string("dd MMM HH:mm")
-                } else {
-                    whenLabel.text = NSLocalizedString("Now", comment: "")
-                }
+            if departureTime?.timeIntervalSinceDate(NSDate()) < 600 { // 10 minute
+                departureTime = nil
             }
+            updateWhenLabel()
+        }
+    }
+    // selected arrival time
+    var arrivalTime: NSDate? {
+        didSet {
+            // after set value of when need set label text
+            updateWhenLabel()
         }
     }
     
     let fortuneQuotes = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("FortuneQuotes", ofType: "plist")!)
-    
+
+    let routeDataModel = RouteDataModel.sharedInstance
     let locationService = LocationService()
+    let userDefaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +64,6 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
         setDefaultCampus()
 
         // autolocation
-        let userDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.synchronize()
         if userDefaults.boolForKey("autolocation") {
             locationService.requestLocation()
@@ -81,13 +85,24 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
 
     func setDefaultCampus() {
         // clear campus TODO: get from setting or location
-        let userDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.synchronize()
         var defaultCampus = userDefaults.integerForKey("campus")
         if defaultCampus == 0 {
             defaultCampus = 2 // Strogino
         }
         campus = RouteDataModel.sharedInstance.campuses![defaultCampus]
+    }
+    
+    func updateWhenLabel() {
+        if whenLabel != nil {
+            if arrivalTime != nil {
+                whenLabel.text = arrivalTime!.string("dd MMM HH:mm")
+            } else if departureTime != nil {
+                whenLabel.text = departureTime!.string("dd MMM HH:mm")
+            } else {
+                whenLabel.text = NSLocalizedString("Now", comment: "")
+            }
+        }
     }
     
     // generate randomize int from mil to max
@@ -99,6 +114,7 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
     override func viewWillAppear(animated: Bool) {
         let fq = randomInt(0, max: ((fortuneQuotes?.count)! - 1))
         fortuneQuoteLabel.text = fortuneQuotes![fq] as? String
+        tableView.reloadData()
     }
 
     // when direction segment change value
@@ -115,7 +131,14 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
         
         if segue.identifier == "RouteShow" {
             // посторить маршрут
-            RouteDataModel.sharedInstance.calculateRoute(directionSegmentControl.selectedSegmentIndex, campus: campus, when: when)
+            if arrivalTime != nil {
+                // по времени прибытия
+                RouteDataModel.sharedInstance.calculateRouteByArrival(arrivalTime!, direction: directionSegmentControl.selectedSegmentIndex, campus: campus!)
+            } else {
+                // по времени отправления
+                let departure = departureTime != nil ? departureTime : NSDate()
+                RouteDataModel.sharedInstance.calculateRouteByDeparture(departure!, direction: directionSegmentControl.selectedSegmentIndex, campus: campus!)
+            }
             //tabBarController.selectedIndex = 1 // Route Tab
         }
         
@@ -127,7 +150,8 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
 
         if segue.identifier == "TimePick" {
             if let timePicker = segue.destinationViewController as? TimePickerViewController {
-                timePicker.selectedDate = when
+                timePicker.departureTime = departureTime
+                timePicker.arrivalTime = arrivalTime
             }
         }
 
@@ -141,7 +165,6 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
             }
         }
     }
-
     
     // when press button done on campus picker view controller
     @IBAction func unwindWithSelectedCampus(segue:UIStoryboardSegue) {
@@ -154,7 +177,8 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
     @IBAction func unwindSelectedTime(segue:UIStoryboardSegue) {
         if let timePicker = segue.sourceViewController as? TimePickerViewController {
             //print(timePickerViewController.selectedDate)
-            when = timePicker.selectedDate
+            departureTime = timePicker.departureTime
+            arrivalTime = timePicker.arrivalTime
         }
     }
 
@@ -188,7 +212,12 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
                 return NSLocalizedString("FromCampus", comment: "") // из Кампуса
             }
         case 2:
-            return NSLocalizedString("ThePlannedTime", comment: "") // Планируемое время
+            //return NSLocalizedString("ThePlannedTime", comment: "") // Планируемое время
+            if arrivalTime != nil {
+                return NSLocalizedString("ThePlannedArrivalTime", comment: "") // Планируемое время прибытия
+            } else {
+                return NSLocalizedString("ThePlannedDepartureTime", comment: "") // Планируемое время отправления
+            }
         default:
             return ""
         }

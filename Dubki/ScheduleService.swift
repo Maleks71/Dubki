@@ -228,4 +228,35 @@ class ScheduleService: NSObject {
         
         return times
     }
+/*
+    // MARK: - Function for URL request
+    
+    // Synchronous Request
+    func synchronousRequest(url: NSURL) -> NSData? {
+        var result: NSData? = nil
+        
+        let session = NSURLSession.sharedSession()
+        
+        // set semaphore
+        let sem = dispatch_semaphore_create(0)
+        
+        let task1 = session.dataTaskWithURL(url, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            //print(response)
+            //print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            
+            //let jsonData = JSON(data: data!)
+            result = data
+            
+            // delete semophore
+            dispatch_semaphore_signal(sem)
+        })
+        // run parallel thread
+        task1.resume()
+        
+        // white delete semophore
+        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER)
+        
+        return result
+    }
+*/
 }

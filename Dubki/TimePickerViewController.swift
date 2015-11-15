@@ -13,7 +13,8 @@ class TimePickerViewController: UIViewController {
 //    let lessonTitles = ["I (9:00)", "II (10:30)", "III (12:10)", "IV (13:40)", "V (15:10)", "VI (16:40)", "VII (18:10)", "VIII (19:40)"]
     let lessonTimes = ["I":"09:00", "II":"10:30", "III":"12:10", "IV":"13:40", "V":"15:10", "VI":"16:40", "VII":"18:10", "VIII":"19:40"]
 
-    var selectedDate: NSDate?
+    var departureTime: NSDate?
+    var arrivalTime: NSDate?
     
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var lessonView: UIView!
@@ -24,11 +25,16 @@ class TimePickerViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         datePicker.minimumDate = NSDate()
-        datePicker.maximumDate = NSDate().dateByAddingDay(30)
-        if selectedDate != nil {
-            datePicker.date = selectedDate!
+        datePicker.maximumDate = NSDate().dateByAddingDay(30) // +30 day
+        if departureTime != nil {
+            datePicker.date = departureTime!
+            departureArrivalSegmentControl.selectedSegmentIndex = 0
         }
-        lessonView.hidden = true
+        if arrivalTime != nil {
+            datePicker.date = arrivalTime!
+            departureArrivalSegmentControl.selectedSegmentIndex = 1
+        }
+        lessonView.hidden = departureArrivalSegmentControl.selectedSegmentIndex == 0
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,7 +66,13 @@ class TimePickerViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "SaveSelectedTime" {
-            selectedDate = datePicker.date
+            if departureArrivalSegmentControl.selectedSegmentIndex == 0 {
+                departureTime = datePicker.date
+                arrivalTime = nil
+            } else {
+                departureTime = nil
+                arrivalTime = datePicker.date
+            }
         }
     }
 }
