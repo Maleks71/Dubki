@@ -164,11 +164,14 @@ class ScheduleService: NSObject {
         
         let date = timestamp.string("yyyy-MM-dd")
         let key = "\(from):\(to):\(date)"
-        let schedule = trainSchedule![key]
-        if schedule != nil {
+        if trainSchedule![key].isExists() {
+            return trainSchedule![key]
+        }
+        if let schedule = loadScheduleTrain(from, to: to, date: date) {
+            trainSchedule![key] = schedule
             return schedule
         }
-        return loadScheduleTrain(from, to: to, date: date)
+        return nil
     }
 
     // MARK: - Bus Schedule
