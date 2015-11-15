@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreLocation
 
 // view controller for input of find parameter
-class FindViewController: UITableViewController {
+class FindViewController: UITableViewController, LocationServiceDelegate {
 
     @IBOutlet weak var directionSegmentControl: UISegmentedControl!
     @IBOutlet weak var campusLabel: UILabel!
@@ -47,24 +48,21 @@ class FindViewController: UITableViewController {
     }
     
     let fortuneQuotes = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("FortuneQuotes", ofType: "plist")!)
+    
+    let locationService = LocationService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        locationService.delegate = self
+        locationService.requestLocation()
+
+        setDefaultCampus()
         
         // set rounded border button
         //campusButton.layer.cornerRadius = 5
         //campusButton.layer.borderWidth = 1
         //campusButton.layer.borderColor = UIColor.blueColor().CGColor
-        
-        // clear campus TODO: get from setting or location
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.synchronize()
-        var defaultCampus = userDefaults.integerForKey("campus")
-        if defaultCampus == 0 {
-            defaultCampus = 2 // Strogino
-        }
-        campus = RouteDataModel.sharedInstance.campuses![defaultCampus]
         
         //fromToLabel = tableView.headerViewForSection(1)?.textLabel
         //fromToLabel?.text = NSLocalizedString("ToCampus", comment: "").uppercaseString
@@ -73,6 +71,17 @@ class FindViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    func setDefaultCampus() {
+        // clear campus TODO: get from setting or location
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.synchronize()
+        var defaultCampus = userDefaults.integerForKey("campus")
+        if defaultCampus == 0 {
+            defaultCampus = 2 // Strogino
+        }
+        campus = RouteDataModel.sharedInstance.campuses![defaultCampus]
     }
     
     // generate randomize int from mil to max
@@ -120,7 +129,8 @@ class FindViewController: UITableViewController {
             if let settings = segue.destinationViewController as? SettingsTableViewController {
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 userDefaults.synchronize()
-                settings.campusIndex = userDefaults.integerForKey("campus")
+                let campusIndex = userDefaults.integerForKey("campus")
+                settings.campusIndex = campusIndex == 0 ? 0 : campusIndex - 1
                 settings.autolocation = userDefaults.boolForKey("autolocation")
                 settings.autoload = userDefaults.boolForKey("autoload")
             }
@@ -179,5 +189,60 @@ class FindViewController: UITableViewController {
             return ""
         }
     }
+    
+    // MARK: - Location Service Delegate
+    
+    func locationDidUpdate(service: LocationService, location: CLLocation) {
+        //print("Current location: \(location)")
+        let locationLatitude = location.coordinate.latitude
+        let locationLongitude = location.coordinate.longitude
+        
+        var findItem: Dictionary<String, AnyObject>? = nil
+        for item in RouteDataModel.sharedInstance.campuses! {
+            let latitude = Double(item["lat"] as! String)
+            let longitude = Double(item["lon"] as! String)
+            // Градусы   Дистанция
+            // --------- ----------
+            // 1         111 km
+            // 0.1       11.1 km
+            // 0.01      1.11 km
+            //*0.001     111 m
+            // 0.0001    11.1 m
+            // 0.00001   1.11 m
+            // 0.000001  11.1 cm
+            // 0.0005 - 55.5m
+            if abs(locationLatitude - latitude!) < 0.001 && abs(locationLongitude - longitude!) < 0.001 {
+                findItem = item
+                break;
+            }
+        }
+        if findItem != nil {
+            //print("Find Current Campus: \(findItem!)")
+            let campusId = findItem!["id"] as! Int
+            if campusId == 1 {
+                // dormitories
+                directionSegmentControl.selectedSegmentIndex = 0 // из Дубков
+                setDefaultCampus()
+            } else {
+                // campus
+                directionSegmentControl.selectedSegmentIndex = 1 // в Дубки
+                campus = findItem
+            }
+        }
+    }
+    
+    func didFailWithError(service: LocationService, error: NSError) {
+        // show error alert
+        if #available(iOS 8.0, *) {
+            let errorAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+            errorAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+                errorAlert.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            presentViewController(errorAlert, animated: true, completion: nil)
+        } else {
+            // Fallback on earlier versions
+            let alertView = UIAlertView(title: "Error", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "Ok")
+            alertView.show()
+        }
+    }
 }
-

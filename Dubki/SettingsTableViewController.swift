@@ -45,7 +45,7 @@ class SettingsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         if campusIndex != nil {
-            let campus = RouteDataModel.sharedInstance.campuses![campusIndex!]
+            let campus = RouteDataModel.sharedInstance.campuses![campusIndex! + 1]
             campusLabel.text = campus["title"] as? String
         }
         if autolocation != nil {
@@ -134,7 +134,7 @@ class SettingsTableViewController: UITableViewController {
         
         if segue.identifier == "CampusPick" {
             if let campusPicker = segue.destinationViewController as? CampusPickerViewController {
-                campusPicker.selectedCampusIndex = campusIndex! - 1
+                campusPicker.selectedCampusIndex = campusIndex
             }
         }
 

@@ -107,9 +107,9 @@ class RouteStep {
     }
 }
 
-// Singleton Class
 class RouteDataModel: NSObject {
     
+    // Singleton Class
     static let sharedInstance = RouteDataModel()
 
     // Описание общежитий
@@ -342,88 +342,6 @@ class RouteDataModel: NSObject {
 
     // MARK: - Route On Bus
 
-
-    // загрузка расписания автобусов Дубки-Одинцово в файл bus.json
-    func loadBusSchedule() -> JSON? {
-        let BUS_API_URL = "https://dubkiapi2.appspot.com/sch"
-        let BUS_SCHEDULE_FILE = "bus.json"
-        
-        // полный путь к файлу bus.json
-        //let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
-        //let destinationUrl = documentsUrl.URLByAppendingPathComponent("filteredImage.png")
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        //let destinationPath = documentsPath.stringByAppendingPathComponent("filename.ext")
-        let filePath = "\(documentsPath)/\(BUS_SCHEDULE_FILE)"
-
-        // загрузка распияния из интернета
-        if let busSchedule = NSData(contentsOfURL: NSURL(string: BUS_API_URL)!) {
-            // сохранить расписание в файл bus.json
-            busSchedule.writeToFile(filePath, atomically: true)
-            
-            return JSON(data: busSchedule)
-        }
-
-        // загрузка расписания из файла bus.json
-        if let busSchedule = NSData(contentsOfFile: filePath) {
-            return JSON(data: busSchedule)
-        }
-        return nil
-    }
-    
-    /**
-    Caches the bus schedule to `SCHEDULE_FILE`
-    Получить расписание автобусов на день
-    */
-    func getBusSchedule(from: String, to: String, timestamp: NSDate, useAsterisk: Bool = true) -> [String] {
-        var _from: String = from
-        var _to: String = to
-        
-        // today is either {'', '*Суббота', '*Воскресенье'}
-        if timestamp.weekday == 7 {
-            if from == "Дубки" {
-                _from = "ДубкиСуббота"
-            } else if to == "Дубки" {
-                _to = "ДубкиСуббота"
-            }
-        } else if timestamp.weekday == 1 {
-            if from == "Дубки" {
-                _from = "ДубкиВоскресенье"
-            } else if to == "Дубки" {
-                _to = "ДубкиВоскресенье"
-            }
-        }
-        
-        // загрузка расписания
-        var times = [String]() // время отправления автобуса
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        if let busSchedule = loadBusSchedule() {
-            // find current schedule
-            for elem in busSchedule.array! {
-                let elemFrom = elem["from"].string
-                let elemTo = elem["to"].string
-                if elemFrom == _from && elemTo == _to {
-                    let currentSchedule = elem["hset"].array
-                    // convert to array of time
-                    for time in currentSchedule! {
-                        times.append(time["time"].string!)
-                    }
-                    break
-                }
-            }
-            
-            if times.count == 0 {
-                //TODO: добавить сообщение об ошибки пользователю
-                print("Ошибка: В расписании автобуса нет направления \(_from)->\(_to)")
-            }
-        } else {
-            //TODO: добавить сообщение об ошибки пользователю
-            print("Не получилось загрузить расписание автобуса")
-        }
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        
-        return times
-    }
-    
     /**
     Returns the nearest bus
     
@@ -445,60 +363,21 @@ class RouteDataModel: NSObject {
         //assert(from != to)
         assert(from != to, "From equal To")
         
-        var _from: String = from
-        var _to: String = to
+        // получить расписание автобуса (время отправления)
+        let times = ScheduleService.sharedInstance.getScheduleBus(from, to: to, timestamp: timestamp)
         
-        // today is either {'', '*Суббота', '*Воскресенье'}
-        if timestamp.weekday == 7 {
-            if from == "Дубки" {
-                _from = "ДубкиСуббота"
-            } else if to == "Дубки" {
-                _to = "ДубкиСуббота"
-            }
-        } else if timestamp.weekday == 1 {
-            if from == "Дубки" {
-                _from = "ДубкиВоскресенье"
-            } else if to == "Дубки" {
-                _to = "ДубкиВоскресенье"
-            }
-        }
-
-        // загрузка расписания
-        var times = [String]() // время отправления автобуса
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        if let busSchedule = loadBusSchedule() {
-            // find current schedule
-            for elem in busSchedule.array! {
-                let elemFrom = elem["from"].string
-                let elemTo = elem["to"].string
-                if elemFrom == _from && elemTo == _to {
-                    let currentSchedule = elem["hset"].array
-                    // convert to array of time
-                    for time in currentSchedule! {
-                        times.append(time["time"].string!)
-                    }
-                    break
-                }
-            }
-            
-            if times.count == 0 {
-                //TODO: добавить сообщение об ошибки пользователю
-                print("Ошибка: В расписании автобуса нет направления \(_from)->\(_to)")
-                return RouteStep()
-            }
-        } else {
+        if times == nil || times!.count == 0 {
             //TODO: добавить сообщение об ошибки пользователю
             print("Не получилось загрузить расписание автобуса")
             return RouteStep()
         }
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
  
         // поиск ближайшего рейса (минимум ожидания)
         var minInterval: Double = 24*60*60 // мин. интервал (сутки)
         var busDeparture: NSDate?          // время отправления
         var slBlvdBus: Bool = false        // автобус до м.Славянский бульвара
 
-        for time in times {
+        for time in times! {
             var timeWithoutAsteriks = time
             // asterisk indicates bus arrival/departure station is 'Славянский бульвар'
             // it needs special handling
@@ -549,57 +428,6 @@ class RouteDataModel: NSObject {
     */
 
     /*
-    Caches a schedule between all stations
-    */
-    func cacheEverything() {
-        let from = "Одинцово"
-        let toStations = ["Кунцево", "Фили", "Беговая", "Белорусская"]
-        for to in toStations {
-            cacheScheduleTrain(from, to: to, timestamp: NSDate())
-            cacheScheduleTrain(to, to: from, timestamp: NSDate())
-        }
-    }
-
-    /*
-    Caches a schedule between stations from arguments starting with certain day
-    Writes the cached schedule for day and two days later to train_cached_* files
-    
-    Args:
-        from(String): departure train station
-        to(String): arrival train station
-        timestamp(NSDate): date to cache schedule for
-    */
-    func cacheScheduleTrain(from: String, to: String, timestamp: NSDate) {
-        
-    }
-
-    /*
-    Returns a cached schedule between stations in arguments
-    If no cached schedule is available, download and return a fresh one
-    
-    Args:
-        from(String): departure train station
-        to(String): arrival train station
-        timestamp(NSDate): date to get schedule for
-    */
-    func getScheduleTrain(from: String, to: String, timestamp: NSDate) -> JSON? {
-        let YANDEX_API_KEY = apikeys!["rasp.yandex.ru"]
-        // URL of train schedule API provider
-        let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%@&format=json&date=%@&from=%@&to=%@&lang=ru&transport_types=suburban"
-        
-        let api_url = String(format: TRAIN_API_URL, YANDEX_API_KEY!, timestamp.string("yyyy-MM-dd"), from, to)
-        
-        // загрузка распияния из интернета
-        if let trainSchedule = NSData(contentsOfURL: NSURL(string: api_url)!) {
-            // сохранить расписание в файл bus.json
-            //trainSchedule.writeToFile(filePath, atomically: true)
-            
-            return JSON(data: trainSchedule)
-        }
-        return nil
-    }
-    
-    /*
     Returns the nearest train
     
     Args:
@@ -616,23 +444,21 @@ class RouteDataModel: NSObject {
         
         let fromCode = from["code"] as? String
         let toCode = to["code"] as? String
-        let schedule = getScheduleTrain(fromCode!, to: toCode!, timestamp: timestamp)
         
-        var trains = [Dictionary<String, String>]()
-        for item in (schedule!["threads"].array)! {
-            var train = Dictionary<String, String>()
-            train["arrival"] = item["arrival"].string
-            train["departure"] = item["departure"].string
-            train["stops"] = item["stops"].string
-            train["title"] = item["thread"]["title"].string
-            trains.append(train)
+        // получить расписание электричек
+        let trains = ScheduleService.sharedInstance.getScheduleTrain(fromCode!, to: toCode!, timestamp: timestamp)
+        
+        if trains == nil || trains!.count == 0 {
+            //TODO: добавить сообщение об ошибки пользователю
+            print("Не получилось загрузить расписание электричек")
+            return RouteStep()
         }
-        
+
         // поиск ближайшего рейса (минимум ожидания)
         var minInterval: Double = 24*60*60 // мин. интервал (сутки)
-        var trainInfo: Dictionary<String, String>? // поезд
-        for train in trains {
-            let departure = train["departure"]!.date()
+        var trainInfo: JSON? // найденая информация о поезде
+        for train in trains!.array! {
+            let departure = train["departure"].string!.date()
             let interval: Double = departure!.timeIntervalSinceDate(timestamp)
             if interval > 0 && interval < minInterval {
                 minInterval = interval
@@ -651,11 +477,12 @@ class RouteDataModel: NSObject {
         
         train.from = from["title"] as? String
         train.to = to["title"] as? String
-        train.trainName = trainInfo!["title"] //"Кубинка 1 - Москва (Белорусский вокзал)"
-        train.stops = trainInfo!["stops"] //"везде"
-        train.departure = trainInfo!["departure"]!.date()
-        train.arrival = trainInfo!["arrival"]!.date()
+        train.trainName = trainInfo!["title"].string //"Кубинка 1 - Москва (Белорусский вокзал)"
+        train.stops = trainInfo!["stops"].string //"везде"
+        train.departure = trainInfo!["departure"].string!.date()
+        train.arrival = trainInfo!["arrival"].string!.date()
         train.duration = Int(train.arrival!.timeIntervalSinceDate(train.departure!) / 60)
+        train.duration = trainInfo!["duration"].int! / 60
         train.url = "https://rasp.yandex.ru/"
         
         return train
