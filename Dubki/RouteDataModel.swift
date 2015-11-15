@@ -638,6 +638,9 @@ class RouteDataModel: NSObject {
     Key location and cached schedules' files are likely to change in future
     */
 
+    //let RASP_YANDEX_URL = "https://rasp.yandex.ru/"
+    let RASP_YANDEX_URL = "https://rasp.yandex.ru/search/?when=%@&fromId=%@&toId=%@"
+    
     /*
     Returns the nearest train by departure time
     
@@ -653,11 +656,11 @@ class RouteDataModel: NSObject {
         //assert _from in STATIONS
         //assert _to in STATIONS
         
-        let fromCode = from["code"] as? String
-        let toCode = to["code"] as? String
+        let fromCode = from["code"] as! String
+        let toCode = to["code"] as! String
         
         // получить расписание электричек
-        let trains = scheduleService.getScheduleTrain(fromCode!, to: toCode!, timestamp: departure)
+        let trains = scheduleService.getScheduleTrain(fromCode, to: toCode, timestamp: departure)
         
         if trains == nil || trains!.count == 0 {
             //TODO: добавить сообщение об ошибки пользователю
@@ -694,7 +697,7 @@ class RouteDataModel: NSObject {
         train.arrival = trainInfo!["arrival"].string!.date()!
         train.duration = Int(train.arrival.timeIntervalSinceDate(train.departure) / 60)
         //train.duration = trainInfo!["duration"].int! / 60
-        train.url = "https://rasp.yandex.ru/"
+        train.url = String(format: RASP_YANDEX_URL, departure.string("yyyy-MM-dd"), fromCode, toCode)
         
         return train
     }
@@ -714,11 +717,11 @@ class RouteDataModel: NSObject {
         //assert _from in STATIONS
         //assert _to in STATIONS
         
-        let fromCode = from["code"] as? String
-        let toCode = to["code"] as? String
+        let fromCode = from["code"] as! String
+        let toCode = to["code"] as! String
         
         // получить расписание электричек
-        let trains = scheduleService.getScheduleTrain(fromCode!, to: toCode!, timestamp: arrival)
+        let trains = scheduleService.getScheduleTrain(fromCode, to: toCode, timestamp: arrival)
         
         if trains == nil || trains!.count == 0 {
             //TODO: добавить сообщение об ошибки пользователю
@@ -755,7 +758,7 @@ class RouteDataModel: NSObject {
         train.arrival = trainInfo!["arrival"].string!.date()!
         train.duration = Int(train.arrival.timeIntervalSinceDate(train.departure) / 60)
         //train.duration = trainInfo!["duration"].int! / 60
-        train.url = "https://rasp.yandex.ru/"
+        train.url = String(format: RASP_YANDEX_URL, arrival.string("yyyy-MM-dd"), fromCode, toCode)
         
         return train
     }
