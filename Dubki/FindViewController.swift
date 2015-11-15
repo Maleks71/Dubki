@@ -232,8 +232,9 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
     }
     
     func didFailWithError(service: LocationService, error: NSError) {
+        print("didFailWithError: \(error.localizedDescription)")
         // show error alert
-        if #available(iOS 8.0, *) {
+       /* if #available(iOS 8.0, *) {
             let errorAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
             errorAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
                 errorAlert.dismissViewControllerAnimated(true, completion: nil)
@@ -243,6 +244,6 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
             // Fallback on earlier versions
             let alertView = UIAlertView(title: "Error", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "Ok")
             alertView.show()
-        }
+        } */
     }
 }
