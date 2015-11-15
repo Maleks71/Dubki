@@ -20,7 +20,7 @@
 		<key>mapsrc</key>
 		<string></string>
 		<key>lon</key>
-		<string>37.228579 </string>
+		<string>37.228579</string>
 		<key>lat</key>
 		<string>55.660150</string>
 	</dict>
@@ -42,7 +42,7 @@
 		<key>mapsrc</key>
 		<string>9kfYmO7lbg2o_YuSTvZqiY9rCevo23cs</string>
 		<key>lon</key>
-		<string>37.541718 </string>
+		<string>37.541718</string>
 		<key>lat</key>
 		<string>55.806661</string>
 	</dict>
@@ -64,7 +64,7 @@
 		<key>mapsrc</key>
 		<string>pMeBRyKZjz3PnQn4HCZKIlagbMIv2Bxp</string>
 		<key>lon</key>
-		<string>37.409846 </string>
+		<string>37.409846</string>
 		<key>lat</key>
 		<string>55.803469</string>
 	</dict>
@@ -108,7 +108,7 @@
 		<key>mapsrc</key>
 		<string>_Cz-NprpRRfD15AECXvyxGQb5N7RY3xC</string>
 		<key>lon</key>
-		<string>37.585358 </string>
+		<string>37.585358</string>
 		<key>lat</key>
 		<string>55.704874</string>
 	</dict>
@@ -174,7 +174,7 @@
 		<key>mapsrc</key>
 		<string>LwunOFh66TXk8NyRAgKpsssV0Gdy34pG</string>
 		<key>lon</key>
-		<string>37.663287 </string>
+		<string>37.663287</string>
 		<key>lat</key>
 		<string>55.766734</string>
 	</dict>
@@ -196,7 +196,7 @@
 		<key>mapsrc</key>
 		<string>0enMIqcJ_dLy8ShEHN34Lu-4XBAHsrno</string>
 		<key>lon</key>
-		<string>37.608472 </string>
+		<string>37.608472</string>
 		<key>lat</key>
 		<string>55.720418</string>
 	</dict>
@@ -240,7 +240,7 @@
 		<key>mapsrc</key>
 		<string>1SimW8pYfuzER0tbTEYFs1RFaNUFnhh-</string>
 		<key>lon</key>
-		<string>37.635171 </string>
+		<string>37.635171</string>
 		<key>lat</key>
 		<string>55.728358</string>
 	</dict>
@@ -262,7 +262,7 @@
 		<key>mapsrc</key>
 		<string>7UEkPE7kT0Bhb4rOzDbk2O57LdWBE8Lq</string>
 		<key>lon</key>
-		<string>37.628028 </string>
+		<string>37.628028</string>
 		<key>lat</key>
 		<string>55.755864</string>
 	</dict>
@@ -306,7 +306,7 @@
 		<key>mapsrc</key>
 		<string>jBGwqmV8V-JjFzbG2M_13sGlAUVqug-9</string>
 		<key>lon</key>
-		<string>37.645447 </string>
+		<string>37.645447</string>
 		<key>lat</key>
 		<string>55.754213</string>
 	</dict>
@@ -328,7 +328,7 @@
 		<key>mapsrc</key>
 		<string>j1cHqL5k2jw_MK31dlBLEwPPPmj72NNg</string>
 		<key>lon</key>
-		<string>37.644773 </string>
+		<string>37.644773</string>
 		<key>lat</key>
 		<string>55.753555</string>
 	</dict>
@@ -350,7 +350,7 @@
 		<key>mapsrc</key>
 		<string>_a_UjKz_rMbmf2l_mWtsRUjlaqlRySIS</string>
 		<key>lon</key>
-		<string>37.606109 </string>
+		<string>37.606109</string>
 		<key>lat</key>
 		<string>55.761690</string>
 	</dict>
