@@ -55,10 +55,16 @@ class FindViewController: UITableViewController, LocationServiceDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         locationService.delegate = self
-        locationService.requestLocation()
 
         setDefaultCampus()
-        
+
+        // autolocation
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.synchronize()
+        if userDefaults.boolForKey("autolocation") {
+            locationService.requestLocation()
+        }
+
         // set rounded border button
         //campusButton.layer.cornerRadius = 5
         //campusButton.layer.borderWidth = 1
