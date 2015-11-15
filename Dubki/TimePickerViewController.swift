@@ -24,6 +24,7 @@ class TimePickerViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         datePicker.minimumDate = NSDate()
+        datePicker.maximumDate = NSDate().dateByAddingDay(30)
         if selectedDate != nil {
             datePicker.date = selectedDate!
         }
