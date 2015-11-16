@@ -21,6 +21,7 @@
 		21BC21F51BE95601002E0DFF /* Dormitories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21BC21F31BE95601002E0DFF /* Dormitories.plist */; };
 		21C89BBF1BE6501500816449 /* Campuses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C89BC11BE6501500816449 /* Campuses.plist */; };
 		21C89BC51BE69E2700816449 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C89BC31BE69E2700816449 /* Localizable.strings */; };
+		21D2C24B1BF9BC4F0011D91A /* RouteStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D2C24A1BF9BC4F0011D91A /* RouteStep.swift */; };
 		21DBB37B1BE6AD3600879415 /* FortuneQuotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21DBB3791BE6AD3600879415 /* FortuneQuotes.plist */; };
 		A6BC8BD81BE2B21F006A91F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC8BD71BE2B21F006A91F7 /* AppDelegate.swift */; };
 		A6BC8BDA1BE2B21F006A91F7 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BC8BD91BE2B21F006A91F7 /* FindViewController.swift */; };
@@ -58,6 +59,7 @@
 		21C89BC21BE6501C00816449 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/Campuses.plist; sourceTree = "<group>"; };
 		21C89BC41BE69E2700816449 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		21C89BC61BE69E3300816449 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		21D2C24A1BF9BC4F0011D91A /* RouteStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteStep.swift; sourceTree = "<group>"; };
 		21DBB37A1BE6AD3600879415 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/FortuneQuotes.plist; sourceTree = "<group>"; };
 		21DBB37C1BE6AE6E00879415 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/FortuneQuotes.plist; sourceTree = "<group>"; };
 		A6BC8BD41BE2B21F006A91F7 /* Dubki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dubki.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +89,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21D2C2491BF9BB980011D91A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				21D2C24A1BF9BC4F0011D91A /* RouteStep.swift */,
+				A6BC8BF11BE3C232006A91F7 /* RouteDataModel.swift */,
+				219349CC1BF6061600D1A48D /* ScheduleService.swift */,
+				219CFFD31BEBFA24008F2EE8 /* LocationService.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		21D2C24C1BF9BCC30011D91A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A6BC8BD91BE2B21F006A91F7 /* FindViewController.swift */,
+				A6BC8BE91BE2BE9B006A91F7 /* CampusPickerViewController.swift */,
+				A6BC8BEB1BE2BEAC006A91F7 /* TimePickerViewController.swift */,
+				A6BC8BED1BE2BEC7006A91F7 /* RouteTableViewController.swift */,
+				2180D46C1BF1DFB3009FFD4F /* DetailViewController.swift */,
+				219FA9C81BEA2BAC00161450 /* SettingsTableViewController.swift */,
+				219CFFCF1BEBECE7008F2EE8 /* AboutViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
 		A6BC8BCB1BE2B21F006A91F7 = {
 			isa = PBXGroup;
 			children = (
@@ -112,16 +139,8 @@
 				A6BC8BF31BE3C2EC006A91F7 /* Resources */,
 				A6BC8BD71BE2B21F006A91F7 /* AppDelegate.swift */,
 				21AA803A1BEFA1BC00F942F8 /* Date.swift */,
-				A6BC8BD91BE2B21F006A91F7 /* FindViewController.swift */,
-				A6BC8BE91BE2BE9B006A91F7 /* CampusPickerViewController.swift */,
-				A6BC8BEB1BE2BEAC006A91F7 /* TimePickerViewController.swift */,
-				A6BC8BED1BE2BEC7006A91F7 /* RouteTableViewController.swift */,
-				2180D46C1BF1DFB3009FFD4F /* DetailViewController.swift */,
-				219FA9C81BEA2BAC00161450 /* SettingsTableViewController.swift */,
-				219CFFCF1BEBECE7008F2EE8 /* AboutViewController.swift */,
-				A6BC8BF11BE3C232006A91F7 /* RouteDataModel.swift */,
-				219349CC1BF6061600D1A48D /* ScheduleService.swift */,
-				219CFFD31BEBFA24008F2EE8 /* LocationService.swift */,
+				21D2C2491BF9BB980011D91A /* Model */,
+				21D2C24C1BF9BCC30011D91A /* ViewController */,
 				A6BC8BDB1BE2B21F006A91F7 /* Main.storyboard */,
 				A6BC8BE01BE2B21F006A91F7 /* LaunchScreen.storyboard */,
 				A6BC8BE31BE2B21F006A91F7 /* Info.plist */,
@@ -244,6 +263,7 @@
 				A6BC8BEC1BE2BEAD006A91F7 /* TimePickerViewController.swift in Sources */,
 				A6BC8BEA1BE2BE9B006A91F7 /* CampusPickerViewController.swift in Sources */,
 				219349CD1BF6061600D1A48D /* ScheduleService.swift in Sources */,
+				21D2C24B1BF9BC4F0011D91A /* RouteStep.swift in Sources */,
 				219CFFD41BEBFA24008F2EE8 /* LocationService.swift in Sources */,
 				21AA803B1BEFA1BC00F942F8 /* Date.swift in Sources */,
 				A6BC8BD81BE2B21F006A91F7 /* AppDelegate.swift in Sources */,

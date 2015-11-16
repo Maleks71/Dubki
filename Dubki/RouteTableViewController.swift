@@ -36,12 +36,16 @@ class RouteTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         let routeStep = routeDataModel.route[indexPath.row]
-        if routeStep.url != nil {
-            UIApplication.sharedApplication().openURL(NSURL(string: routeStep.url!)!)
+        if  let trainStep = routeStep as? TrainStep {
+            if trainStep.url != nil {
+                UIApplication.sharedApplication().openURL(NSURL(string: trainStep.url!)!)
+            }
         }
-        if routeStep.map != nil {
-            let cell = tableView.cellForRowAtIndexPath(indexPath)
-            performSegueWithIdentifier("RouteDetail", sender: cell)
+        if let onfootStep = routeStep as? OnfootStep {
+            if onfootStep.map != nil {
+                let cell = tableView.cellForRowAtIndexPath(indexPath)
+                performSegueWithIdentifier("RouteDetail", sender: cell)
+            }
         }
     }
 
@@ -59,7 +63,7 @@ class RouteTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let routeStep = routeDataModel.route[indexPath.row]
-        if routeStep.type == .Train {
+        if routeStep is TrainStep {
             return 120
         } else {
             return 66
@@ -70,7 +74,7 @@ class RouteTableViewController: UITableViewController {
         
         let routeStep = routeDataModel.route[indexPath.row]
 
-        if routeStep.type == .Train {
+        if routeStep is TrainStep {
             let cell = tableView.dequeueReusableCellWithIdentifier("TrainRouteCell", forIndexPath: indexPath) as! TrainRouteStepTableViewCell
             
             // Configure the cell...
@@ -84,7 +88,7 @@ class RouteTableViewController: UITableViewController {
             // Configure the cell...
             cell.textLabel?.text = routeStep.title
             cell.detailTextLabel?.text = routeStep.detail
-            if routeStep.url != nil || routeStep.map != nil {
+            if routeStep is TrainStep || routeStep is OnfootStep {
                 cell.accessoryType = .DetailButton
             } else {
                 cell.accessoryType = .None
@@ -138,8 +142,9 @@ class RouteTableViewController: UITableViewController {
             if let detailViewController = segue.destinationViewController as? DetailViewController {
                 if let cell = sender as? UITableViewCell {
                     let indexPath = tableView.indexPathForCell(cell)
-                    let routeStep = routeDataModel.route[indexPath!.row]
-                    detailViewController.imageName = routeStep.map
+                    if let onfootStep = routeDataModel.route[indexPath!.row] as? OnfootStep {
+                        detailViewController.imageName = onfootStep.map
+                    }
                 }
             }
         }
