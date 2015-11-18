@@ -22,8 +22,6 @@ class RouteDataModel: NSObject {
     // Описания станций ж/д
     let stations = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Stations", ofType: "plist")!) as? Dictionary<String, AnyObject>
     
-    let scheduleService = ScheduleService.sharedInstance
-    
     // Маршрут
     var route: [RouteStep] = [RouteStep()]
     
