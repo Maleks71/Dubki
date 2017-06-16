@@ -3,7 +3,7 @@
 //  Dubki
 //
 //  Created by Игорь Моренко on 04.11.15.
-//  Copyright © 2015 LionSoft, LLC. All rights reserved.
+//  Copyright © 2015-2017 LionSoft, LLC. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +12,6 @@ class SettingsTableViewController: UITableViewController {
 
     @IBOutlet weak var campusLabel: UILabel!
     @IBOutlet weak var autolocationSwitch: UISwitch!
-    @IBOutlet weak var autoloadSwitch: UISwitch!
     
     // selected campus
     var campusIndex: Int? {
@@ -46,7 +45,7 @@ class SettingsTableViewController: UITableViewController {
             campusLabel.text = campus["title"] as? String
         }
         if autolocation != nil {
-            autolocationSwitch.on = autolocation!
+            autolocationSwitch.isOn = autolocation!
         }
     }
 
@@ -56,84 +55,85 @@ class SettingsTableViewController: UITableViewController {
     }
 
     // when press button done on campus picker view controller
-    @IBAction func unwindWithSelectedCampus(segue:UIStoryboardSegue) {
-        if let campusPickerViewController = segue.sourceViewController as? CampusPickerViewController {
+    @IBAction func unwindWithSelectedCampus(_ segue:UIStoryboardSegue) {
+        if let campusPickerViewController = segue.source as? CampusPickerViewController {
             campusIndex = campusPickerViewController.selectedCampusIndex
         }
     }
 
     // MARK: - Table view data source
-    /*
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+/*
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
-    */
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+*/
+
+/*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
 
         return cell
     }
-    */
+*/
 
-    /*
+/*
     // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+*/
 
-    /*
+/*
     // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func  tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+*/
 
-    /*
+/*
     // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
 
     }
-    */
+*/
 
-    /*
+/*
     // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
-    */
+*/
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "CampusPick" {
-            if let campusPicker = segue.destinationViewController as? CampusPickerViewController {
+            if let campusPicker = segue.destination as? CampusPickerViewController {
                 campusPicker.selectedCampusIndex = campusIndex
             }
         }
 
         if segue.identifier == "SaveSettings" {
-            autolocation = autolocationSwitch.on
+            autolocation = autolocationSwitch.isOn
         }
     }
 

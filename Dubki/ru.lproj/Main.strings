@@ -64,7 +64,7 @@
 "L3e-pc-eRK.headerTitle" = "Основной кампус";
 
 /* Class = "UIButton"; normalTitle = "Donate"; ObjectID = "MqE-pc-HLc"; */
-"MqE-pc-HLc.normalTitle" = " Пожертвовать";
+"MqE-pc-HLc.normalTitle" = "Пожертвовать";
 
 /* Class = "UISegmentedControl"; OGV-aH-kKZ.segmentTitles[0] = "from Dubki"; ObjectID = "OGV-aH-kKZ"; */
 "OGV-aH-kKZ.segmentTitles[0]" = "из Дубков";

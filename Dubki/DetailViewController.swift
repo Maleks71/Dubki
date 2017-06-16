@@ -3,7 +3,7 @@
 //  Dubki
 //
 //  Created by Игорь Моренко on 10.11.15.
-//  Copyright © 2015 LionSoft, LLC. All rights reserved.
+//  Copyright © 2015-2017 LionSoft, LLC. All rights reserved.
 //
 
 import UIKit
@@ -24,7 +24,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         scrollView = UIScrollView(frame: view.bounds)
         //scrollView.backgroundColor = UIColor.blackColor()
         scrollView.contentSize = imageView.bounds.size
-        scrollView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         scrollView.delegate = self
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 4.0
@@ -59,12 +59,12 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func setupGestureRecognizer() {
-        let doubleTap = UITapGestureRecognizer(target: self, action: "handleDoubleTap:")
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(DetailViewController.handleDoubleTap(_:)))
         doubleTap.numberOfTapsRequired = 2
         scrollView.addGestureRecognizer(doubleTap)
     }
     
-    func handleDoubleTap(recognizer: UITapGestureRecognizer) {
+    func handleDoubleTap(_ recognizer: UITapGestureRecognizer) {
         
         if (scrollView.zoomScale > scrollView.minimumZoomScale) {
             scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
@@ -75,11 +75,11 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: - Scroll view delegate
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
 
-    func scrollViewDidZoom(scrollView: UIScrollView) {
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
         let imageViewSize = imageView.frame.size
         let scrollViewSize = scrollView.bounds.size
         
@@ -89,14 +89,14 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
     }
     
-    /*
+/*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+*/
 
 }

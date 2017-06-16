@@ -3,22 +3,22 @@
 //  Dubki
 //
 //  Created by Игорь Моренко on 13.10.15.
-//  Copyright © 2015 LionSoft LLC. All rights reserved.
+//  Copyright © 2015-2017 LionSoft LLC. All rights reserved.
 //
 
 import UIKit
 import CoreLocation
 
 protocol LocationServiceDelegate {
-    func locationDidUpdate(service: LocationService, location: CLLocation)
-    func didFailWithError(service: LocationService, error: NSError)
+    func locationDidUpdate(_ service: LocationService, location: CLLocation)
+    func didFailWithError(_ service: LocationService, error: Error)
 }
 
 class LocationService: NSObject, CLLocationManagerDelegate {
     
     var delegate: LocationServiceDelegate?
 
-    private let locationManager = CLLocationManager()
+    fileprivate let locationManager = CLLocationManager()
     
     override init() {
         super.init()
@@ -43,7 +43,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
 
     // MARK: - CoreLocation Location Manager Delegate
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             //print("Current location: \(location)")
             delegate?.locationDidUpdate(self, location: location)
@@ -51,7 +51,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         //print("Error finding location: \(error.localizedDescription)")
         delegate?.didFailWithError(self, error: error)
     }

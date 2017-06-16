@@ -3,7 +3,7 @@
 //  Dubki
 //
 //  Created by Alexander Morenko on 30.10.15.
-//  Copyright © 2015 LionSoft, LLC. All rights reserved.
+//  Copyright © 2015-2017 LionSoft, LLC. All rights reserved.
 //
 
 import UIKit
@@ -14,13 +14,13 @@ class RouteDataModel: NSObject {
     static let sharedInstance = RouteDataModel()
 
     // Описание общежитий
-    let dormitories = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Dormitories", ofType: "plist")!) as? [Dictionary<String, AnyObject>]
+    let dormitories = NSArray(contentsOfFile: Bundle.main.path(forResource: "Dormitories", ofType: "plist")!) as? [Dictionary<String, AnyObject>]
     // Описание кампусов
-    let campuses = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("Campuses", ofType: "plist")!) as? [Dictionary<String, AnyObject>]
+    let campuses = NSArray(contentsOfFile: Bundle.main.path(forResource: "Campuses", ofType: "plist")!) as? [Dictionary<String, AnyObject>]
     // Названия станций метро
-    let subways = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Subways", ofType: "plist")!) as? Dictionary<String, AnyObject>
+    let subways = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Subways", ofType: "plist")!) as? Dictionary<String, AnyObject>
     // Описания станций ж/д
-    let stations = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Stations", ofType: "plist")!) as? Dictionary<String, AnyObject>
+    let stations = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Stations", ofType: "plist")!) as? Dictionary<String, AnyObject>
     
     // Маршрут
     var route: [RouteStep] = [RouteStep()]
@@ -29,7 +29,7 @@ class RouteDataModel: NSObject {
         super.init()
         
         // load array of campuses from resource
-        //let dormitoriesPath = NSBundle.mainBundle().pathForResource("Dormitories", ofType: "plist")
+        //let dormitoriesPath = Bundle.main.path(forResource: "Dormitories", ofType: "plist")
         //let dormitories = NSArray(contentsOfFile: dormitoriesPath!)
         //print(dormitories?.count)
         
@@ -41,14 +41,14 @@ class RouteDataModel: NSObject {
     Args:
         direction (Int): flow from/to dormitory
         campus (Dictionary): place edu of arrival/departure
-        timestamp(Optional[NSDate]): time of departure.
+        timestamp(Optional[Date]): time of departure.
             Defaults to the current time plus 10 minutes.
         src(Optional[str]): function caller ID (used for logging)
     
     Returns:
         route (Array): a calculated route
     */
-    func calculateRouteByDeparture(departure: NSDate, direction: Int, campus: Dictionary<String, AnyObject>) {
+    func calculateRouteByDeparture(_ departure: Date, direction: Int, campus: Dictionary<String, AnyObject>) {
         
         //self.direction = direction
         //self.campus = campus
@@ -77,7 +77,7 @@ class RouteDataModel: NSObject {
             
             // станции метро
             var subwayFrom: String?     // станция метро после транзита
-            var transitArrival: NSDate? // время пребытия к метро
+            var transitArrival: Date? // время пребытия к метро
             
             var transit1: TransitionStep?
             var train: TrainStep?
@@ -215,12 +215,12 @@ class RouteDataModel: NSObject {
      Args:
      direction (Int): flow from/to dormitory
      campus (Dictionary): place edu of arrival/departure
-     timestampEnd(NSDate): expected time of arrival
+     timestampEnd(Date): expected time of arrival
      
      Returns:
      route (Array): a calculated route
      */
-    func calculateRouteByArrival(arrival: NSDate, direction: Int, campus: Dictionary<String, AnyObject>) {
+    func calculateRouteByArrival(_ arrival: Date, direction: Int, campus: Dictionary<String, AnyObject>) {
         let dorm = dormitories![0] // общежитие
         
         route = [RouteStep]() // очистка маршрута

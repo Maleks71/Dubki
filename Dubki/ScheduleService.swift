@@ -3,7 +3,7 @@
 //  Dubki
 //
 //  Created by Игорь Моренко on 13.11.15.
-//  Copyright © 2015 LionSoft, LLC. All rights reserved.
+//  Copyright © 2015-2017 LionSoft, LLC. All rights reserved.
 //
 
 import UIKit
@@ -14,35 +14,35 @@ class ScheduleService: NSObject {
     static let sharedInstance = ScheduleService()
 
     // API Keys
-    let apikeys = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("apikeys", ofType: "plist")!) as? Dictionary<String, String>
+    let apikeys = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "apikeys", ofType: "plist")!) as? Dictionary<String, String>
 
     // Standart User Default Settings
-    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let userDefaults = UserDefaults.standard
     
     let BUS_SCHEDULE_FILE = "bus.json"
     let TRAIN_SCHEDULE_FILE = "train.json"
 
-    var busFileURL: NSURL   // путь к файлу bus.json
-    var trainFileURL: NSURL // путь к файлу train.json
+    var busFileURL: URL   // путь к файлу bus.json
+    var trainFileURL: URL // путь к файлу train.json
 
     var busSchedule: JSON?
     var trainSchedule: JSON?
-    var lastUpdate: NSDate? {
+    var lastUpdate: Date? {
         get {
             userDefaults.synchronize()
-            return userDefaults.objectForKey("last_update") as? NSDate
+            return userDefaults.object(forKey: "last_update") as? Date
         }
         set {
-            userDefaults.setObject(newValue, forKey: "last_update")
+            userDefaults.set(newValue, forKey: "last_update")
             userDefaults.synchronize()
         }
     }
     
     // конструктор
     override init() {
-        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
-        busFileURL = documentsUrl.URLByAppendingPathComponent(BUS_SCHEDULE_FILE)
-        trainFileURL = documentsUrl.URLByAppendingPathComponent(TRAIN_SCHEDULE_FILE)
+        let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first! as URL
+        busFileURL = documentsUrl.appendingPathComponent(BUS_SCHEDULE_FILE)
+        trainFileURL = documentsUrl.appendingPathComponent(TRAIN_SCHEDULE_FILE)
         
         super.init()
 
@@ -50,12 +50,12 @@ class ScheduleService: NSObject {
         //if fileManager.fileExistsAtPath(filePath) {
 
         // загрузка расписания из файла bus.json
-        if let busData = NSData(contentsOfURL: busFileURL) {
-            busSchedule = JSON(data: busData)
+        if let busData = try? Data(contentsOf: busFileURL) {
+            busSchedule = try! JSON(data: busData)
         }
         // загрузка расписания из файла train.json
-        if let trainData = NSData(contentsOfURL: trainFileURL) {
-            trainSchedule = JSON(data: trainData)
+        if let trainData = try? Data(contentsOf: trainFileURL) {
+            trainSchedule = try! JSON(data: trainData)
         }
         
         cacheSchedules()
@@ -63,19 +63,19 @@ class ScheduleService: NSObject {
 
     // Кэширование расписания автобуса и электрички на сегодня
     func cacheSchedules() {
-        if lastUpdate != nil && lastUpdate!.string("yyyyMMdd") == NSDate().string("yyyyMMdd") {
+        if lastUpdate != nil && lastUpdate!.string("yyyyMMdd") == Date().string("yyyyMMdd") {
             if busSchedule != nil && trainSchedule != nil {
                 return
             }
         }
         
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         cacheScheduleBus()
         cacheTrainSchedule()
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         if busSchedule != nil && trainSchedule != nil {
             // update schedule successfull
-            lastUpdate = NSDate()
+            lastUpdate = Date()
         }
     }
     
@@ -84,7 +84,7 @@ class ScheduleService: NSObject {
     */
     func cacheTrainSchedule() {
         trainSchedule = JSON([String: JSON]())
-        let date = NSDate().string("yyyy-MM-dd")
+        let date = Date().string("yyyy-MM-dd")
         let from = "c10743" //"Одинцово" = "s9600721"
         let toStations = ["s9601728", "s9600821", "s9601666", "s2000006"] //["Кунцево", "Фили", "Беговая", "Белорусская"]
         for to in toStations {
@@ -98,8 +98,8 @@ class ScheduleService: NSObject {
             }
         }
         // сохранить в файл train.json
-        if let trainData = trainSchedule!.rawString()?.dataUsingEncoding(NSUTF8StringEncoding) {
-            trainData.writeToURL(trainFileURL, atomically: true)
+        if let trainData = trainSchedule!.rawString()?.data(using: String.Encoding.utf8) {
+            try? trainData.write(to: trainFileURL, options: [.atomic])
         }
     }
     
@@ -112,9 +112,9 @@ class ScheduleService: NSObject {
     Args:
     from(String): departure train station
     to(String): arrival train station
-    timestamp(NSDate): date to cache schedule for
+    timestamp(Date): date to cache schedule for
     */
-    func loadScheduleTrain(from: String, to: String, date: String) -> JSON? {
+    func loadScheduleTrain(_ from: String, to: String, date: String) -> JSON? {
         let YANDEX_API_KEY = apikeys!["rasp.yandex.ru"]
         // URL of train schedule API provider
         let TRAIN_API_URL = "https://api.rasp.yandex.net/v1.0/search/?apikey=%@&format=json&date=%@&from=%@&to=%@&lang=ru&transport_types=suburban"
@@ -122,18 +122,18 @@ class ScheduleService: NSObject {
         let api_url = String(format: TRAIN_API_URL, YANDEX_API_KEY!, date, from, to)
         
         // загрузка распияния из интернета
-        if let trainSchedule = NSData(contentsOfURL: NSURL(string: api_url)!) {
-            let schedule = JSON(data: trainSchedule)
+        if let trainSchedule = try? Data(contentsOf: URL(string: api_url)!) {
+            let schedule = try! JSON(data: trainSchedule)
 
             var trains = [Dictionary<String, AnyObject>]()
             for item in (schedule["threads"].array)! {
                 var train = Dictionary<String, AnyObject>()
-                train["arrival"] = item["arrival"].string
-                train["departure"] = item["departure"].string
-                train["duration"] = item["duration"].int
-                train["stops"] = item["stops"].string
-                train["title"] = item["thread"]["title"].string
-                train["number"] = item["thread"]["number"].string
+                train["arrival"] = item["arrival"].string as AnyObject?
+                train["departure"] = item["departure"].string as AnyObject?
+                train["duration"] = item["duration"].int as AnyObject?
+                train["stops"] = item["stops"].string as AnyObject?
+                train["title"] = item["thread"]["title"].string as AnyObject?
+                train["number"] = item["thread"]["number"].string as AnyObject?
                 trains.append(train)
             }
             return JSON(trains)
@@ -148,9 +148,9 @@ class ScheduleService: NSObject {
     Args:
     from(String): departure train station
     to(String): arrival train station
-    timestamp(NSDate): date to get schedule for
+    timestamp(Date): date to get schedule for
     */
-    func getScheduleTrain(from: String, to: String, timestamp: NSDate) -> JSON? {
+    func getScheduleTrain(_ from: String, to: String, timestamp: Date) -> JSON? {
         cacheSchedules()
         if trainSchedule == nil {
             return nil
@@ -158,7 +158,7 @@ class ScheduleService: NSObject {
         
         let date = timestamp.string("yyyy-MM-dd")
         let key = "\(from):\(to):\(date)"
-        if trainSchedule![key].isExists() {
+        if trainSchedule![key].exists() {
             return trainSchedule![key]
         }
         if let schedule = loadScheduleTrain(from, to: to, date: date) {
@@ -178,16 +178,16 @@ class ScheduleService: NSObject {
         let BUS_API_URL = "https://dubkiapi2.appspot.com/sch"
         
         // загрузка распияния из интернета
-        if let busData = NSData(contentsOfURL: NSURL(string: BUS_API_URL)!) {
+        if let busData = try? Data(contentsOf: URL(string: BUS_API_URL)!) {
             // сохранить расписание в файл bus.json
-            busData.writeToURL(busFileURL, atomically: true)
+            try? busData.write(to: busFileURL, options: [.atomic])
 
-            busSchedule = JSON(data: busData)
+            busSchedule = try? JSON(data: busData)
         }
     }
     
     // загрузка расписания автобусов Дубки-Одинцово в файл bus.json
-    func getScheduleBus(from: String, to: String, timestamp: NSDate) -> [String]? {
+    func getScheduleBus(_ from: String, to: String, timestamp: Date) -> [String]? {
         cacheSchedules()
         if busSchedule == nil {
             return nil
@@ -232,29 +232,29 @@ class ScheduleService: NSObject {
     // MARK: - Function for URL request
     
     // Synchronous Request
-    func synchronousRequest(url: NSURL) -> NSData? {
-        var result: NSData? = nil
+    func synchronousRequest(url: URL) -> Data? {
+        var result: Data? = nil
         
-        let session = NSURLSession.sharedSession()
+        let session = URLSession.shared
         
         // set semaphore
-        let sem = dispatch_semaphore_create(0)
+        let sem = DispatchSemaphore(value: 0)
         
-        let task1 = session.dataTaskWithURL(url, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        let task1 = session.dataTask(with: url, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             //print(response)
             //print(NSString(data: data!, encoding: NSUTF8StringEncoding))
             
-            //let jsonData = JSON(data: data!)
+            //let jsonData = try! JSON(data: data!)
             result = data
             
             // delete semophore
-            dispatch_semaphore_signal(sem)
+            sem.signal()
         })
         // run parallel thread
         task1.resume()
         
         // white delete semophore
-        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER)
+        sem.wait(timeout: .distantFuture)
         
         return result
     }

@@ -3,7 +3,7 @@
 //  Dubki
 //
 //  Created by Игорь Моренко on 16.11.15.
-//  Copyright © 2015 LionSoft, LLC. All rights reserved.
+//  Copyright © 2015-2017 LionSoft, LLC. All rights reserved.
 //
 
 import Foundation
@@ -13,8 +13,8 @@ class RouteStep {
 
     var from: String?      // откуда (станция метро, ж/д, автобуса)
     var to: String?        // куда (станция метро, ж/д, автобуса)
-    var departure: NSDate  // время отправления
-    var arrival: NSDate    // время прибытия
+    var departure: Date  // время отправления
+    var arrival: Date    // время прибытия
     var duration: Int      // время в пути (в минутах)
     
     // заголовок шага - вид шага и время в пути (для вывода на экран)
@@ -32,8 +32,8 @@ class RouteStep {
     }
     
     init() {
-        departure = NSDate()
-        arrival = NSDate()
+        departure = Date()
+        arrival = Date()
         duration = 0
     }
 }
@@ -51,11 +51,11 @@ class TotalStep: RouteStep {
     override var detail: String {
         get {
             //let timeDeparture = departure.string("HH:mm") ?? "?"
-            let dateDeparture = departure.string("dd MMM HH:mm") ?? "?"
-            let timeArrival = arrival.string("HH:mm") ?? "?"
-            //let dateArrival = arrival?.stringByFormat("dd MMM HH:mm") ?? "?"
+            let dateDeparture = departure.string("dd MMM HH:mm") 
+            let timeArrival = arrival.string("HH:mm") 
+            //let dateArrival = arrival.string("dd MMM HH:mm")
             let detailFormat = NSLocalizedString("TotalDetailFormat", comment: "")
-            return String(format: detailFormat, dateDeparture, timeArrival, duration ?? 0)
+            return String(format: detailFormat, dateDeparture, timeArrival, duration)
         }
     }
     
@@ -65,22 +65,22 @@ class TotalStep: RouteStep {
         self.to = to
     }
     
-    init(departure: NSDate, arrival: NSDate) {
+    init(departure: Date, arrival: Date) {
         super.init()
         setTime(departure, arrival: arrival)
     }
     
-    init(from: String, to: String, departure: NSDate, arrival: NSDate) {
+    init(from: String, to: String, departure: Date, arrival: Date) {
         super.init()
         self.from = from
         self.to = to
         setTime(departure, arrival: arrival)
     }
 
-    func setTime(departure: NSDate, arrival: NSDate) {
+    func setTime(_ departure: Date, arrival: Date) {
         self.departure = departure
         self.arrival = arrival
-        self.duration = Int(arrival.timeIntervalSinceDate(departure) / 60.0 + 0.5)
+        self.duration = Int(arrival.timeIntervalSince(departure) / 60.0 + 0.5)
     }
 }
 
@@ -95,18 +95,18 @@ class BusStep: RouteStep {
     }
     override var detail: String {
         get {
-            let timeDeparture = departure.string("HH:mm") ?? "?"
-            let timeArrival = arrival.string("HH:mm") ?? "?"
+            let timeDeparture = departure.string("HH:mm") 
+            let timeArrival = arrival.string("HH:mm") 
             return String(format: "%@ (%@) → %@ (%@)", from ?? "?", timeDeparture, to ?? "?", timeArrival)
         }
     }
 
-    init(departure: NSDate, from: String, to: String) {
+    init(departure: Date, from: String, to: String) {
         super.init()
         setNearestBusByDeparture(departure, from: from, to: to)
     }
 
-    init(arrival: NSDate, from: String, to: String) {
+    init(arrival: Date, from: String, to: String) {
         super.init()
         setNearestBusByArrival(arrival, from: from, to: to)
     }
@@ -119,12 +119,12 @@ class BusStep: RouteStep {
      Args:
      from(String): place of departure
      to(String): place of arrival
-     departure(NSDate): time of departure
+     departure(Date): time of departure
      
      Note:
      'from' and 'to' should not be equal and should be in {'Одинцово', 'Дубки'}
      */
-    func setNearestBusByDeparture(departure: NSDate, from: String, to: String, useAsterisk: Bool = true) {
+    func setNearestBusByDeparture(_ departure: Date, from: String, to: String, useAsterisk: Bool = true) {
         // from and to should be in {'Одинцово', 'Дубки'}
         let vals = ["Одинцово", "Дубки"]
         //assert from in {'Одинцово', 'Дубки'}
@@ -145,24 +145,24 @@ class BusStep: RouteStep {
         
         // поиск ближайшего рейса (минимум ожидания)
         var minInterval: Double = 24*60*60 // мин. интервал (сутки)
-        var busDeparture: NSDate?          // время отправления
+        var busDeparture: Date?          // время отправления
         var slBlvdBus: Bool = false        // автобус до м.Славянский бульвара
         
         for time in times! {
             var timeWithoutAsteriks = time
             // asterisk indicates bus arrival/departure station is 'Славянский бульвар'
             // it needs special handling
-            if time.containsString("*") {
+            if time.contains("*") {
                 if !useAsterisk { continue } // не использовать автобус до м. Славянский бульвар
-                timeWithoutAsteriks = time.substringToIndex(time.endIndex.predecessor())
+                timeWithoutAsteriks = time.substring(to: time.characters.index(before: time.endIndex))
             }
             let departureTime = departure.dateByWithTime(timeWithoutAsteriks)!
-            let interval: Double = departureTime.timeIntervalSinceDate(departure)
+            let interval: Double = departureTime.timeIntervalSince(departure)
             //TODO: # FIXME works incorrectly between weekday 6-7-1
             if interval > 0 && interval < minInterval {
                 minInterval = interval
                 busDeparture = departureTime
-                slBlvdBus = time.containsString("*")
+                slBlvdBus = time.contains("*")
             }
         }
         if busDeparture == nil {
@@ -192,12 +192,12 @@ class BusStep: RouteStep {
      Args:
      from(String): place of departure
      to(String): place of arrival
-     arrival(NSDate): time of arrival
+     arrival(Date): time of arrival
      
      Note:
      'from' and 'to' should not be equal and should be in {'Одинцово', 'Дубки'}
      */
-    func setNearestBusByArrival(arrival: NSDate, from: String, to: String, useAsterisk: Bool = true) {
+    func setNearestBusByArrival(_ arrival: Date, from: String, to: String, useAsterisk: Bool = true) {
         // получить расписание автобуса (время отправления)
         let times = scheduleService.getScheduleBus(from, to: to, timestamp: arrival)
         
@@ -213,20 +213,20 @@ class BusStep: RouteStep {
         
         // поиск ближайшего рейса (минимум ожидания)
         var minInterval: Double = 24*60*60 // мин. интервал (сутки)
-        var busDeparture: NSDate?          // время отправления
+        var busDeparture: Date?          // время отправления
         //var slBlvdBus: Bool = false        // автобус до м.Славянский бульвара
         
         for time in times! {
             var timeWithoutAsteriks = time
             // asterisk indicates bus arrival/departure station is 'Славянский бульвар'
             // it needs special handling
-            if time.containsString("*") {
+            if time.contains("*") {
                 if !useAsterisk { continue } // не использовать автобус до м. Славянский бульвар
-                timeWithoutAsteriks = time.substringToIndex(time.endIndex.predecessor())
+                timeWithoutAsteriks = time.substring(to: time.characters.index(before: time.endIndex))
             }
             let departureTime = arrival.dateByWithTime(timeWithoutAsteriks)!
             let arrivalTime = departureTime.dateByAddingMinute(duration)! // 15 minute
-            let interval: Double = arrival.timeIntervalSinceDate(arrivalTime)
+            let interval: Double = arrival.timeIntervalSince(arrivalTime)
             //TODO: # FIXME works incorrectly between weekday 6-7-1
             if interval > 0 && interval < minInterval {
                 minInterval = interval
@@ -270,19 +270,19 @@ class TrainStep: RouteStep {
     }
     override var detail: String {
         get {
-            let timeDeparture = departure.string("HH:mm") ?? "?"
-            let timeArrival = arrival.string("HH:mm") ?? "?"
+            let timeDeparture = departure.string("HH:mm") 
+            let timeArrival = arrival.string("HH:mm") 
             let detailFormat = NSLocalizedString("TrainDetailFormat", comment: "")
             return String(format: detailFormat, trainName ?? "?", timeDeparture, timeArrival, stops ?? "везде", to ?? "?")
         }
     }
     
-    init(departure: NSDate, from: Dictionary<String, AnyObject>, to: Dictionary<String, AnyObject>) {
+    init(departure: Date, from: Dictionary<String, AnyObject>, to: Dictionary<String, AnyObject>) {
         super.init()
         setNearestTrainByDeparture(departure, from: from, to: to)
     }
     
-    init(arrival: NSDate, from: Dictionary<String, AnyObject>, to: Dictionary<String, AnyObject>) {
+    init(arrival: Date, from: Dictionary<String, AnyObject>, to: Dictionary<String, AnyObject>) {
         super.init()
         setNearestTrainByArrival(arrival, from: from, to: to)
     }
@@ -298,12 +298,12 @@ class TrainStep: RouteStep {
     Args:
     from(Dictionary): place of departure
     to(Dictionary): place of arrival
-    departure(NSDate): time of departure
+    departure(Date): time of departure
     
     Note:
     'from' and 'to' should not be equal and should be in STATIONS
     */
-    func setNearestTrainByDeparture(departure: NSDate, from: Dictionary<String, AnyObject>, to: Dictionary<String, AnyObject>) {
+    func setNearestTrainByDeparture(_ departure: Date, from: Dictionary<String, AnyObject>, to: Dictionary<String, AnyObject>) {
         //assert _from in STATIONS
         //assert _to in STATIONS
         
@@ -324,7 +324,7 @@ class TrainStep: RouteStep {
         var trainInfo: JSON? // найденая информация о поезде
         for train in trains!.array! {
             let departureTime = train["departure"].string!.date()
-            let interval: Double = departureTime!.timeIntervalSinceDate(departure)
+            let interval: Double = departureTime!.timeIntervalSince(departure)
             if interval > 0 && interval < minInterval {
                 minInterval = interval
                 trainInfo = train
@@ -343,9 +343,9 @@ class TrainStep: RouteStep {
         self.to = to["title"] as? String
         self.trainName = trainInfo!["title"].string //"Кубинка 1 - Москва (Белорусский вокзал)"
         self.stops = trainInfo!["stops"].string //"везде"
-        self.departure = trainInfo!["departure"].string!.date()!
-        self.arrival = trainInfo!["arrival"].string!.date()!
-        self.duration = Int(self.arrival.timeIntervalSinceDate(self.departure) / 60.0 + 0.5)
+        self.departure = trainInfo!["departure"].string!.date()! as Date
+        self.arrival = trainInfo!["arrival"].string!.date()! as Date
+        self.duration = Int(self.arrival.timeIntervalSince(self.departure) / 60.0 + 0.5)
         //self.duration = trainInfo!["duration"].int! / 60
         self.url = String(format: RASP_YANDEX_URL, self.departure.string("yyyy-MM-dd"), fromCode, toCode)
     }
@@ -356,12 +356,12 @@ class TrainStep: RouteStep {
     Args:
     from(Dictionary): place of departure
     to(Dictionary): place of arrival
-    arrival(NSDate): time of arrival
+    arrival(Date): time of arrival
     
     Note:
     'from' and 'to' should not be equal and should be in STATIONS
     */
-    func setNearestTrainByArrival(arrival: NSDate, from: Dictionary<String, AnyObject>, to: Dictionary<String, AnyObject>) {
+    func setNearestTrainByArrival(_ arrival: Date, from: Dictionary<String, AnyObject>, to: Dictionary<String, AnyObject>) {
         //assert _from in STATIONS
         //assert _to in STATIONS
         
@@ -382,7 +382,7 @@ class TrainStep: RouteStep {
         var trainInfo: JSON? // найденая информация о поезде
         for train in trains!.array! {
             let arrivalTime = train["arrival"].string!.date()!
-            let interval: Double = arrival.timeIntervalSinceDate(arrivalTime)
+            let interval: Double = arrival.timeIntervalSince(arrivalTime)
             if interval > 0 && interval < minInterval {
                 minInterval = interval
                 trainInfo = train
@@ -401,9 +401,9 @@ class TrainStep: RouteStep {
         self.to = to["title"] as? String
         self.trainName = trainInfo!["title"].string //"Кубинка 1 - Москва (Белорусский вокзал)"
         self.stops = trainInfo!["stops"].string //"везде"
-        self.departure = trainInfo!["departure"].string!.date()!
-        self.arrival = trainInfo!["arrival"].string!.date()!
-        self.duration = Int(self.arrival.timeIntervalSinceDate(self.departure) / 60.0 + 0.5)
+        self.departure = trainInfo!["departure"].string!.date()! as Date
+        self.arrival = trainInfo!["arrival"].string!.date()! as Date
+        self.duration = Int(self.arrival.timeIntervalSince(self.departure) / 60.0 + 0.5)
         //self.duration = trainInfo!["duration"].int! / 60
         self.url = String(format: RASP_YANDEX_URL, self.arrival.string("yyyy-MM-dd"), fromCode, toCode)
     }
@@ -420,18 +420,18 @@ class SubwayStep: RouteStep {
     }
     override var detail: String {
         get {
-            let timeDeparture = departure.string("HH:mm") ?? "?"
-            let timeArrival = arrival.string("HH:mm") ?? "?"
+            let timeDeparture = departure.string("HH:mm") 
+            let timeArrival = arrival.string("HH:mm") 
             return String(format: "%@ (%@) → %@ (%@)", from ?? "?", timeDeparture, to ?? "?", timeArrival)
         }
     }
     
-    init(departure: NSDate, from: String, to: String) {
+    init(departure: Date, from: String, to: String) {
         super.init()
         setNearestSubwayByDeparture(departure, from: from, to: to)
     }
     
-    init(arrival: NSDate, from: String, to: String) {
+    init(arrival: Date, from: String, to: String) {
         super.init()
         setNearestSubwayByArrival(arrival, from: from, to: to)
     }
@@ -487,7 +487,7 @@ class SubwayStep: RouteStep {
      Note:
      'from' and 'to' must exist in SUBWAY_DATA.keys or any of SUBWAY_DATA[key].values
      */
-    func getSubwayDuration(from: String, to: String) -> Int {
+    func getSubwayDuration(_ from: String, to: String) -> Int {
         if let fromStation = subwayDuration[from] {
             if let result = fromStation[to] {
                 return result
@@ -508,12 +508,12 @@ class SubwayStep: RouteStep {
      Args:
      from(String): Russian name of station of departure
      to(String): Russian name of station of arrival
-     departure(NSDate): time of departure
+     departure(Date): time of departure
      
      Note:
      'from' and 'to' must exist in SUBWAY_DATA.keys or any of SUBWAY_DATA[key].values
      */
-    func setNearestSubwayByDeparture(departure: NSDate, from: String, to: String) {
+    func setNearestSubwayByDeparture(_ departure: Date, from: String, to: String) {
         self.from = subways![from] as? String
         self.to = subways![to] as? String
         self.duration = getSubwayDuration(from, to: to)
@@ -522,8 +522,8 @@ class SubwayStep: RouteStep {
         let subwayCloses = departure.dateByWithTime(subwayClosesTime)
         let subwayOpens = departure.dateByWithTime(subwayOpensTime)
         // subwayCloses <= timestamp <= subwayOpens
-        if subwayCloses!.compare(departure) != .OrderedDescending
-            && departure.compare(subwayOpens!) != .OrderedDescending {
+        if subwayCloses!.compare(departure) != .orderedDescending
+            && departure.compare(subwayOpens!) != .orderedDescending {
                 // subway is still closed
                 self.departure = subwayOpens!
         } else {
@@ -538,12 +538,12 @@ class SubwayStep: RouteStep {
      Args:
      from(String): Russian name of station of departure
      to(String): Russian name of station of arrival
-     arrival(NSDate): time of arrival
+     arrival(Date): time of arrival
      
      Note:
      'from' and 'to' must exist in SUBWAY_DATA.keys or any of SUBWAY_DATA[key].values
      */
-    func setNearestSubwayByArrival(arrival: NSDate, from: String, to: String) {
+    func setNearestSubwayByArrival(_ arrival: Date, from: String, to: String) {
         self.from = subways![from] as? String
         self.to = subways![to] as? String
         self.duration = getSubwayDuration(from, to: to)
@@ -552,8 +552,8 @@ class SubwayStep: RouteStep {
         let subwayCloses = arrival.dateByWithTime(subwayClosesTime)
         let subwayOpens = arrival.dateByWithTime(subwayOpensTime)
         // subwayCloses <= timestamp <= subwayOpens
-        if subwayCloses!.compare(arrival) != .OrderedDescending
-            && arrival.compare(subwayOpens!) != .OrderedDescending {
+        if subwayCloses!.compare(arrival) != .orderedDescending
+            && arrival.compare(subwayOpens!) != .orderedDescending {
                 // subway is still closed
                 self.departure = subwayOpens!
                 self.arrival = subwayOpens!.dateByAddingMinute(duration)!
@@ -584,12 +584,12 @@ class OnfootStep: RouteStep {
         }
     }
     
-    init(departure: NSDate, edu: Dictionary<String, AnyObject>) {
+    init(departure: Date, edu: Dictionary<String, AnyObject>) {
         super.init()
         setNearestOnFootByDeparture(departure, edu: edu)
     }
     
-    init (arrival: NSDate, edu: Dictionary<String, AnyObject>) {
+    init (arrival: Date, edu: Dictionary<String, AnyObject>) {
         super.init()
         setNearestOnFootByArrival(arrival, edu: edu)
     }
@@ -605,7 +605,7 @@ class OnfootStep: RouteStep {
      'edu' should be a value from EDUS
      'urlType' should be in {'static', 'js'}
      */
-    func formMapUrl(edu: Dictionary<String, AnyObject>, urlType: String = "static") -> String? {
+    func formMapUrl(_ edu: Dictionary<String, AnyObject>, urlType: String = "static") -> String? {
         let mapSource = edu["mapsrc"] as! String
         return String(format: "https://api-maps.yandex.ru/services/constructor/1.0/%@/?sid=%@", urlType, mapSource)
     }
@@ -615,12 +615,12 @@ class OnfootStep: RouteStep {
      
      Args:
      edu(Dictionary): place of arrival
-     departure(NSDate): time of departure from subway exit
+     departure(Date): time of departure from subway exit
      
      Note:
      'edu' should be a value from EDUS
      */
-    func setNearestOnFootByDeparture(departure: NSDate, edu: Dictionary<String, AnyObject>) {
+    func setNearestOnFootByDeparture(_ departure: Date, edu: Dictionary<String, AnyObject>) {
         self.duration = edu["onfoot"] as! Int
         self.departure = departure
         self.arrival = departure.dateByAddingMinute(duration)!
@@ -633,12 +633,12 @@ class OnfootStep: RouteStep {
      
      Args:
      edu(Dictionary): place of arrival
-     arrival(NSDate): time of arrival from campus exit
+     arrival(Date): time of arrival from campus exit
      
      Note:
      'edu' should be a value from EDUS
      */
-    func setNearestOnFootByArrival(arrival: NSDate, edu: Dictionary<String, AnyObject>) {
+    func setNearestOnFootByArrival(_ arrival: Date, edu: Dictionary<String, AnyObject>) {
         self.duration = edu["onfoot"] as! Int
         self.departure = arrival.dateByAddingMinute(-duration)!
         self.arrival = arrival
@@ -663,7 +663,7 @@ class TransitionStep: RouteStep {
         }
     }
     
-    init(departure: NSDate, from: String, to: String, duration: Int) {
+    init(departure: Date, from: String, to: String, duration: Int) {
         super.init()
         self.from = from
         self.to = to
@@ -672,7 +672,7 @@ class TransitionStep: RouteStep {
         self.arrival = departure.dateByAddingMinute(duration)!
     }
     
-    init(arrival: NSDate, from: String, to: String, duration: Int) {
+    init(arrival: Date, from: String, to: String, duration: Int) {
         super.init()
         self.from = from
         self.to = to

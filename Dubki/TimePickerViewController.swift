@@ -3,7 +3,7 @@
 //  Dubki
 //
 //  Created by Alexander Morenko on 29.10.15.
-//  Copyright © 2015 LionSoft, LLC. All rights reserved.
+//  Copyright © 2015-2017 LionSoft, LLC. All rights reserved.
 //
 
 import UIKit
@@ -13,8 +13,8 @@ class TimePickerViewController: UIViewController {
 //    let lessonTitles = ["I (9:00)", "II (10:30)", "III (12:10)", "IV (13:40)", "V (15:10)", "VI (16:40)", "VII (18:10)", "VIII (19:40)"]
     let lessonTimes = ["I":"09:00", "II":"10:30", "III":"12:10", "IV":"13:40", "V":"15:10", "VI":"16:40", "VII":"18:10", "VIII":"19:40"]
 
-    var departureTime: NSDate?
-    var arrivalTime: NSDate?
+    var departureTime: Date?
+    var arrivalTime: Date?
     
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var lessonView: UIView!
@@ -24,8 +24,8 @@ class TimePickerViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        datePicker.minimumDate = NSDate()
-        datePicker.maximumDate = NSDate().dateByAddingDay(30) // +30 day
+        datePicker.minimumDate = Date()
+        datePicker.maximumDate = Date().dateByAddingDay(30) // +30 day
         if departureTime != nil {
             datePicker.date = departureTime!
             departureArrivalSegmentControl.selectedSegmentIndex = 0
@@ -34,7 +34,7 @@ class TimePickerViewController: UIViewController {
             datePicker.date = arrivalTime!
             departureArrivalSegmentControl.selectedSegmentIndex = 1
         }
-        lessonView.hidden = departureArrivalSegmentControl.selectedSegmentIndex == 0
+        lessonView.isHidden = departureArrivalSegmentControl.selectedSegmentIndex == 0
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,16 +42,16 @@ class TimePickerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func departureArrivalValueChange(sender: AnyObject) {
-        lessonView.hidden = departureArrivalSegmentControl.selectedSegmentIndex == 0
+    @IBAction func departureArrivalValueChange(_ sender: AnyObject) {
+        lessonView.isHidden = departureArrivalSegmentControl.selectedSegmentIndex == 0
     }
     
-    @IBAction func lessonButtonPress(sender: UIButton) {
+    @IBAction func lessonButtonPress(_ sender: UIButton) {
         // change time for lesson
         let lessonTime = lessonTimes[(sender.titleLabel?.text)!]
         let date = datePicker.date.dateByWithTime(lessonTime!)!
 
-        if date.compare(NSDate()) == .OrderedDescending {
+        if date.compare(Date()) == .orderedDescending {
             datePicker.date = date
         } else {
             // next day
@@ -62,7 +62,7 @@ class TimePickerViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "SaveSelectedTime" {

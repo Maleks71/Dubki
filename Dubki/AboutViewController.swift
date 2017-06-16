@@ -3,7 +3,7 @@
 //  Dubki
 //
 //  Created by Игорь Моренко on 05.11.15.
-//  Copyright © 2015 LionSoft, LLC. All rights reserved.
+//  Copyright © 2015-2017 LionSoft, LLC. All rights reserved.
 //
 
 import UIKit
@@ -17,8 +17,8 @@ class AboutViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String
-        let build = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String
+        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        let build = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
         
         versionLabel.text = String(format: "ver. %@ (build %@)", version, build)
     }
@@ -28,10 +28,10 @@ class AboutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func donatePressButton(sender: AnyObject) {
+    @IBAction func donatePressButton(_ sender: AnyObject) {
         //let money_url = "https://money.yandex.ru/embed/shop.xml?account=41001824209175&quickpay=shop&payment-type-choice=on&writer=seller&targets=Dubki&targets-hint=&default-sum=100&button-text=03&comment=on&hint=&successURL="
         let money_url = "http://yasobe.ru/na/dubki_app"
-        UIApplication.sharedApplication().openURL(NSURL(string: money_url)!)
+        UIApplication.shared.openURL(URL(string: money_url)!)
     }
     
     /*

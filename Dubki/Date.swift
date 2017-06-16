@@ -3,7 +3,7 @@
 //  Dubki
 //
 //  Created by Игорь Моренко on 08.11.15.
-//  Copyright © 2015 LionSoft, LLC. All rights reserved.
+//  Copyright © 2015-2017 LionSoft, LLC. All rights reserved.
 //
 
 import Foundation
@@ -12,45 +12,45 @@ import Foundation
 
 extension String {
     
-    func date(dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> NSDate? {
-        let dateFormatter = NSDateFormatter()
+    func date(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
-        return dateFormatter.dateFromString(self)
+        return dateFormatter.date(from: self)
     }
 }
 
-extension NSDate {
+extension Date {
 
-    func string(dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
-        let dateFormatter = NSDateFormatter()
+    func string(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
-        return dateFormatter.stringFromDate(self)
+        return dateFormatter.string(from: self)
     }
     
-    func dateByAddingMinute(minute: Int) -> NSDate? {
+    func dateByAddingMinute(_ minute: Int) -> Date? {
         //return self.dateByAddingTimeInterval(Double(minute * 60))
         //let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = Calendar.current
         if #available(iOS 8.0, *) {
-            return calendar.dateByAddingUnit([.Minute], value: minute, toDate: self, options: [])
+            return calendar.date(byAdding: .minute, value: minute, to: self)
         } else {
             // Fallback on earlier versions
-            let components = NSDateComponents()
+            var components = DateComponents()
             components.minute = minute
-            return calendar.dateByAddingComponents(components, toDate: self, options: [])
+            return calendar.date(byAdding: components, to: self)
         }
     }
     
-    func dateByAddingDay(day: Int) -> NSDate? {
+    func dateByAddingDay(_ day: Int) -> Date? {
         //let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = Calendar.current
         if #available(iOS 8.0, *) {
-            return calendar.dateByAddingUnit([.Day], value: day, toDate: self, options: [])
+            return calendar.date(byAdding: .day, value: day, to: self)
         } else {
             // Fallback on earlier versions
-            let components = NSDateComponents()
+            var components = DateComponents()
             components.day = day
-            return calendar.dateByAddingComponents(components, toDate: self, options: [])
+            return calendar.date(byAdding: components, to: self)
         }
     }
     
@@ -61,9 +61,10 @@ extension NSDate {
     var weekday: Int {
         get {
             //let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-            let calendar = NSCalendar.currentCalendar()
-            let components = calendar.components(NSCalendarUnit.Weekday, fromDate: self)
-            return components.weekday
+            let calendar = Calendar.current
+            return calendar.component(.weekday, from: self)
+//            let components = (calendar as NSCalendar).components(NSCalendar.Unit.weekday, from: self)
+//            return components.weekday!
         }
     }
     
@@ -73,23 +74,23 @@ extension NSDate {
         //return weekdayName[weekday - 1]
     }
     
-    func dateByWithTime(time: String) -> NSDate? {
-        let dateFormatter = NSDateFormatter()
+    func dateByWithTime(_ time: String) -> Date? {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd "
         
-        let dateString = dateFormatter.stringFromDate(self) + time
+        let dateString = dateFormatter.string(from: self) + time
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         
-        return dateFormatter.dateFromString(dateString)
+        return dateFormatter.date(from: dateString)
     }
     
     // get interval from two date (of date on further date and pass the earlier date as parameter, this would give the time difference in seconds)
     //let interval = date1.timeIntervalSinceDate(date2)
     
     // get component from date
-    //let date = NSDate()
-    //let calendar = NSCalendar.currentCalendar()
+    //let date = Date()
+    //let calendar = Calendar.currentCalendar()
     //let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date)
     //let hour = components.hour
     //let minutes = components.minute

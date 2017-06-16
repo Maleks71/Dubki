@@ -3,7 +3,7 @@
 //  Dubki
 //
 //  Created by Alexander Morenko on 29.10.15.
-//  Copyright © 2015 LionSoft, LLC. All rights reserved.
+//  Copyright © 2015-2017 LionSoft, LLC. All rights reserved.
 //
 
 import UIKit
@@ -29,12 +29,12 @@ class CampusPickerViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "SaveSelectedCampus" {
             if let cell = sender as? UITableViewCell {
-                let indexPath = tableView.indexPathForCell(cell)
+                let indexPath = tableView.indexPath(for: cell)
                 selectedCampusIndex = indexPath?.row
             }
         }
@@ -42,44 +42,44 @@ class CampusPickerViewController: UITableViewController {
 
     // MARK: - Table View Delegate
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         //Other row is selected - need to deselect it
         if let index = selectedCampusIndex {
-            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0))
-            cell?.accessoryType = .None
+            let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0))
+            cell?.accessoryType = .none
         }
         
         //selectedCampus = campuses![indexPath.row] as? Dictionary<String, AnyObject>
         selectedCampusIndex = indexPath.row
         
         //update the checkmark for the current row
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        cell?.accessoryType = .Checkmark
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .checkmark
     }
 
     // MARK: - Table View Data Source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return campuses!.count - 1;
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CampusCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CampusCell", for: indexPath)
         
         let campus = campuses![indexPath.row + 1] 
         
         cell.textLabel?.text = campus["title"] as? String
         cell.detailTextLabel?.text = campus["description"] as? String
         if indexPath.row == selectedCampusIndex {
-            cell.accessoryType = .Checkmark
+            cell.accessoryType = .checkmark
         } else {
-            cell.accessoryType = .None
+            cell.accessoryType = .none
         }
         
         return cell;
